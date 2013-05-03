@@ -13,7 +13,7 @@ public class FallDetectDemo {
 	private FallDetect fallDetect;
 	private static String TAG = "My Fall Detect Demo";
 	private SensePlatform sensePlatform;
-	
+
 	private GetData getData;
 	Thread sendData;
 
@@ -31,18 +31,18 @@ public class FallDetectDemo {
 			fallDetect = new FallDetect(TAG, sensePlatform.getService().getSenseService());	
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 			// only detect fall when the phone is in the pocket
-			sensePlatform.getService().getSenseService().subscribeDataProcessor(CarryDeviceDemo.TAG, getData);
+			//sensePlatform.getService().getSenseService().subscribeDataProcessor(CarryDeviceDemo.TAG, getData);
 			// by default the demo property is disabled
 			fallDetect.setDemo(false);
 		}
-		
+
 	}
-	
+
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
 	}
-	
+
 
 	/**
 	 * This Class implements a data processor to receive data from a DataProducer.
@@ -52,12 +52,12 @@ public class FallDetectDemo {
 	private class GetData implements DataProcessor
 	{			
 		public FragmentDisplay fDisplay;
-		
+
 		GetData(FragmentDisplay fDisplay)
 		{
 			this.fDisplay = fDisplay;
 		}		
-		
+
 		public void startNewSample() {}
 
 		public boolean isSampleComplete() {	return false;	}
@@ -76,16 +76,20 @@ public class FallDetectDemo {
 					final String value = dataPoint.getJSONValue().getJSONObject("value").toString();
 					final long timestamp = dataPoint.timeStamp;
 					fDisplay.addText(value);
-					
-					try {
-						sendData =  new Thread() { public void run() {
-							 sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 
-						 }};
-						 sendData.start();
-					} catch (Exception e) {
-						Log.e(TAG, "Failed to add fall detect data point!", e);
-					}
+
+					if(sensePlatform.getService().isBinderAlive())
+					{
+						try {
+							sendData =  new Thread() { public void run() {
+								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 
+							}};
+							sendData.start();
+						} catch (Exception e) {
+							Log.e(TAG, "Failed to add fall detect data point!", e);
+						}
+					}					
 				}
+				// Only enable the fall detection when it is carried on body.
 				if(dataPoint.sensorName == CarryDeviceDemo.TAG)
 				{
 					if(dataPoint.getJSONValue().getJSONObject("value").getInt("on body") == 0)

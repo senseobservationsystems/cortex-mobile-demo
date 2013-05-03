@@ -12,11 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -37,10 +39,11 @@ public class FragmentDisplay extends Fragment
 	public JSONArray output = new JSONArray();
 	public View v = null;
 	private float mx, my;
-    private float curX, curY;
+	private float curX, curY;
+	private FragmentActivity fa;
 
-    private ScrollView vScroll;
-    private HorizontalScrollView hScroll;
+	private ScrollView vScroll;
+	private HorizontalScrollView hScroll;
 
 	public static final FragmentDisplay newInstance(String message)
 	{
@@ -52,11 +55,7 @@ public class FragmentDisplay extends Fragment
 	}
 
 	public void addText(final String message)
-	{
-		Calendar cal = Calendar.getInstance();
-		cal.getTime();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		System.out.println( sdf.format(cal.getTime()) );
+	{		
 		JSONObject data = null;
 		try {
 			data = new JSONObject(message);
@@ -68,6 +67,9 @@ public class FragmentDisplay extends Fragment
 		}
 
 		try {
+			Calendar cal = Calendar.getInstance();
+			cal.getTime();
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");		
 			data.put("time", sdf.format(cal.getTime()));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -86,62 +88,67 @@ public class FragmentDisplay extends Fragment
 		});
 	}
 
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
 		String message = getArguments().getString(TITLE);		
 		this.v = inflater.inflate(R.layout.fragmentdisplay_layout, container, false);
-		 vScroll = (ScrollView) v.findViewById(R.id.vScroll);
-	        hScroll = (HorizontalScrollView) v.findViewById(R.id.hScroll); 
-		final GestureDetector gesture = new GestureDetector(getActivity(),
-	            new GestureDetector.SimpleOnGestureListener() {
+		vScroll = (ScrollView) v.findViewById(R.id.vScroll);
+		hScroll = (HorizontalScrollView) v.findViewById(R.id.hScroll); 
+		if(fa == null)
+			fa = getActivity();
+		if(fa != null)
+		{
+			final GestureDetector gesture = new GestureDetector(fa,
+					new GestureDetector.SimpleOnGestureListener() {
 
-	                @Override
-	                public boolean onDown(MotionEvent e) {
-	                    return true;
-	                }
+				@Override
+				public boolean onDown(MotionEvent e) {
+					return true;
+				}
 
-	                @Override
-	                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-	                    float velocityY) {
-	                   
-	                    return super.onFling(e1, e2, velocityX, velocityY);
-	                }
-	            });
+				@Override
+				public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+						float velocityY) {
 
-		
-	        v.setOnTouchListener(new View.OnTouchListener() {
-	            @Override
-	            public boolean onTouch(View v, MotionEvent event) {
-	            	 float curX, curY;	            	 
-	                 switch (event.getAction()) {
+					return super.onFling(e1, e2, velocityX, velocityY);
+				}
+			});
 
-	                     case MotionEvent.ACTION_DOWN:
-	                         mx = event.getX();
-	                         my = event.getY();
-	                         break;
-	                     case MotionEvent.ACTION_MOVE:
-	                         curX = event.getX();
-	                         curY = event.getY();
-	                         vScroll.scrollBy((int) (mx - curX), (int) (my - curY));
-	                         hScroll.scrollBy((int) (mx - curX), (int) (my - curY));
-	                         mx = curX;
-	                         my = curY;
-	                         break;
-	                     case MotionEvent.ACTION_UP:
-	                         curX = event.getX();
-	                         curY = event.getY();
-	                         vScroll.scrollBy((int) (mx - curX), (int) (my - curY));
-	                         hScroll.scrollBy((int) (mx - curX), (int) (my - curY));
-	                         break;
-	                 }
 
-	                 return true;
-	            }
-	        });
-		
-		
+			v.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					float curX, curY;	            	 
+					switch (event.getAction()) {
+
+					case MotionEvent.ACTION_DOWN:
+						mx = event.getX();
+						my = event.getY();
+						break;
+					case MotionEvent.ACTION_MOVE:
+						curX = event.getX();
+						curY = event.getY();
+						vScroll.scrollBy((int) (mx - curX), (int) (my - curY));
+						hScroll.scrollBy((int) (mx - curX), (int) (my - curY));
+						mx = curX;
+						my = curY;
+						break;
+					case MotionEvent.ACTION_UP:
+						curX = event.getX();
+						curY = event.getY();
+						vScroll.scrollBy((int) (mx - curX), (int) (my - curY));
+						hScroll.scrollBy((int) (mx - curX), (int) (my - curY));
+						break;
+					}
+
+					return true;
+				}
+			});
+		}
+		else
+			Log.e("FragmentDisplay", "Empty Fragment Activity");
 		TextView messageTextView = (TextView)v.findViewById(R.id.textView);
 		messageTextView.setText(message);	
 		TableLayout tl = (TableLayout)v.findViewById(R.id.tableLayoutOutput);		
@@ -160,18 +167,18 @@ public class FragmentDisplay extends Fragment
 	}
 
 
- 
+
 	private void addRow(JSONObject message)
 	{
 		try
 		{
-			if(v == null)
+			if(v == null || fa == null)
 				return;
 			TableLayout tl = (TableLayout)v.findViewById(R.id.tableLayoutOutput);		
 			tl.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));		
 			boolean createHeader = (tl.getChildCount() == 0);						
-			TableRow tr = new TableRow(getActivity());			
-			TextView date = new TextView(getActivity());
+			TableRow tr = new TableRow(fa);			
+			TextView date = new TextView(fa);
 			createView(tr, date,createHeader?"time":message.getString("time"));
 
 			Iterator<?> keys = message.keys();
@@ -187,7 +194,7 @@ public class FragmentDisplay extends Fragment
 				String key = (String)keys.next();
 				if(key.equals("time"))
 					continue;
-				TextView tv1 = new TextView(getActivity());
+				TextView tv1 = new TextView(fa);
 				if(message.optJSONObject(key) != null)
 					addRow(message.optJSONObject(key));
 				else 

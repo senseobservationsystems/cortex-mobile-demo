@@ -26,10 +26,7 @@
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:scrollbarAlwaysDrawHorizontalTrack="true"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbarFadeDuration="0"
-            android:scrollbars="vertical|horizontal" >
+            >
 
             <nl.sense.demo.HScroll
                 android:id="@+id/hScroll"
@@ -38,25 +35,19 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:scrollbarFadeDuration="0"
-                android:scrollbars="vertical|horizontal" >
+                android:focusableInTouchMode="true">
 
                 <LinearLayout
                     android:id="@+id/LinearLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:scrollbars="horizontal|vertical" >
+                    android:orientation="vertical" >
 
                     <TableLayout
                         android:id="@+id/tableLayoutOutput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.68"
-                        android:scrollbars="horizontal|vertical" >
+                        android:layout_weight="0.68">
                     </TableLayout>
                 </LinearLayout>
             </nl.sense.demo.HScroll>

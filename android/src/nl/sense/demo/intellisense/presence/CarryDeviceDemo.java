@@ -48,7 +48,7 @@ public class CarryDeviceDemo {
 			carryDevice.setEventThreshold(0.01);
 		}
 	}
-	
+
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
@@ -88,13 +88,16 @@ public class CarryDeviceDemo {
 					final String value = json.getJSONObject("value").toString();
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
-					try {
-						sendData = new Thread(){public void run(){
-							sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp);
-						}};
-						sendData.start();
-					} catch (Exception e) {
-						Log.e(TAG, "Failed to add data point!", e);
+					if(sensePlatform.getService().isBinderAlive())
+					{
+						try {
+							sendData = new Thread(){public void run(){
+								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp);
+							}};
+							sendData.start();
+						} catch (Exception e) {
+							Log.e(TAG, "Failed to add data point!", e);
+						}
 					}
 				}
 			}catch(Exception e)

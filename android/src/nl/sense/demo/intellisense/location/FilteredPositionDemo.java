@@ -36,7 +36,7 @@ public class FilteredPositionDemo {
 	{
 		return getData.fDisplay;
 	}
-	
+
 	/**
 	 * This Class implements a data processor to receive data from a DataProducer.
 	 * 
@@ -44,8 +44,8 @@ public class FilteredPositionDemo {
 	 */
 	private class GetData implements DataProcessor
 	{						
-public FragmentDisplay fDisplay;
-		
+		public FragmentDisplay fDisplay;
+
 		GetData(FragmentDisplay fDisplay)
 		{
 			this.fDisplay = fDisplay;
@@ -71,13 +71,16 @@ public FragmentDisplay fDisplay;
 					final String value = json.getJSONObject("value").toString();
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
-					try {
-						sendData = new Thread(){public void run(){
-							sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp);
-						}};
-						sendData.start();
-					} catch (Exception e) {
-						Log.e(TAG, "Failed to add data point!", e);
+					if(sensePlatform.getService().isBinderAlive())
+					{
+						try {
+							sendData = new Thread(){public void run(){
+								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp);
+							}};
+							sendData.start();
+						} catch (Exception e) {
+							Log.e(TAG, "Failed to add data point!", e);
+						}
 					}
 				}
 			}catch(Exception e)

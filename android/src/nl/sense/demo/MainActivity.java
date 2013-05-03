@@ -25,6 +25,7 @@ import nl.sense_os.service.constants.SensePrefs.Main.Motion;
 import nl.sense_os.service.constants.SensePrefs.Main.PhoneState;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -112,6 +113,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.e(TAG, "Create");
 		// trivial UI
 		setContentView(R.layout.activity_main);
 	}
@@ -139,10 +141,14 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	protected void onDestroy() {
 		// close binding with the Sense service
 		// (the service will remain running on its own if it is not explicitly stopped!)
-		//sensePlatform.close();
-		super.onDestroy();
+		super.onDestroy();	
+	
+		sensePlatform.close();
+		sensePlatform = null;	
 	}
 
+
+	
 	/**
 	 * Callback for when the service logged in, gets called from the SenseCallback object.<br/>
 	 * <br/>
@@ -243,21 +249,21 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector 
-			service.setPrefBool(Motion.BURSTMODE, true);
+			service.setPrefBool(Motion.BURSTMODE, false);
 
 			// set how often to sample
 			// 1 := rarely (~every 15 min)
 			// 0 := normal`  (~every 5 min)
 			// -1 := often (~every 10 sec)
 			// -2 := real time (this setting affects power consumption considerably!)
-			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "-1");
+			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "1");
 
 			// set how often to upload
 			// 1 := eco mode (buffer data for 30 minutes before bulk uploading)
 			// 0 := normal (buffer 5 min)
 			// -1 := often (buffer 1 min)
 			// -2 := real time (every new data point is uploaded immediately)
-			service.setPrefString(SensePrefs.Main.SYNC_RATE, "-1");
+			service.setPrefString(SensePrefs.Main.SYNC_RATE, "1");
 
 			service.toggleMain(true);
 			// carry device

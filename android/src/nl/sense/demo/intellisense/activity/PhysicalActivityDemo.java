@@ -19,7 +19,7 @@ public class PhysicalActivityDemo {
 
 	public PhysicalActivityDemo(SensePlatform sensePlatform)
 	{	
-		
+
 		this.sensePlatform = sensePlatform;
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(PhysicalActivityDemo.TAG))
 		{
@@ -33,12 +33,12 @@ public class PhysicalActivityDemo {
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}
-	
+
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
 	}
-	
+
 	/**
 	 * This Class implements a data processor to receive data from a DataProducer.
 	 * 
@@ -47,7 +47,7 @@ public class PhysicalActivityDemo {
 	private class GetData implements DataProcessor
 	{						
 		public FragmentDisplay fDisplay;
-		
+
 		GetData(FragmentDisplay fDisplay)
 		{
 			this.fDisplay = fDisplay;
@@ -68,18 +68,21 @@ public class PhysicalActivityDemo {
 					final String dataType = "string";
 					final String description = name;
 					JSONObject json = dataPoint.getJSONValue();				
-					
+
 					// the value to be sent as string
 					final String value = json.getString("value");
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
-					try {
-						sendData =  new Thread() { public void run() {
-							 sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 
-						 }};
-						 sendData.start();
-					} catch (Exception e) {
-						Log.e(TAG, "Failed to add data point!", e);
+					if(sensePlatform.getService().isBinderAlive())
+					{
+						try {
+							sendData =  new Thread() { public void run() {
+								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 
+							}};
+							sendData.start();
+						} catch (Exception e) {
+							Log.e(TAG, "Failed to add data point!", e);
+						}
 					}
 				}
 			}catch(Exception e)
