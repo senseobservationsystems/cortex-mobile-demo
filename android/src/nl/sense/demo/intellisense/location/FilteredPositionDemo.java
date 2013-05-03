@@ -2,6 +2,7 @@ package nl.sense.demo.intellisense.location;
 
 import org.json.JSONObject;
 
+import nl.sense.demo.FragmentDisplay;
 import nl.sense_os.intellisense.dataprocessor.FilteredPosition;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
@@ -13,14 +14,29 @@ public class FilteredPositionDemo {
 	public final static String TAG = "My Filtered Position Demo";	
 	private Thread sendData;
 	private SensePlatform sensePlatform;
+	private GetData getData;
 
 	public FilteredPositionDemo(SensePlatform sensePlatform)
 	{		
 		this.sensePlatform = sensePlatform;
-		filteredPosition = new FilteredPosition(TAG, sensePlatform.getService().getSenseService());
-		filteredPosition.addSubscriber(new GetData());
+		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(FilteredPositionDemo.TAG))
+		{
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(FilteredPositionDemo.TAG).get(0);
+			filteredPosition = (FilteredPosition) sensePlatform.getService().getSenseService().getRegisteredDataProducer(FilteredPositionDemo.TAG).get(0);
+		}
+		else
+		{
+			getData = new GetData(FragmentDisplay.newInstance(TAG));
+			filteredPosition = new FilteredPosition(TAG, sensePlatform.getService().getSenseService());
+			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
+		}
 	}
 
+	public FragmentDisplay getFragment()
+	{
+		return getData.fDisplay;
+	}
+	
 	/**
 	 * This Class implements a data processor to receive data from a DataProducer.
 	 * 
@@ -28,7 +44,12 @@ public class FilteredPositionDemo {
 	 */
 	private class GetData implements DataProcessor
 	{						
-
+public FragmentDisplay fDisplay;
+		
+		GetData(FragmentDisplay fDisplay)
+		{
+			this.fDisplay = fDisplay;
+		}
 		public void startNewSample() {}
 
 		public boolean isSampleComplete() {	return false;	}
@@ -48,6 +69,7 @@ public class FilteredPositionDemo {
 					Log.e(TAG,json.getJSONObject("value").toString());
 					// the value to be sent, in json format
 					final String value = json.getJSONObject("value").toString();
+					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
 					try {
 						sendData = new Thread(){public void run(){

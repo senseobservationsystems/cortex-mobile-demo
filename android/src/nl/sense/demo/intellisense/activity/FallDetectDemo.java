@@ -11,7 +11,7 @@ import nl.sense_os.service.shared.SensorDataPoint;
 public class FallDetectDemo {
 
 	private FallDetect fallDetect;
-	public final static String TAG = "My Fall Detect Demo";
+	private static String TAG = "My Fall Detect Demo";
 	private SensePlatform sensePlatform;
 	
 	private GetData getData;
@@ -20,11 +20,10 @@ public class FallDetectDemo {
 	public FallDetectDemo(SensePlatform sensePlatform)
 	{		
 		this.sensePlatform = sensePlatform;
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(TAG))
+		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(FallDetectDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(TAG).get(0);
-			// why can't it find the registered FallDetect module?
-			fallDetect = (FallDetect) sensePlatform.getService().getSenseService().getRegisteredDataProducer(TAG).get(0);
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(FallDetectDemo.TAG).get(0);
+			fallDetect = (FallDetect) sensePlatform.getService().getSenseService().getRegisteredDataProducer(FallDetectDemo.TAG).get(0);
 		}
 		else
 		{
@@ -76,6 +75,8 @@ public class FallDetectDemo {
 					final String description = name;					
 					final String value = dataPoint.getJSONValue().getJSONObject("value").toString();
 					final long timestamp = dataPoint.timeStamp;
+					fDisplay.addText(value);
+					
 					try {
 						sendData =  new Thread() { public void run() {
 							 sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 

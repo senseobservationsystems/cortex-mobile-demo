@@ -13,10 +13,10 @@ import nl.sense.demo.intellisense.presence.CarryDeviceDemo;
 
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.ISenseServiceCallback;
-import nl.sense_os.service.SenseService;
 import nl.sense_os.service.SenseServiceStub;
 import nl.sense_os.service.commonsense.SenseApi;
 import nl.sense_os.service.constants.SensePrefs;
+import nl.sense_os.service.constants.SenseStatusCodes;
 
 import nl.sense_os.service.constants.SensePrefs.Main.Ambience;
 import nl.sense_os.service.constants.SensePrefs.Main.Location;
@@ -35,6 +35,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.CheckBox;
 
 /**
  * Main activity of the Sense Platform Demo. This activity is created to demonstrate the most
@@ -62,10 +63,6 @@ import android.util.Log;
  * @author Ted Schmidt <ted@sense-os.nl>
  */
 public class MainActivity extends FragmentActivity implements ServiceConnection {
-
-
-
-
 	/**
 	 * Service stub for callbacks from the Sense service.
 	 */
@@ -95,7 +92,10 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 		@Override
 		public void statusReport(final int status) {
-			// not used
+			
+			// set up the sense service as soon as we are connected and not logged in
+			if((status & SenseStatusCodes.RUNNING) <= 0) 
+				setupSense();
 		}
 	}
 
@@ -112,24 +112,9 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		// trivial UI
-		setContentView(R.layout.activity_main);		 
-
+		setContentView(R.layout.activity_main);
 	}
-
-
-	private List<Fragment> getFragments(){
-		List<Fragment> fList = new ArrayList<Fragment>();
-
-		fList.add(FragmentDisplay.newInstance("Fragment 1"));
-		fList.add(FragmentDisplay.newInstance("Fragment 2")); 
-		fList.add(FragmentDisplay.newInstance("Fragment 3"));
-
-		return fList;
-	}
-
-
 
 	class MyPageAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragments;
@@ -175,8 +160,40 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
-		// set up the sense service as soon as we are connected to it
-		setupSense();
+		
+		// Create the Demo DataProcessors with the bound senseService			
+		if(filteredPositionDemo == null)			
+			filteredPositionDemo = new FilteredPositionDemo(sensePlatform);		
+		
+		if(geoFenceDemo == null)			
+			geoFenceDemo = new GeoFenceDemo(sensePlatform); 
+		
+		if(physicalActivityDemo == null)	
+			physicalActivityDemo = new PhysicalActivityDemo(sensePlatform);
+		
+		if(carryDeviceDemo == null)			
+			carryDeviceDemo = new CarryDeviceDemo(sensePlatform);			
+
+		if(fallDetectDemo == null)			
+			fallDetectDemo = new FallDetectDemo(sensePlatform);		
+
+		// set the view			
+		List<Fragment> fragments = new ArrayList<Fragment>();
+		fragments.add(fallDetectDemo.getFragment());
+		fragments.add(physicalActivityDemo.getFragment());		
+		fragments.add(filteredPositionDemo.getFragment());
+		fragments.add(geoFenceDemo.getFragment());	
+		fragments.add(carryDeviceDemo.getFragment());
+		pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
+		ViewPager pager =  (ViewPager)findViewById(R.id.viewpager);
+		pager.setAdapter(pageAdapter);
+		
+		try {
+			sensePlatform.getService().getStatus(callback);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -184,6 +201,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		// not used
 	}
 
+	
 	@Override
 	protected void onStart() {
 		Log.v(TAG, "onStart");
@@ -192,7 +210,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		// create SensePlatform instance to do the complicated work
 		// (when the service is ready, we get a call to onServiceConnected)
 		if(sensePlatform == null)
-			sensePlatform = new SensePlatform(this, this);		
+			sensePlatform = new SensePlatform(this, this);				
 	}
 
 
@@ -201,36 +219,13 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	 */
 	private void setupSense() {
 		try {
+			
 			SenseServiceStub service = sensePlatform.getService();
-			SenseService senseService = service.getSenseService();
-
-			// Create the Demo DataProcessors with the bound senseService			
-			if(filteredPositionDemo == null && !senseService.isDataProducerRegistered(FilteredPositionDemo.TAG))			
-				filteredPositionDemo = new FilteredPositionDemo(sensePlatform);		
 			
-			if(geoFenceDemo == null && !senseService.isDataProducerRegistered(GeoFenceDemo.TAG))			
-				geoFenceDemo = new GeoFenceDemo(sensePlatform); 
-			
-			if(physicalActivityDemo == null)	
-				physicalActivityDemo = new PhysicalActivityDemo(sensePlatform);
-			
-			if(carryDeviceDemo == null && !senseService.isDataProducerRegistered(CarryDeviceDemo.TAG))			
-				carryDeviceDemo = new CarryDeviceDemo(sensePlatform);			
-
-			if(fallDetectDemo == null)			
-				fallDetectDemo = new FallDetectDemo(sensePlatform);		
-
-			// set the view			
-			List<Fragment> fragments = new ArrayList<Fragment>();
-			fragments.add(fallDetectDemo.getFragment());
-			fragments.add(physicalActivityDemo.getFragment());			
-			pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
-			ViewPager pager =  (ViewPager)findViewById(R.id.viewpager);
-			pager.setAdapter(pageAdapter);
 			// log in (you only need to do this once, Sense will remember the login)
 			sensePlatform.login("foo", SenseApi.hashPassword("bar"), callback);
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
-
+	
 			// turn on specific sensors			
 			//  settings for the Geo-Fencing demo
 			service.setPrefBool(Location.GPS, true);
@@ -255,15 +250,14 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// 0 := normal`  (~every 5 min)
 			// -1 := often (~every 10 sec)
 			// -2 := real time (this setting affects power consumption considerably!)
-			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "0");
+			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "-1");
 
 			// set how often to upload
 			// 1 := eco mode (buffer data for 30 minutes before bulk uploading)
 			// 0 := normal (buffer 5 min)
 			// -1 := often (buffer 1 min)
 			// -2 := real time (every new data point is uploaded immediately)
-			service.setPrefString(SensePrefs.Main.SYNC_RATE, "0");
-
+			service.setPrefString(SensePrefs.Main.SYNC_RATE, "-1");
 
 			service.toggleMain(true);
 			// carry device

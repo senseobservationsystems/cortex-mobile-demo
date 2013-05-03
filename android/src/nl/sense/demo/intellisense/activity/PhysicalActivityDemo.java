@@ -21,10 +21,10 @@ public class PhysicalActivityDemo {
 	{	
 		
 		this.sensePlatform = sensePlatform;
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(TAG))
+		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(PhysicalActivityDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(TAG).get(0);
-			physicalActivity = (PhysicalActivity) sensePlatform.getService().getSenseService().getRegisteredDataProducer(TAG).get(0);
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(PhysicalActivityDemo.TAG).get(0);
+			physicalActivity = (PhysicalActivity) sensePlatform.getService().getSenseService().getRegisteredDataProducer(PhysicalActivityDemo.TAG).get(0);
 		}
 		else
 		{
@@ -68,9 +68,10 @@ public class PhysicalActivityDemo {
 					final String dataType = "string";
 					final String description = name;
 					JSONObject json = dataPoint.getJSONValue();				
-
+					
 					// the value to be sent as string
 					final String value = json.getString("value");
+					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
 					try {
 						sendData =  new Thread() { public void run() {
