@@ -10,8 +10,6 @@ import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class PhysicalActivityDemo {
-
-	private PhysicalActivity physicalActivity;
 	public final static String TAG = "My Physical Activity Demo";
 	private SensePlatform sensePlatform;
 	Thread sendData;
@@ -21,19 +19,29 @@ public class PhysicalActivityDemo {
 	{	
 
 		this.sensePlatform = sensePlatform;
+		// Check if the DataProcessor is already registered at the Sense Service
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(PhysicalActivityDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(PhysicalActivityDemo.TAG).get(0);
-			physicalActivity = (PhysicalActivity) sensePlatform.getService().getSenseService().getRegisteredDataProducer(PhysicalActivityDemo.TAG).get(0);
+			// Get the getData class which has the fragment for the display
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(PhysicalActivityDemo.TAG).get(0);			
 		}
 		else
 		{
+			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
-			physicalActivity = new PhysicalActivity(TAG, sensePlatform.getService().getSenseService());
+			new PhysicalActivity(TAG, sensePlatform.getService().getSenseService());
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}
 
+	/**
+	 * Get the fragment object.
+	 * 
+	 * The fragment keeps the data from the moment the service was started.
+	 * The fragment displays the data coming from the Data Processor in a table
+	 * 
+	 * @return FragmentDisplay
+	 */
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
@@ -63,6 +71,7 @@ public class PhysicalActivityDemo {
 				if(dataPoint.sensorName == TAG)
 				{
 					// Description of the sensor
+					// This is only used to send data to CommonSense
 					final String name = "physical activity";
 					final String displayName = TAG;
 					final String dataType = "string";
@@ -71,8 +80,12 @@ public class PhysicalActivityDemo {
 
 					// the value to be sent as string
 					final String value = json.getString("value");
+					
+					// Add data to the fragment display
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
+
+					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{
 						try {
@@ -90,6 +103,5 @@ public class PhysicalActivityDemo {
 				Log.e(TAG, e.getMessage());
 			}
 		}
-
 	}
 }

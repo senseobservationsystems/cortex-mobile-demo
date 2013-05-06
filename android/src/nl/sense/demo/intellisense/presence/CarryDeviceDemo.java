@@ -20,13 +20,17 @@ public class CarryDeviceDemo {
 	public CarryDeviceDemo(SensePlatform sensePlatform)
 	{			
 		this.sensePlatform = sensePlatform;
+		// Check if the DataProcessor is already registered at the Sense Service
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(CarryDeviceDemo.TAG))
 		{
+			// Get the getData class which has the fragment for the display
 			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(CarryDeviceDemo.TAG).get(0);
+			// Get the DataProcessor
 			carryDevice = (CarryDevice) sensePlatform.getService().getSenseService().getRegisteredDataProducer(CarryDeviceDemo.TAG).get(0);
 		}
 		else
 		{
+			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			carryDevice = new CarryDevice(TAG, sensePlatform.getService().getSenseService());
 			// This resets the learned noise values, when erroneous data with no variance is processed
@@ -49,6 +53,14 @@ public class CarryDeviceDemo {
 		}
 	}
 
+	/**
+	 * Get the fragment object.
+	 * 
+	 * The fragment keeps the data from the moment the service was started.
+	 * The fragment displays the data coming from the Data Processor in a table
+	 * 
+	 * @return FragmentDisplay
+	 */
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
@@ -78,6 +90,7 @@ public class CarryDeviceDemo {
 				if(dataPoint.sensorName == TAG)
 				{
 					// Description of the sensor
+					// This is only used to send data to CommonSense
 					final String name = "carry device";
 					final String displayName = TAG;
 					final String dataType = "json";
@@ -86,8 +99,12 @@ public class CarryDeviceDemo {
 
 					// the value to be sent, in json format
 					final String value = json.getJSONObject("value").toString();
+					
+					// Add data to the fragment display
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
+					
+					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{
 						try {

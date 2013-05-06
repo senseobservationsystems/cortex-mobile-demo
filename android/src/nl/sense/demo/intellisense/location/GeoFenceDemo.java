@@ -35,6 +35,14 @@ public class GeoFenceDemo {
 		}
 	}
 
+	/**
+	 * Get the fragment object.
+	 * 
+	 * The fragment keeps the data from the moment the service was started.
+	 * The fragment displays the data coming from the Data Processor in a table
+	 * 
+	 * @return FragmentDisplay
+	 */
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
@@ -64,6 +72,7 @@ public class GeoFenceDemo {
 				if(dataPoint.sensorName == TAG)
 				{
 					// Description of the sensor
+					// This is only used to send data to CommonSense
 					final String name = "geo-fence";
 					final String displayName = TAG;
 					final String dataType = "json";
@@ -72,8 +81,12 @@ public class GeoFenceDemo {
 
 					// the value to be sent, in json format
 					final String value = json.getJSONObject("value").toString();
+					
+					// Add data to the fragment display
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
+					
+					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{
 						try {

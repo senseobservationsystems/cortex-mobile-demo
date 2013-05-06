@@ -4,6 +4,7 @@ package nl.sense.demo;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -12,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,8 +38,7 @@ public class FragmentDisplay extends Fragment
 	public static final String TITLE = "TITLE";	
 	public JSONArray output = new JSONArray();
 	public View v = null;
-	private float mx, my;
-	private float curX, curY;
+	private float mx, my;	
 	private FragmentActivity fa;
 	private String pager = "";
 	
@@ -60,6 +59,11 @@ public class FragmentDisplay extends Fragment
 		this.pager = pager;
 	}
 
+	/**
+	 * Add text to the table of the fragment
+	 * 
+	 * @param message The json string data
+	 */
 	public void addText(final String message)
 	{		
 		JSONObject data = null;
@@ -75,10 +79,9 @@ public class FragmentDisplay extends Fragment
 		try {
 			Calendar cal = Calendar.getInstance();
 			cal.getTime();
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");		
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);		
 			data.put("time", sdf.format(cal.getTime()));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+		} catch (JSONException e) {		
 			e.printStackTrace();
 		}
 		output.put(data);	
@@ -94,7 +97,15 @@ public class FragmentDisplay extends Fragment
 		});
 	}
 
-
+	/**
+	 * Display the fragment
+	 * 
+	 * @param inflater
+	 * @param container
+	 * @param savedInstanceState
+	 * @return
+	 */
+	@SuppressLint("NewApi")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
@@ -106,7 +117,7 @@ public class FragmentDisplay extends Fragment
 			fa = getActivity();
 		if(fa != null)
 		{
-			final GestureDetector gesture = new GestureDetector(fa,
+			new GestureDetector(fa,
 					new GestureDetector.SimpleOnGestureListener() {
 
 				@Override
@@ -166,15 +177,17 @@ public class FragmentDisplay extends Fragment
 			try {
 				JSONObject json = output.getJSONObject(i);				
 				addRow(json);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+			} catch (JSONException e) {			
 				e.printStackTrace();
 			}
 		}
 		return v;
 	}
 
-
+	/**
+	 * Add a row to the TableLayout
+	 * @param message
+	 */
 	@SuppressLint("NewApi")
 	private void addRow(JSONObject message)
 	{
@@ -225,6 +238,13 @@ public class FragmentDisplay extends Fragment
 		}
 	}
 
+	/**
+	 * This function adds a TextView to a row and sets the layout
+	 *  
+	 * @param tr The table row
+	 * @param t The TextView
+	 * @param viewdata The text to set in the TextView
+	 */
 	@SuppressLint("NewApi")
 	public void createView(TableRow tr, TextView t, String viewdata) {
 		t.setText(viewdata);

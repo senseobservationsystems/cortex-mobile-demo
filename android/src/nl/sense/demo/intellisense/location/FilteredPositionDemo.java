@@ -9,8 +9,7 @@ import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;
 import android.util.Log;
 
-public class FilteredPositionDemo {
-	private FilteredPosition filteredPosition;
+public class FilteredPositionDemo {	
 	public final static String TAG = "My Filtered Position Demo";	
 	private Thread sendData;
 	private SensePlatform sensePlatform;
@@ -21,17 +20,24 @@ public class FilteredPositionDemo {
 		this.sensePlatform = sensePlatform;
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(FilteredPositionDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(FilteredPositionDemo.TAG).get(0);
-			filteredPosition = (FilteredPosition) sensePlatform.getService().getSenseService().getRegisteredDataProducer(FilteredPositionDemo.TAG).get(0);
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(FilteredPositionDemo.TAG).get(0);			
 		}
 		else
 		{
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
-			filteredPosition = new FilteredPosition(TAG, sensePlatform.getService().getSenseService());
+			new FilteredPosition(TAG, sensePlatform.getService().getSenseService());
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}
 
+	/**
+	 * Get the fragment object.
+	 * 
+	 * The fragment keeps the data from the moment the service was started.
+	 * The fragment displays the data coming from the Data Processor in a table
+	 * 
+	 * @return FragmentDisplay
+	 */
 	public FragmentDisplay getFragment()
 	{
 		return getData.fDisplay;
@@ -61,6 +67,7 @@ public class FilteredPositionDemo {
 				if(dataPoint.sensorName == TAG)
 				{
 					// Description of the sensor
+					// This is only used to send data to CommonSense
 					final String name = "position filter";
 					final String displayName = TAG;
 					final String dataType = "json";
@@ -69,8 +76,12 @@ public class FilteredPositionDemo {
 					Log.e(TAG,json.getJSONObject("value").toString());
 					// the value to be sent, in json format
 					final String value = json.getJSONObject("value").toString();
+					
+					// Add data to the fragment display
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
+					
+					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{
 						try {

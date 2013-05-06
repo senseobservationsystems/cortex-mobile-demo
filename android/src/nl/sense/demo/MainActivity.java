@@ -1,6 +1,5 @@
 package nl.sense.demo;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import nl.sense_os.service.constants.SensePrefs.Main.Motion;
 import nl.sense_os.service.constants.SensePrefs.Main.PhoneState;
 
 import android.content.ComponentName;
-import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -36,7 +34,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.CheckBox;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -74,8 +71,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		public void onChangeLoginResult(int result) throws RemoteException {
 			switch (result) {
 			case 0:
-				Log.v(TAG, "Change login OK");
-				onLoggedIn();
+				Log.v(TAG, "Change login OK");			
 				break;
 			case -1:
 				Log.v(TAG, "Login failed! Connectivity problems?");
@@ -96,7 +92,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		@Override
 		public void statusReport(final int status) {
 
-			// set up the sense service as soon as we are connected and not logged in
+			// set up the sense service as soon as we are connected 
 			if((status & SenseStatusCodes.RUNNING) <= 0) 
 				setupSense();
 		}
@@ -122,6 +118,10 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		setContentView(R.layout.activity_main);
 	}
 
+	/**
+	 * A page adapter to hold the fragments of the categories
+	 * 
+	 */
 	class MyPageAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragments;
 
@@ -143,35 +143,17 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 	@Override
 	protected void onDestroy() {
+		sensePlatform.close();
+		sensePlatform = null;
 		// close binding with the Sense service
 		// (the service will remain running on its own if it is not explicitly stopped!)
-		super.onDestroy();	
-
-		sensePlatform.close();
-		sensePlatform = null;	
-	}
-
-
-
-	/**
-	 * Callback for when the service logged in, gets called from the SenseCallback object.<br/>
-	 * <br/>
-	 * Starts sensing, and sends and gets some data. It is recommended to wait until the login has
-	 * finished before actually starting the sensing.
-	 */
-	private void onLoggedIn() {
-		try {
-
-
-		} catch (Exception e) {
-			Log.e(TAG, "Exception while starting sense library.", e);
-		}
+		super.onDestroy();			
 	}
 
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 
-		// Create the Demo DataProcessors with the bound senseService			
+		// Create the Demo DataProcessors with the bound senseService
 		if(filteredPositionDemo == null)			
 			filteredPositionDemo = new FilteredPositionDemo(sensePlatform);		
 
@@ -187,7 +169,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		if(fallDetectDemo == null)			
 			fallDetectDemo = new FallDetectDemo(sensePlatform);		
 
-		// set the view			
+		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
 		fragmentsActivity.add(physicalActivityDemo.getFragment());	
 		fragmentsActivity.add(fallDetectDemo.getFragment());
@@ -196,7 +178,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		ViewPager pager =  (ViewPager)findViewById(R.id.viewpagerActivity);
 		pager.setAdapter(pageAdapterActivity);
 
-
+		// Add the location Fragments to the right pager
 		List<Fragment> fragmentsLocation = new ArrayList<Fragment>();		
 		fragmentsLocation.add(filteredPositionDemo.getFragment());
 		fragmentsLocation.add(geoFenceDemo.getFragment());	
@@ -205,6 +187,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		pager =  (ViewPager)findViewById(R.id.ViewPagerLocation);
 		pager.setAdapter(pageAdapterLocation);
 
+		// Add the presence Fragments to the right pager
 		List<Fragment> fragmentsPresence = new ArrayList<Fragment>();
 		fragmentsPresence.add(carryDeviceDemo.getFragment());
 		setFragmentPager(fragmentsPresence);
@@ -212,6 +195,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		pager =  (ViewPager)findViewById(R.id.ViewPagerPresence);
 		pager.setAdapter(pageAdapterPresence);
 
+		// Init the Tabs
 		TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
 		tabHost.setup();
 		
@@ -223,7 +207,6 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		spec2.setContent(R.id.tabLocation);
 		spec2.setIndicator("Location");
 
-
 		TabSpec spec3=tabHost.newTabSpec("Presence");
 		spec3.setContent(R.id.tabPresence);
 		spec3.setIndicator("Presence");
@@ -231,8 +214,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		tabHost.addTab(spec2);
 		tabHost.addTab(spec3);
 
-
 		try {
+			// Check the status of the service
 			sensePlatform.getService().getStatus(callback);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -240,6 +223,10 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		}
 	}
 
+	/**
+	 * Add pager text to a fragment
+	 * @param fragments
+	 */
 	private void setFragmentPager(List<Fragment> fragments)
 	{
 		for (int i = 0; i < fragments.size(); i++) 
@@ -254,7 +241,6 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	public void onServiceDisconnected(ComponentName className) {
 		// not used
 	}
-
 
 	@Override
 	protected void onStart() {
@@ -277,7 +263,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			SenseServiceStub service = sensePlatform.getService();
 
 			// log in (you only need to do this once, Sense will remember the login)
-			sensePlatform.login("foo", SenseApi.hashPassword("bar"), callback);
+			sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
 
 			// turn on specific sensors			
