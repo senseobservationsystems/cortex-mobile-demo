@@ -3,9 +3,68 @@
  android:layout_width="match_parent"
  android:layout_height="match_parent" >
 
-   <android.support.v4.view.ViewPager
-     android:id="@+id/viewpager"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent" />
+   <TabHost
+       android:id="@+id/tabHost"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" >
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical" >
+
+           <TabWidget
+               android:id="@android:id/tabs"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content" >
+           </TabWidget>
+
+           <FrameLayout
+               android:id="@android:id/tabcontent"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" >
+
+               <LinearLayout
+                   android:id="@+id/tabActivity"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <android.support.v4.view.ViewPager
+                       android:id="@+id/viewpagerActivity"
+                       android:layout_width="fill_parent"
+                       android:layout_height="fill_parent" >
+                   </android.support.v4.view.ViewPager>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/tabLocation"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <android.support.v4.view.ViewPager
+                       android:id="@+id/ViewPagerLocation"
+                       android:layout_width="fill_parent"
+                       android:layout_height="fill_parent" >
+                   </android.support.v4.view.ViewPager>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/tabPresence"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <android.support.v4.view.ViewPager
+                       android:id="@+id/ViewPagerPresence"
+                       android:layout_width="fill_parent"
+                       android:layout_height="fill_parent" >
+                   </android.support.v4.view.ViewPager>
+
+               </LinearLayout>
+           </FrameLayout>
+
+       </LinearLayout>
+   </TabHost>
 
 </RelativeLayout>

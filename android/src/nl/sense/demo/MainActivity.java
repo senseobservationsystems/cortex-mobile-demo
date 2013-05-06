@@ -37,6 +37,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.CheckBox;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 /**
  * Main activity of the Sense Platform Demo. This activity is created to demonstrate the most
@@ -93,7 +95,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 		@Override
 		public void statusReport(final int status) {
-			
+
 			// set up the sense service as soon as we are connected and not logged in
 			if((status & SenseStatusCodes.RUNNING) <= 0) 
 				setupSense();
@@ -109,7 +111,9 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	private PhysicalActivityDemo physicalActivityDemo = null;
 	private CarryDeviceDemo carryDeviceDemo = null;	
 	private FallDetectDemo fallDetectDemo = null;
-	private MyPageAdapter pageAdapter;		
+	private MyPageAdapter pageAdapterActivity;
+	private MyPageAdapter pageAdapterLocation;	
+	private MyPageAdapter pageAdapterPresence;	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -142,13 +146,13 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		// close binding with the Sense service
 		// (the service will remain running on its own if it is not explicitly stopped!)
 		super.onDestroy();	
-	
+
 		sensePlatform.close();
 		sensePlatform = null;	
 	}
 
 
-	
+
 	/**
 	 * Callback for when the service logged in, gets called from the SenseCallback object.<br/>
 	 * <br/>
@@ -166,17 +170,17 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
-		
+
 		// Create the Demo DataProcessors with the bound senseService			
 		if(filteredPositionDemo == null)			
 			filteredPositionDemo = new FilteredPositionDemo(sensePlatform);		
-		
+
 		if(geoFenceDemo == null)			
 			geoFenceDemo = new GeoFenceDemo(sensePlatform); 
-		
+
 		if(physicalActivityDemo == null)	
 			physicalActivityDemo = new PhysicalActivityDemo(sensePlatform);
-		
+
 		if(carryDeviceDemo == null)			
 			carryDeviceDemo = new CarryDeviceDemo(sensePlatform);			
 
@@ -184,16 +188,50 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			fallDetectDemo = new FallDetectDemo(sensePlatform);		
 
 		// set the view			
-		List<Fragment> fragments = new ArrayList<Fragment>();
-		fragments.add(fallDetectDemo.getFragment());
-		fragments.add(physicalActivityDemo.getFragment());		
-		fragments.add(filteredPositionDemo.getFragment());
-		fragments.add(geoFenceDemo.getFragment());	
-		fragments.add(carryDeviceDemo.getFragment());
-		pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
-		ViewPager pager =  (ViewPager)findViewById(R.id.viewpager);
-		pager.setAdapter(pageAdapter);
+		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
+		fragmentsActivity.add(physicalActivityDemo.getFragment());	
+		fragmentsActivity.add(fallDetectDemo.getFragment());
+		setFragmentPager(fragmentsActivity);
+		pageAdapterActivity = new MyPageAdapter(getSupportFragmentManager(), fragmentsActivity);
+		ViewPager pager =  (ViewPager)findViewById(R.id.viewpagerActivity);
+		pager.setAdapter(pageAdapterActivity);
+
+
+		List<Fragment> fragmentsLocation = new ArrayList<Fragment>();		
+		fragmentsLocation.add(filteredPositionDemo.getFragment());
+		fragmentsLocation.add(geoFenceDemo.getFragment());	
+		setFragmentPager(fragmentsLocation);		
+		pageAdapterLocation = new MyPageAdapter(getSupportFragmentManager(), fragmentsLocation);
+		pager =  (ViewPager)findViewById(R.id.ViewPagerLocation);
+		pager.setAdapter(pageAdapterLocation);
+
+		List<Fragment> fragmentsPresence = new ArrayList<Fragment>();
+		fragmentsPresence.add(carryDeviceDemo.getFragment());
+		setFragmentPager(fragmentsPresence);
+		pageAdapterPresence = new MyPageAdapter(getSupportFragmentManager(), fragmentsPresence);
+		pager =  (ViewPager)findViewById(R.id.ViewPagerPresence);
+		pager.setAdapter(pageAdapterPresence);
+
+		TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
+		tabHost.setup();
 		
+		TabSpec spec1= tabHost.newTabSpec("Activity");		
+		spec1.setContent(R.id.tabActivity);
+		spec1.setIndicator("Activity");
+		
+		TabSpec spec2=tabHost.newTabSpec("Location");		
+		spec2.setContent(R.id.tabLocation);
+		spec2.setIndicator("Location");
+
+
+		TabSpec spec3=tabHost.newTabSpec("Presence");
+		spec3.setContent(R.id.tabPresence);
+		spec3.setIndicator("Presence");
+		tabHost.addTab(spec1);
+		tabHost.addTab(spec2);
+		tabHost.addTab(spec3);
+
+
 		try {
 			sensePlatform.getService().getStatus(callback);
 		} catch (RemoteException e) {
@@ -202,12 +240,22 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		}
 	}
 
+	private void setFragmentPager(List<Fragment> fragments)
+	{
+		for (int i = 0; i < fragments.size(); i++) 
+		{
+			String previous = (i == 0)? "" : " < ";
+			String next = (i+1 == fragments.size())? "" : " > ";
+			((FragmentDisplay)fragments.get(i)).setPager(previous+(i+1)+"/"+fragments.size()+next);
+		}
+	}
+
 	@Override
 	public void onServiceDisconnected(ComponentName className) {
 		// not used
 	}
 
-	
+
 	@Override
 	protected void onStart() {
 		Log.v(TAG, "onStart");
@@ -225,13 +273,13 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	 */
 	private void setupSense() {
 		try {
-			
+
 			SenseServiceStub service = sensePlatform.getService();
-			
+
 			// log in (you only need to do this once, Sense will remember the login)
 			sensePlatform.login("foo", SenseApi.hashPassword("bar"), callback);
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
-	
+
 			// turn on specific sensors			
 			//  settings for the Geo-Fencing demo
 			service.setPrefBool(Location.GPS, true);
@@ -249,14 +297,14 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector 
-			service.setPrefBool(Motion.BURSTMODE, false);
+			service.setPrefBool(Motion.BURSTMODE, true);
 
 			// set how often to sample
 			// 1 := rarely (~every 15 min)
 			// 0 := normal`  (~every 5 min)
 			// -1 := often (~every 10 sec)
 			// -2 := real time (this setting affects power consumption considerably!)
-			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "1");
+			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "-1");
 
 			// set how often to upload
 			// 1 := eco mode (buffer data for 30 minutes before bulk uploading)

@@ -41,7 +41,8 @@ public class FragmentDisplay extends Fragment
 	private float mx, my;
 	private float curX, curY;
 	private FragmentActivity fa;
-
+	private String pager = "";
+	
 	private ScrollView vScroll;
 	private HorizontalScrollView hScroll;
 
@@ -50,8 +51,13 @@ public class FragmentDisplay extends Fragment
 		FragmentDisplay f = new FragmentDisplay();
 		Bundle bdl = new Bundle(1);
 		bdl.putString(TITLE, message);
-		f.setArguments(bdl);	     
+		f.setArguments(bdl);
 		return f;
+	}
+	
+	public void setPager(String pager)
+	{
+		this.pager = pager;
 	}
 
 	public void addText(final String message)
@@ -149,10 +155,12 @@ public class FragmentDisplay extends Fragment
 		}
 		else
 			Log.e("FragmentDisplay", "Empty Fragment Activity");
-		TextView messageTextView = (TextView)v.findViewById(R.id.textView);
+		TextView messageTextView = (TextView)v.findViewById(R.id.textViewTitle);
 		messageTextView.setText(message);	
+		TextView pagerText = (TextView)v.findViewById(R.id.pager);
+		pagerText.setText(pager);	
 		TableLayout tl = (TableLayout)v.findViewById(R.id.tableLayoutOutput);		
-		tl.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+		tl.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 		for(int i = 0; i < output.length(); i++)
 		{
 			try {
@@ -167,7 +175,7 @@ public class FragmentDisplay extends Fragment
 	}
 
 
-
+	@SuppressLint("NewApi")
 	private void addRow(JSONObject message)
 	{
 		try
@@ -175,7 +183,8 @@ public class FragmentDisplay extends Fragment
 			if(v == null || fa == null)
 				return;
 			TableLayout tl = (TableLayout)v.findViewById(R.id.tableLayoutOutput);		
-			tl.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));		
+			tl.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+			tl.setBackgroundColor(Color.WHITE);
 			boolean createHeader = (tl.getChildCount() == 0);						
 			TableRow tr = new TableRow(fa);			
 			TextView date = new TextView(fa);
@@ -221,13 +230,16 @@ public class FragmentDisplay extends Fragment
 		t.setText(viewdata);
 		//adjust the properties of the textView
 		t.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
-		t.setTextColor(Color.BLACK);
-		t.setTextSize(10);
-		t.setBackgroundColor(Color.WHITE);
-		t.setPadding(10, 1, 1, 1);
-		tr.setPadding(1, 1, 1, 1);
-		tr.setBackgroundColor(Color.BLACK);
-		tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+		t.setBackgroundResource(android.R.color.white);
+		t.setTextColor(Color.WHITE);
+		t.setTextSize(12);
+		t.setBackgroundColor(Color.BLACK);		
+		t.setPadding(10, 1, 5, 1);
+		//t.setWidth(0);
+		t.setGravity(1);
+		tr.setPadding(0, 0, 0, 1);
+		tr.setBackgroundColor(Color.WHITE);
+		tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));		
 		tr.addView(t); // add TextView to row.
 	}
 }
