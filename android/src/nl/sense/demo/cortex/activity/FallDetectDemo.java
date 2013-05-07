@@ -1,9 +1,9 @@
-package nl.sense.demo.intellisense.activity;
+package nl.sense.demo.cortex.activity;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense.demo.intellisense.presence.CarryDeviceDemo;
-import nl.sense_os.intellisense.dataprocessor.FallDetect;
+import nl.sense.demo.cortex.presence.CarryDeviceDemo;
+import nl.sense_os.cortex.dataprocessor.FallDetect;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;
