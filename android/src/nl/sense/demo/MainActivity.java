@@ -42,21 +42,19 @@ import android.widget.TabHost.TabSpec;
  * important use cases of the Sense Cortex library in Android. The goal is to provide useful code
  * snippets that you can use in your own Android project.<br/>
  * <br/>
- * The activity has a trivial UI, but automatically performs the following tasks when it is started.
+ * The activity performs the following tasks when it is started.
  * <ul>
  * <li>Create a {@link SensePlatform} instance for communication with the Sense service.</li>
  * <li>Log in as user "cortex".</li>
  * <li>Set some sensing preferences, e.g. sample rate and sync rate.</li>
- * <li>Start a couple of Data Processors.</li>
- * <li>Send data for a non-standard sensor: "position_annotation".</li>
- * <li>Get data from a certain sensor.</li>
+ * <li>Start a couple of Data Processors.</li> * 
+ * <li>Display and upload data comming from the data processors</li>
  * </ul>
  * This class implements the {@link ServiceConnection} interface so it can receive callbacks from the
  * SensePlatform object.
- * 
- * UPDATE:
- * This version demonstrates the usage of the cortex package in combination with the Sense Platform library.
- * To obtain the cortex package please contact one of the persons below.  
+ *
+ * To use this demo application you need the cortex library files. 
+ * To obtain the cortex library please contact one of the persons below.  
  * 
  * @author Steven Mulder <steven@sense-os.nl>
  * @author Pim Nijdam <pim@sense-os.nl>
@@ -142,10 +140,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 
 	@Override
-	protected void onDestroy() {
-		sensePlatform.close();
-		sensePlatform = null;
-		// close binding with the Sense service
+	protected void onDestroy() {	
 		// (the service will remain running on its own if it is not explicitly stopped!)
 		super.onDestroy();			
 	}
