@@ -1,36 +1,35 @@
-package nl.sense.demo.intellisense.location;
+package nl.sense.demo.cortex.activity;
 
 import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.intellisense.dataprocessor.GeoFence;
+import nl.sense_os.cortex.dataprocessor.PhysicalActivity;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;
 
-public class GeoFenceDemo {
-
-	private GeoFence geoFence;
-	public final static String TAG = "My Geo-Fencing Demo";
+public class PhysicalActivityDemo {
+	public final static String TAG = "My Physical Activity Demo";
 	private SensePlatform sensePlatform;
-	private Thread sendData;
+	Thread sendData;
 	private GetData getData;
 
-	public GeoFenceDemo(SensePlatform sensePlatform)
-	{		
+	public PhysicalActivityDemo(SensePlatform sensePlatform)
+	{	
+
 		this.sensePlatform = sensePlatform;
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(GeoFenceDemo.TAG))
+		// Check if the DataProcessor is already registered at the Sense Service
+		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(PhysicalActivityDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(GeoFenceDemo.TAG).get(0);
-			geoFence = (GeoFence) sensePlatform.getService().getSenseService().getRegisteredDataProducer(GeoFenceDemo.TAG).get(0);
+			// Get the getData class which has the fragment for the display
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(PhysicalActivityDemo.TAG).get(0);			
 		}
 		else
 		{
+			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
-			geoFence = new GeoFence(TAG, sensePlatform.getService().getSenseService());	
-			geoFence.setGoalLocation(53.20987,6.54536);
-			geoFence.setRange(100);
+			new PhysicalActivity(TAG, sensePlatform.getService().getSenseService());
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}
@@ -60,38 +59,38 @@ public class GeoFenceDemo {
 		GetData(FragmentDisplay fDisplay)
 		{
 			this.fDisplay = fDisplay;
-		}	
+		}		
 		public void startNewSample() {}
 
 		public boolean isSampleComplete() {	return false;	}
 
 		public void onNewData(SensorDataPoint dataPoint) 
-		{	
+		{
 			try
 			{
 				if(dataPoint.sensorName == TAG)
 				{
 					// Description of the sensor
 					// This is only used to send data to CommonSense
-					final String name = "geo-fence";
+					final String name = "physical activity";
 					final String displayName = TAG;
-					final String dataType = "json";
+					final String dataType = "string";
 					final String description = name;
 					JSONObject json = dataPoint.getJSONValue();				
 
-					// the value to be sent, in json format
-					final String value = json.getJSONObject("value").toString();
+					// the value to be sent as string
+					final String value = json.getString("value");
 					
 					// Add data to the fragment display
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
-					
+
 					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{
 						try {
-							sendData = new Thread(){public void run(){
-								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp);
+							sendData =  new Thread() { public void run() {
+								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 
 							}};
 							sendData.start();
 						} catch (Exception e) {
@@ -103,6 +102,6 @@ public class GeoFenceDemo {
 			{
 				Log.e(TAG, e.getMessage());
 			}
-		}		
+		}
 	}
 }

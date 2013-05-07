@@ -17,7 +17,7 @@
 
     <!-- NOTIFICATION RESOURCES -->
     <string name="stat_notify_action">nl.sense_os.demo.cortex.NOTIFICATION</string>
-    <string name="stat_notify_title">Sense Demo</string>
+    <string name="stat_notify_title">Sense Cortex Demo</string>
     <string name="stat_notify_content_off_loggedin">Meting gestopt, ingelogd als \'%s\'</string>
     <string name="stat_notify_content_off_loggedout">Meting gestopt, geen verbinding met server</string>
     <string name="stat_notify_content_on_loggedin">"Meting actief, ingelogd als \'%s\'"</string>

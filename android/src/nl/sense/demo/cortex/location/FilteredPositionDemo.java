@@ -1,9 +1,9 @@
-package nl.sense.demo.intellisense.location;
+package nl.sense.demo.cortex.location;
 
 import org.json.JSONObject;
 
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.intellisense.dataprocessor.FilteredPosition;
+import nl.sense_os.cortex.dataprocessor.FilteredPosition;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;

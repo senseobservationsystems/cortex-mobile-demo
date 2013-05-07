@@ -1,10 +1,10 @@
-package nl.sense.demo.intellisense.presence;
+package nl.sense.demo.cortex.presence;
 
 import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.intellisense.dataprocessor.CarryDevice;
+import nl.sense_os.cortex.dataprocessor.CarryDevice;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;

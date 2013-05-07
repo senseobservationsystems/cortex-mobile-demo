@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.sense.demo.R;
-import nl.sense.demo.intellisense.activity.FallDetectDemo;
-import nl.sense.demo.intellisense.activity.PhysicalActivityDemo;
-import nl.sense.demo.intellisense.location.FilteredPositionDemo;
-import nl.sense.demo.intellisense.location.GeoFenceDemo;
-import nl.sense.demo.intellisense.presence.CarryDeviceDemo;
+import nl.sense.demo.cortex.activity.FallDetectDemo;
+import nl.sense.demo.cortex.activity.PhysicalActivityDemo;
+import nl.sense.demo.cortex.location.FilteredPositionDemo;
+import nl.sense.demo.cortex.location.GeoFenceDemo;
+import nl.sense.demo.cortex.presence.CarryDeviceDemo;
 
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.ISenseServiceCallback;
@@ -38,16 +38,16 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 /**
- * Main activity of the Sense Platform Demo. This activity is created to demonstrate the most
- * important use cases of the Sense Platform library in Android. The goal is to provide useful code
+ * Main activity of the Sense Cortex Demo. This activity is created to demonstrate the most
+ * important use cases of the Sense Cortex library in Android. The goal is to provide useful code
  * snippets that you can use in your own Android project.<br/>
  * <br/>
  * The activity has a trivial UI, but automatically performs the following tasks when it is started.
  * <ul>
  * <li>Create a {@link SensePlatform} instance for communication with the Sense service.</li>
- * <li>Log in as user "foo".</li>
+ * <li>Log in as user "cortex".</li>
  * <li>Set some sensing preferences, e.g. sample rate and sync rate.</li>
- * <li>Start a couple of sensor modules.</li>
+ * <li>Start a couple of Data Processors.</li>
  * <li>Send data for a non-standard sensor: "position_annotation".</li>
  * <li>Get data from a certain sensor.</li>
  * </ul>
@@ -55,8 +55,8 @@ import android.widget.TabHost.TabSpec;
  * SensePlatform object.
  * 
  * UPDATE:
- * This version demonstrates the usage of the IntelliSense package in combination with the Sense Platform library.
- * To obtain the IntelliSense package please contact one of the persons below.  
+ * This version demonstrates the usage of the cortex package in combination with the Sense Platform library.
+ * To obtain the cortex package please contact one of the persons below.  
  * 
  * @author Steven Mulder <steven@sense-os.nl>
  * @author Pim Nijdam <pim@sense-os.nl>
