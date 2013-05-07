@@ -1,7 +1,7 @@
 cortex-mobile-demo
 ==================
 
-Android demo applications of cortex
+Android demo applications of cortex. The goal is to provide useful code snippets that you can use in your own Android project.
 
 ## Cortex
  
@@ -14,7 +14,7 @@ Your data will be logged to common.sense-os.nl and can be viewed as _user_ corte
 
 ### Functionality
 
-Currently IntelliSense contains the following functionalities.
+Currently Cortex contains the following functionalities.
 
 __Location based__:
 * Geo-Fencing
