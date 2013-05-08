@@ -22,8 +22,8 @@ public class GeoFenceDemo {
 		this.sensePlatform = sensePlatform;
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(GeoFenceDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(GeoFenceDemo.TAG).get(0);
-			geoFence = (GeoFence) sensePlatform.getService().getSenseService().getRegisteredDataProducer(GeoFenceDemo.TAG).get(0);
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(GeoFenceDemo.TAG).get(0);
+			geoFence = (GeoFence) sensePlatform.getService().getSenseService().getRegisteredDataProducers(GeoFenceDemo.TAG).get(0);
 		}
 		else
 		{

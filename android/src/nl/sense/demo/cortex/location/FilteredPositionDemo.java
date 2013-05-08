@@ -20,7 +20,7 @@ public class FilteredPositionDemo {
 		this.sensePlatform = sensePlatform;
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(FilteredPositionDemo.TAG))
 		{
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(FilteredPositionDemo.TAG).get(0);			
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(FilteredPositionDemo.TAG).get(0);			
 		}
 		else
 		{

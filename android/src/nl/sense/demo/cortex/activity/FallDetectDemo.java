@@ -29,9 +29,9 @@ public class FallDetectDemo {
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(FallDetectDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(FallDetectDemo.TAG).get(0);
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(FallDetectDemo.TAG).get(0);
 			// Get the FallDetect DataProcessor
-			fallDetect = (FallDetect) sensePlatform.getService().getSenseService().getRegisteredDataProducer(FallDetectDemo.TAG).get(0);
+			fallDetect = (FallDetect) sensePlatform.getService().getSenseService().getRegisteredDataProducers(FallDetectDemo.TAG).get(0);
 		}
 		else
 		{

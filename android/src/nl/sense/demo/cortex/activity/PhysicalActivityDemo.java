@@ -23,7 +23,7 @@ public class PhysicalActivityDemo {
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(PhysicalActivityDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(PhysicalActivityDemo.TAG).get(0);			
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(PhysicalActivityDemo.TAG).get(0);			
 		}
 		else
 		{

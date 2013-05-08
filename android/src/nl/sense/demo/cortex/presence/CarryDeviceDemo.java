@@ -24,9 +24,9 @@ public class CarryDeviceDemo {
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(CarryDeviceDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessor(CarryDeviceDemo.TAG).get(0);
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(CarryDeviceDemo.TAG).get(0);
 			// Get the DataProcessor
-			carryDevice = (CarryDevice) sensePlatform.getService().getSenseService().getRegisteredDataProducer(CarryDeviceDemo.TAG).get(0);
+			carryDevice = (CarryDevice) sensePlatform.getService().getSenseService().getRegisteredDataProducers(CarryDeviceDemo.TAG).get(0);
 		}
 		else
 		{
