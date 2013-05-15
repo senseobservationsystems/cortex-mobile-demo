@@ -15,10 +15,14 @@ import nl.sense_os.service.shared.SensorDataPoint;
  */
 public class FallDetectDemo {
 
+	/** The DataProcessor */
 	private FallDetect fallDetect;
+	/** The name of the DataProcessor */
 	private static String TAG = "My Fall Detect Demo";
+	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
 
+	/** The DataProcessor which handles the data coming from the FallDetect DataProcessor */
 	private GetData getData;
 	Thread sendData;
 
@@ -46,7 +50,9 @@ public class FallDetectDemo {
 			// sensePlatform.getService().getSenseService().subscribeDataProcessor(CarryDeviceDemo.TAG, getData);
 			// by default the demo property is disabled
 			// When it is enabled a fall will be triggered when a free fall is detected
-			fallDetect.setDemo(false);
+			// fallDetect.setDemo(false);
+			// Use the check for orientation change and inactivity after a free fall followed by an impact. Default is true
+			// fallDetect.setUseInactivity(true);			
 		}
 	}
 

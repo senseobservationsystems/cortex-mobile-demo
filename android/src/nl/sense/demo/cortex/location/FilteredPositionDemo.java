@@ -3,6 +3,7 @@ package nl.sense.demo.cortex.location;
 import org.json.JSONObject;
 
 import nl.sense.demo.FragmentDisplay;
+import nl.sense_os.cortex.dataprocessor.FallDetect;
 import nl.sense_os.cortex.dataprocessor.FilteredPosition;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
@@ -10,22 +11,32 @@ import nl.sense_os.service.shared.SensorDataPoint;
 import android.util.Log;
 
 public class FilteredPositionDemo {	
-	public final static String TAG = "My Filtered Position Demo";	
-	private Thread sendData;
+
+	/** The name of the DataProcessor */
+	private static String TAG = "My Filtered Position Demo";
+	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
+
+	/** The DataProcessor which handles the data coming from the FilteredPosition DataProcessor */
 	private GetData getData;
+	private Thread sendData;
 
 	public FilteredPositionDemo(SensePlatform sensePlatform)
 	{		
 		this.sensePlatform = sensePlatform;
+		// Check if the DataProcessor is already registered at the Sense Service
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(FilteredPositionDemo.TAG))
 		{
+			// Get the getData class which has the fragment for the display
 			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(FilteredPositionDemo.TAG).get(0);			
 		}
 		else
 		{
+			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
+			// Create the actual FilteredPostion DataProcessor, which will be registered at the Sense Service with the given name (TAG)
 			new FilteredPosition(TAG, sensePlatform.getService().getSenseService());
+			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}

@@ -11,26 +11,39 @@ import nl.sense_os.service.shared.SensorDataPoint;
 
 public class GeoFenceDemo {
 
+	/** The DataProcessor */
 	private GeoFence geoFence;
+	/** The name of the DataProcessor */
 	public final static String TAG = "My Geo-Fencing Demo";
+	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
-	private Thread sendData;
+	
+	/** The DataProcessor which handles the data coming from the GeoFence DataProcessor */
 	private GetData getData;
-
+	private Thread sendData;
+	
 	public GeoFenceDemo(SensePlatform sensePlatform)
 	{		
 		this.sensePlatform = sensePlatform;
+		// Check if the DataProcessor is already registered at the Sense Service
 		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(GeoFenceDemo.TAG))
 		{
+			// Get the getData class which has the fragment for the display
 			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(GeoFenceDemo.TAG).get(0);
+			// Get the GeoFence DataProcessor
 			geoFence = (GeoFence) sensePlatform.getService().getSenseService().getRegisteredDataProducers(GeoFenceDemo.TAG).get(0);
 		}
 		else
 		{
+			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
-			geoFence = new GeoFence(TAG, sensePlatform.getService().getSenseService());	
+			// Create the actual GeoFence DataProcessor, which will be registered at the Sense Service with the given name (TAG)
+			geoFence = new GeoFence(TAG, sensePlatform.getService().getSenseService());
+			// Set the goal location to create a fence around
 			geoFence.setGoalLocation(53.20987,6.54536);
+			// Set the circle diameter range from the goal location as fence
 			geoFence.setRange(100);
+			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}

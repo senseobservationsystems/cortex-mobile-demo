@@ -262,7 +262,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
 
 			// turn on specific sensors			
-			//  settings for the Geo-Fencing demo
+			// settings for the Geo-Fencing demo
 			service.setPrefBool(Location.GPS, true);
 			service.setPrefBool(Location.NETWORK, true);
 			service.setPrefBool(Location.AUTO_GPS, true);
@@ -271,14 +271,20 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			service.setPrefBool(PhoneState.CALL_STATE, true);
 			service.setPrefBool(PhoneState.PROXIMITY, true);
 			service.setPrefBool(PhoneState.SCREEN_ACTIVITY, true);
+			service.setPrefBool(PhoneState.BATTERY, true);
 			service.setPrefBool(Ambience.LIGHT, true);
 			service.setPrefBool(Ambience.AUDIO_SPECTRUM, false);
 			service.setPrefBool(Ambience.MAGNETIC_FIELD, false);
 			service.setPrefBool(Ambience.MIC, false);
 
 			// settings for physical activity demo and fall detect 
-			// TODO: create separate preference for the new fall detector 
-			service.setPrefBool(Motion.BURSTMODE, true);
+			// TODO: create separate preference for the new fall detector
+			service.setPrefBool(Motion.FALL_DETECT, true);
+			service.setPrefBool(Motion.BURSTMODE, false);
+			service.setPrefBool(Motion.ACCELEROMETER, true);
+			service.setPrefBool(Motion.GYROSCOPE, false);
+			service.setPrefBool(Motion.ORIENTATION, false);
+			service.setPrefBool(Motion.LINEAR_ACCELERATION, false);
 
 			// set how often to sample
 			// 1 := rarely (~every 15 min)
@@ -302,7 +308,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// carry device
 			service.togglePhoneState(true);
 			// geo-fencing
-			service.toggleLocation(true);
+			service.toggleLocation(false);
 
 		} catch (Exception e) {
 			Log.e(TAG, "Exception while setting up Sense library.", e);

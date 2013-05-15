@@ -11,11 +11,17 @@ import nl.sense_os.service.shared.SensorDataPoint;
 
 public class CarryDeviceDemo {
 
+	/** The DataProcessor */
 	private CarryDevice carryDevice;
+	/** The name of the DataProcessor */
 	public final static String TAG = "My CarryDevice Demo";
+	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
-	private Thread sendData;
+	
+	/** The DataProcessor which handles the data coming from the CarryDevice DataProcessor */
 	private GetData getData;
+	private Thread sendData;
+
 
 	public CarryDeviceDemo(SensePlatform sensePlatform)
 	{			
@@ -32,6 +38,7 @@ public class CarryDeviceDemo {
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
+			// Create the actual CarryDevice DataProcessor, which will be registered at the Sense Service with the given name (TAG)
 			carryDevice = new CarryDevice(TAG, sensePlatform.getService().getSenseService());
 			// This resets the learned noise values, when erroneous data with no variance is processed
 			// the lowest variance used to determine the noise is 0 which means that the smallest change will cause an event
@@ -49,7 +56,9 @@ public class CarryDeviceDemo {
 			// this event can take the length of the time window to get the event out
 			carryDevice.setTimeWindow(60*5);
 			// this sets how much times the sensor data should be above the noise level
-			carryDevice.setEventThreshold(0.01);
+			// carryDevice.setEventThreshold(0.01);
+			// Re-calibrate removes the learned lowest and highest variance values
+			// carryDevice.reCalibrate();
 		}
 	}
 

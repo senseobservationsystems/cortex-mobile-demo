@@ -4,16 +4,22 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
+import nl.sense_os.cortex.dataprocessor.FallDetect;
 import nl.sense_os.cortex.dataprocessor.PhysicalActivity;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class PhysicalActivityDemo {
-	public final static String TAG = "My Physical Activity Demo";
+	
+	/** The name of the DataProcessor */
+	private static String TAG = "My Physical Activity Demo";
+	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
-	Thread sendData;
+
+	/** The DataProcessor which handles the data coming from the PhysicalActivity DataProcessor */
 	private GetData getData;
+	Thread sendData;
 
 	public PhysicalActivityDemo(SensePlatform sensePlatform)
 	{	
@@ -29,7 +35,9 @@ public class PhysicalActivityDemo {
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
+			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
 			new PhysicalActivity(TAG, sensePlatform.getService().getSenseService());
+			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
 	}
