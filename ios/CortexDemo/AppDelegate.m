@@ -17,10 +17,11 @@
     //Setup sense platform
     [CSSensePlatform initialize];
     //login on common sense
-    //[CSSensePlatform loginWithUser:@"username" andPassword:@"password"]
+    [CSSensePlatform loginWithUser:@"cortex" andPassword:@"demo"];
 
-    //don't upload data to Common Sense.
-    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingUploadToCommonSense value:kCSSettingNO];
+    //upload data to Common Sense every 15 minutes
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingUploadToCommonSense value:kCSSettingYES];
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingUploadInterval value:@"900"];
 
     //enable location sensor so we keep running in the background
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeLocation setting:kCSLocationSettingAccuracy value:@"10000"];

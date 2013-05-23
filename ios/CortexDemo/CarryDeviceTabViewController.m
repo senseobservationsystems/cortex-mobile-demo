@@ -10,13 +10,15 @@
 #import <Cortex/Cortex/CarryDeviceModule.h>
 #import <Cortex/SensePlatform/CSSensePlatform.h>
 
+static const NSUInteger MAX_ENTRIES = 60;
+
 @interface CarryDeviceTabViewController ()
 
 @end
 
 @implementation CarryDeviceTabViewController {
     CarryDeviceModule* carryDeviceModule;
-    NSString* carryDeviceLog;
+    NSMutableArray* carryDeviceLog;
     
     NSDateFormatter* dateFormatter;
 }
@@ -28,6 +30,7 @@
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterNoStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    carryDeviceLog = [[NSMutableArray alloc] init];
 
     //subscribe to sensor data
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
@@ -56,8 +59,18 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             @autoreleasepool {
-            carryDeviceLog = [NSString stringWithFormat:@"%@\n%@:%@", carryDeviceLog, [dateFormatter stringFromDate:date], json];
-            [self.logText setText:carryDeviceLog];
+                //only look at the carried state, as the others don't work on iOS anyway
+                bool carried = [(NSNumber*)[(NSDictionary*)json valueForKey:@"carried"] boolValue];
+                NSString* value = carried ? @"Device is being carried": @"Device is not being carried";
+                NSString* entry = [NSString stringWithFormat:@"%@:%@", [dateFormatter stringFromDate:date], value];
+                //log entry
+                [carryDeviceLog insertObject:entry atIndex:0];
+                while ([carryDeviceLog count] > MAX_ENTRIES) {
+                    [carryDeviceLog removeLastObject];
+                }
+                
+                
+                [self.logText setText:[carryDeviceLog componentsJoinedByString:@"\n"]];
             }
         });
     }

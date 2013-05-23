@@ -10,13 +10,16 @@
 #import <Cortex/SensePlatform/CSSensePlatform.h>
 #import <Cortex/Cortex/FallDetectorModule.h>
 
+
+static const NSUInteger MAX_ENTRIES = 10;
+
 @interface FallDetectionTabViewController ()
 
 @end
 
 @implementation FallDetectionTabViewController {
     FallDetectorModule* fdm;
-    NSString* fallLog;
+    NSMutableArray* fallLog;
     
     NSDateFormatter* dateFormatter;
 }
@@ -29,7 +32,7 @@
     [dateFormatter setDateStyle:NSDateFormatterNoStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     
-    fallLog = @"";
+    fallLog = [[NSMutableArray alloc] init];
     
     //subscribe to sensor data
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
@@ -67,19 +70,18 @@
     NSString* sensor = notification.object;
     if ([sensor isEqualToString:@"fall detector"]) {
         NSString* json = [notification.userInfo valueForKey:@"value"];
-        id data = [notification.userInfo valueForKey:@"value"];
-        NSLog(@"DATA: <%@> %@", [data class], data);
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[notification.userInfo valueForKey:@"date"] doubleValue]];
-
-        bool fall = [[data valueForKey:@"fall"] boolValue];
-        bool criticalFall = [[data valueForKey:@"critical free fall"] boolValue];
-        NSLog(@"Fall: %@, critical fall: %@", fall? @"yes":@"no", criticalFall ? @"yes":@"no");
         
         dispatch_async(dispatch_get_main_queue(), ^{
             @autoreleasepool {
 
-            fallLog = [NSString stringWithFormat:@"%@\n%@:%@", fallLog, [dateFormatter stringFromDate:date], json];
-            [self.logText setText:fallLog];
+                NSString* entry = [NSString stringWithFormat:@"%@:%@", [dateFormatter stringFromDate:date], json];
+                [fallLog insertObject:entry atIndex:0];
+                while ([fallLog count] > MAX_ENTRIES) {
+                    [fallLog removeLastObject];
+                }
+
+                [self.logText setText:[fallLog componentsJoinedByString:@"\n"]];
             }
         });
     }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3E13878A174D0EC900950CA4 /* CommonSense.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138788174D0EC900950CA4 /* CommonSense.plist */; };
 		3E13878B174D0EC900950CA4 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138789174D0EC900950CA4 /* Settings.plist */; };
-		3E1387AB174D103B00950CA4 /* libSensePlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1387A4174D102600950CA4 /* libSensePlatform.a */; };
 		3E14CD761727DEBB0002D558 /* libCortex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E14CD601727CADE0002D558 /* libCortex.a */; };
 		3E836DCA171D93A300D7494C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836DC9171D93A300D7494C /* UIKit.framework */; };
 		3E836DCC171D93A300D7494C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836DCB171D93A300D7494C /* Foundation.framework */; };
@@ -32,38 +31,9 @@
 		3E836E03171D960C00D7494C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836E02171D960C00D7494C /* CoreTelephony.framework */; };
 		3E836E05171D961500D7494C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836E04171D961500D7494C /* SystemConfiguration.framework */; };
 		3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EACDDB517325C1700975C8D /* DebugTabViewController.m */; };
-		3EC8F656172568AF0051A16A /* BatteryTriggerTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC8F655172568AF0051A16A /* BatteryTriggerTabViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3E1387A3174D102600950CA4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E820D6A15D40AB50001A3EC;
-			remoteInfo = SensePlatform;
-		};
-		3E1387A5174D102600950CA4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E148B91160A12000010A0D1;
-			remoteInfo = SensePlatformTestApp;
-		};
-		3E1387A7174D102600950CA4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E148BA8160A12010010A0D1;
-			remoteInfo = SensePlatformTestAppTests;
-		};
-		3E1387A9174D103300950CA4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E820D6915D40AB50001A3EC;
-			remoteInfo = SensePlatform;
-		};
 		3E14CD5F1727CADE0002D558 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
@@ -97,7 +67,6 @@
 /* Begin PBXFileReference section */
 		3E138788174D0EC900950CA4 /* CommonSense.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = CommonSense.plist; path = "../../../Documents/iosProjects/sense-library/resources/CommonSense.plist"; sourceTree = "<group>"; };
 		3E138789174D0EC900950CA4 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Settings.plist; path = "../../../Documents/iosProjects/sense-library/resources/Settings.plist"; sourceTree = "<group>"; };
-		3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensePlatform.xcodeproj; path = "../../../Documents/iosProjects/sense-library/SensePlatform.xcodeproj"; sourceTree = "<group>"; };
 		3E14CD511727CADD0002D558 /* Cortex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cortex.xcodeproj; path = "../../../aim/ios-sdk/Cortex.xcodeproj"; sourceTree = "<group>"; };
 		3E836DC5171D93A300D7494C /* CortexDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CortexDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E836DC9171D93A300D7494C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -127,8 +96,6 @@
 		3E836E04171D961500D7494C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EACDDB417325C1700975C8D /* DebugTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTabViewController.h; sourceTree = "<group>"; };
 		3EACDDB517325C1700975C8D /* DebugTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugTabViewController.m; sourceTree = "<group>"; };
-		3EC8F654172568AF0051A16A /* BatteryTriggerTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryTriggerTabViewController.h; sourceTree = "<group>"; };
-		3EC8F655172568AF0051A16A /* BatteryTriggerTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryTriggerTabViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +103,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E1387AB174D103B00950CA4 /* libSensePlatform.a in Frameworks */,
 				3E14CD761727DEBB0002D558 /* libCortex.a in Frameworks */,
 				3E836E05171D961500D7494C /* SystemConfiguration.framework in Frameworks */,
 				3E836E03171D960C00D7494C /* CoreTelephony.framework in Frameworks */,
@@ -154,16 +120,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E13879E174D102500950CA4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E1387A4174D102600950CA4 /* libSensePlatform.a */,
-				3E1387A6174D102600950CA4 /* SensePlatformTestApp.app */,
-				3E1387A8174D102600950CA4 /* SensePlatformTestAppTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3E14CD521727CADD0002D558 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +133,6 @@
 		3E836DBA171D93A300D7494C = {
 			isa = PBXGroup;
 			children = (
-				3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */,
 				3E14CD511727CADD0002D558 /* Cortex.xcodeproj */,
 				3E836E04171D961500D7494C /* SystemConfiguration.framework */,
 				3E836E02171D960C00D7494C /* CoreTelephony.framework */,
@@ -219,8 +174,6 @@
 				3E836DDB171D93A300D7494C /* MainStoryboard.storyboard */,
 				3E836DDE171D93A300D7494C /* FallDetectionTabViewController.h */,
 				3E836DDF171D93A300D7494C /* FallDetectionTabViewController.m */,
-				3EC8F654172568AF0051A16A /* BatteryTriggerTabViewController.h */,
-				3EC8F655172568AF0051A16A /* BatteryTriggerTabViewController.m */,
 				3E836DE1171D93A300D7494C /* first.png */,
 				3E836DE3171D93A300D7494C /* first@2x.png */,
 				3E836DE5171D93A300D7494C /* CarryDeviceTabViewController.h */,
@@ -268,7 +221,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E1387AA174D103300950CA4 /* PBXTargetDependency */,
 				3E14CD741727DEAF0002D558 /* PBXTargetDependency */,
 			);
 			name = CortexDemo;
@@ -300,10 +252,6 @@
 					ProductGroup = 3E14CD521727CADD0002D558 /* Products */;
 					ProjectRef = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
 				},
-				{
-					ProductGroup = 3E13879E174D102500950CA4 /* Products */;
-					ProjectRef = 3E13879D174D102500950CA4 /* SensePlatform.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -313,27 +261,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3E1387A4174D102600950CA4 /* libSensePlatform.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSensePlatform.a;
-			remoteRef = 3E1387A3174D102600950CA4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E1387A6174D102600950CA4 /* SensePlatformTestApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SensePlatformTestApp.app;
-			remoteRef = 3E1387A5174D102600950CA4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E1387A8174D102600950CA4 /* SensePlatformTestAppTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SensePlatformTestAppTests.octest;
-			remoteRef = 3E1387A7174D102600950CA4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		3E14CD601727CADE0002D558 /* libCortex.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -384,7 +311,6 @@
 				3E836DDA171D93A300D7494C /* AppDelegate.m in Sources */,
 				3E836DE0171D93A300D7494C /* FallDetectionTabViewController.m in Sources */,
 				3E836DE7171D93A300D7494C /* CarryDeviceTabViewController.m in Sources */,
-				3EC8F656172568AF0051A16A /* BatteryTriggerTabViewController.m in Sources */,
 				3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,11 +318,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3E1387AA174D103300950CA4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SensePlatform;
-			targetProxy = 3E1387A9174D103300950CA4 /* PBXContainerItemProxy */;
-		};
 		3E14CD741727DEAF0002D558 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Cortex;
