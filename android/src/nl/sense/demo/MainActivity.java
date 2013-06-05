@@ -178,7 +178,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
 		fragmentsActivity.add(physicalActivityDemo.getFragment());	
 		fragmentsActivity.add(fallDetectDemo.getFragment());
-		fragmentsActivity.add(sitStandDemo.getFragment());		
+		fragmentsActivity.add(sitStandDemo.getFragment());
+		fragmentsActivity.add(stepCounter.getFragment());		
 		setFragmentPager(fragmentsActivity);
 		pageAdapterActivity = new MyPageAdapter(getSupportFragmentManager(), fragmentsActivity);
 		ViewPager pager =  (ViewPager)findViewById(R.id.viewpagerActivity);
