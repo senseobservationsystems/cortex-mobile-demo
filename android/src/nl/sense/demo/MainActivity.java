@@ -7,6 +7,7 @@ import nl.sense.demo.R;
 import nl.sense.demo.cortex.activity.FallDetectDemo;
 import nl.sense.demo.cortex.activity.PhysicalActivityDemo;
 import nl.sense.demo.cortex.activity.SitStandDemo;
+import nl.sense.demo.cortex.activity.StepCounterDemo;
 import nl.sense.demo.cortex.location.FilteredPositionDemo;
 import nl.sense.demo.cortex.location.GeoFenceDemo;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
@@ -107,6 +108,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	private CarryDeviceDemo carryDeviceDemo = null;	
 	private FallDetectDemo fallDetectDemo = null;
 	private SitStandDemo sitStandDemo = null;
+	private StepCounterDemo stepCounter = null;	
 	private MyPageAdapter pageAdapterActivity;
 	private MyPageAdapter pageAdapterLocation;	
 	private MyPageAdapter pageAdapterPresence;	
@@ -168,12 +170,16 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		
 		if(sitStandDemo == null)			
 			sitStandDemo = new SitStandDemo(sensePlatform);
+		
+		if(stepCounter == null)			
+			stepCounter = new StepCounterDemo(sensePlatform);
 
 		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
 		fragmentsActivity.add(physicalActivityDemo.getFragment());	
 		fragmentsActivity.add(fallDetectDemo.getFragment());
-		fragmentsActivity.add(sitStandDemo.getFragment());		
+		fragmentsActivity.add(sitStandDemo.getFragment());
+		fragmentsActivity.add(stepCounter.getFragment());		
 		setFragmentPager(fragmentsActivity);
 		pageAdapterActivity = new MyPageAdapter(getSupportFragmentManager(), fragmentsActivity);
 		ViewPager pager =  (ViewPager)findViewById(R.id.viewpagerActivity);
