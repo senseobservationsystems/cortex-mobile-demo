@@ -11,7 +11,6 @@ import nl.sense.demo.cortex.location.FilteredPositionDemo;
 import nl.sense.demo.cortex.location.GeoFenceDemo;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
 
-import nl.sense_os.cortex.module.sitstand.SitStand;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.ISenseServiceCallback;
 import nl.sense_os.service.SenseServiceStub;
@@ -280,9 +279,11 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			service.setPrefBool(PhoneState.SCREEN_ACTIVITY, true);
 			service.setPrefBool(PhoneState.BATTERY, true);
 			service.setPrefBool(Ambience.LIGHT, true);
+			service.setPrefBool(Ambience.CAMERA_LIGHT, true);
 			service.setPrefBool(Ambience.AUDIO_SPECTRUM, false);
 			service.setPrefBool(Ambience.MAGNETIC_FIELD, false);
 			service.setPrefBool(Ambience.MIC, false);
+			
 
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector
