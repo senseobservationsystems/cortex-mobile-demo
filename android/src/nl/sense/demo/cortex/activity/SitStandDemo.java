@@ -4,15 +4,15 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.dataprocessor.PhysicalActivity;
+import nl.sense_os.cortex.dataprocessor.SitStand;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.shared.DataProcessor;
 import nl.sense_os.service.shared.SensorDataPoint;
 
-public class PhysicalActivityDemo {
+public class SitStandDemo {
 	
 	/** The name of the DataProcessor */
-	private static String TAG = "My Physical Activity Demo";
+	private static String TAG = "My Sit Stand Demo";
 	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
 
@@ -20,22 +20,22 @@ public class PhysicalActivityDemo {
 	private GetData getData;
 	Thread sendData;
 
-	public PhysicalActivityDemo(SensePlatform sensePlatform)
+	public SitStandDemo(SensePlatform sensePlatform)
 	{	
 
 		this.sensePlatform = sensePlatform;
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(PhysicalActivityDemo.TAG))
+		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(SitStandDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(PhysicalActivityDemo.TAG).get(0);			
+			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(SitStandDemo.TAG).get(0);			
 		}
 		else
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			new PhysicalActivity(TAG, sensePlatform.getService().getSenseService());
+			new SitStand(TAG, sensePlatform.getService().getSenseService());
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
 		}
@@ -79,7 +79,7 @@ public class PhysicalActivityDemo {
 				{
 					// Description of the sensor
 					// This is only used to send data to CommonSense
-					final String name = "physical activity";
+					final String name = "sit_stand";
 					final String displayName = TAG;
 					final String dataType = "string";
 					final String description = name;
