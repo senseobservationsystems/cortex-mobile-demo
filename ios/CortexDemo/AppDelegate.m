@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import <Cortex/SensePlatform/CSSensePlatform.h>
-#import <Cortex/SensePlatform/CSSettings.h>
+#import <Cortex/CSSensePlatform.h>
+#import <Cortex/CSSettings.h>
+#import "Factory.h"
 
 @implementation AppDelegate
 
@@ -16,8 +17,6 @@
 {
     //Setup sense platform
     [CSSensePlatform initialize];
-    //login on common sense
-    [CSSensePlatform loginWithUser:@"cortex" andPassword:@"demo"];
 
     //upload data to Common Sense every 15 minutes
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingUploadToCommonSense value:kCSSettingYES];
@@ -26,6 +25,28 @@
     //enable location sensor so we keep running in the background
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeLocation setting:kCSLocationSettingAccuracy value:@"10000"];
     [[CSSettings sharedSettings] setSensor:kCSSENSOR_LOCATION enabled:YES];
+    
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingSenseEnabled value:kCSSettingYES];
+    
+    
+    //continuous motion sensor sampling this is needed to do continuous fall detection, but this drains battery. Other modules work well with lower sample interval.
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeSpatial setting:kCSSpatialSettingInterval value:@"0"];
+
+    //Modules expect 50Hz sample rate, 3 a duration of three seconds works quite well for activity detection and step counting
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeSpatial setting:kCSSpatialSettingFrequency value:@"50"];
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeSpatial setting:kCSSpatialSettingNrSamples value:@"150"];
+    [[CSSettings sharedSettings] setSensor:kCSSENSOR_ACCELEROMETER enabled:YES];
+    
+    //acceleration is used by the Activity and stepcounter module
+    [[CSSettings sharedSettings] setSensor:kCSSENSOR_ACCELERATION enabled:YES];
+    [[CSSettings sharedSettings] setSensor:kCSSENSOR_ACCELERATION_BURST enabled:YES];
+    
+    //noise sensor is used to detect sleep
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeAmbience setting:kCSAmbienceSettingInterval value:@"60"];
+    [[CSSettings sharedSettings] setSensor:kCSSENSOR_NOISE enabled:YES];
+    
+    //Let the factory instantiate all modules
+    [Factory sharedFactory];
 
     return YES;
 }

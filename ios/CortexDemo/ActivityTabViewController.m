@@ -1,24 +1,21 @@
 //
-//  FirstViewController.m
+//  ActivityTabViewController.m
 //  CortexDemo
 //
-//  Created by Pim Nijdam on 4/16/13.
+//  Created by Pim Nijdam on 7/2/13.
 //  Copyright (c) 2013 Sense Observation Systems BV. All rights reserved.
 //
 
-#import "FallDetectionTabViewController.h"
+#import "ActivityTabViewController.h"
+#import "Factory.h"
+#import <Cortex/ActivityModule.h>
 #import <Cortex/CSSensePlatform.h>
-#import <Cortex/FallDetectorModule.h>
+#import <Cortex/CSSettings.h>
 
+static const size_t MAX_ENTRIES = 60;
 
-static const NSUInteger MAX_ENTRIES = 10;
-
-@interface FallDetectionTabViewController ()
-
-@end
-
-@implementation FallDetectionTabViewController {
-    FallDetectorModule* fdm;
+@implementation ActivityTabViewController{
+    ActivityModule* pam;
     NSMutableArray* fallLog;
     
     NSDateFormatter* dateFormatter;
@@ -38,11 +35,7 @@ static const NSUInteger MAX_ENTRIES = 10;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
     
     //setup fall detector module
-    fdm = [[FallDetectorModule alloc] init];
-    
-    //Set the UI for the parameter to the current values
-    self.demoSwitch.on = fdm.isDemo;
-    self.useInactivitySwitch.on = fdm.useInactivity;
+    pam = [Factory sharedFactory].activityModule;
 }
 
 - (void)viewDidUnload
@@ -56,31 +49,19 @@ static const NSUInteger MAX_ENTRIES = 10;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction) toggleSwitch: (id) sender {
-    if (sender == self.demoSwitch) {
-        fdm.isDemo = self.demoSwitch.on;
-        
-    } else if (sender == self.useInactivitySwitch) {
-        fdm.useInactivity = self.useInactivitySwitch.on;
-    }
-    NSLog(@"Demo: %@, use inactivity: %@.", fdm.isDemo ? @"yes" : @"no", fdm.useInactivity ? @"yes" : @"no");
-}
-
 - (void) onNewData:(NSNotification*)notification {
     NSString* sensor = notification.object;
-    if ([sensor isEqualToString:@"fall detector"]) {
+    if ([sensor isEqualToString:@"activity"]) {
         NSString* json = [notification.userInfo valueForKey:@"value"];
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[notification.userInfo valueForKey:@"date"] doubleValue]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             @autoreleasepool {
-
                 NSString* entry = [NSString stringWithFormat:@"%@:%@", [dateFormatter stringFromDate:date], json];
                 [fallLog insertObject:entry atIndex:0];
                 while ([fallLog count] > MAX_ENTRIES) {
                     [fallLog removeLastObject];
                 }
-
                 [self.logText setText:[fallLog componentsJoinedByString:@"\n"]];
             }
         });

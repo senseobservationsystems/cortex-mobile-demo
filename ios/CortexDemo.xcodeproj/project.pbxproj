@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0585D81783006A00808B5D /* ActivityTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0585D71783006A00808B5D /* ActivityTabViewController.m */; };
+		3E0585EE1784650A00808B5D /* Cortex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0585ED1784650A00808B5D /* Cortex.framework */; };
 		3E13878A174D0EC900950CA4 /* CommonSense.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138788174D0EC900950CA4 /* CommonSense.plist */; };
 		3E13878B174D0EC900950CA4 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138789174D0EC900950CA4 /* Settings.plist */; };
-		3E14CD761727DEBB0002D558 /* libCortex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E14CD601727CADE0002D558 /* libCortex.a */; };
+		3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */; };
+		3E76A5211781D4C5009CCACB /* Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A5201781D4C4009CCACB /* Factory.m */; };
+		3E76A5261782D1FF009CCACB /* RegisterUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A5251782D1FF009CCACB /* RegisterUserView.m */; };
+		3E76A52C1782D9BD009CCACB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A52B1782D9BD009CCACB /* MainViewController.m */; };
 		3E836DCA171D93A300D7494C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836DC9171D93A300D7494C /* UIKit.framework */; };
 		3E836DCC171D93A300D7494C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836DCB171D93A300D7494C /* Foundation.framework */; };
 		3E836DCE171D93A300D7494C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836DCD171D93A300D7494C /* CoreGraphics.framework */; };
@@ -33,41 +38,20 @@
 		3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EACDDB517325C1700975C8D /* DebugTabViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3E14CD5F1727CADE0002D558 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E4F260317030AA30045588C;
-			remoteInfo = Cortex;
-		};
-		3E14CD611727CADE0002D558 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E4F261417030AA30045588C;
-			remoteInfo = CortexTests;
-		};
-		3E14CD631727CADE0002D558 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E4F26A71703279F0045588C;
-			remoteInfo = AIM;
-		};
-		3E14CD731727DEAF0002D558 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E4F260217030AA30045588C;
-			remoteInfo = Cortex;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		3E138788174D0EC900950CA4 /* CommonSense.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = CommonSense.plist; path = "../../../Documents/iosProjects/sense-library/resources/CommonSense.plist"; sourceTree = "<group>"; };
-		3E138789174D0EC900950CA4 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Settings.plist; path = "../../../Documents/iosProjects/sense-library/resources/Settings.plist"; sourceTree = "<group>"; };
-		3E14CD511727CADD0002D558 /* Cortex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cortex.xcodeproj; path = "../../../aim/ios-sdk/Cortex.xcodeproj"; sourceTree = "<group>"; };
+		3E0585D61783006A00808B5D /* ActivityTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTabViewController.h; sourceTree = "<group>"; };
+		3E0585D71783006A00808B5D /* ActivityTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTabViewController.m; sourceTree = "<group>"; };
+		3E0585ED1784650A00808B5D /* Cortex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cortex.framework; sourceTree = "<group>"; };
+		3E138788174D0EC900950CA4 /* CommonSense.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CommonSense.plist; path = "../../../Documents/iosProjects/sense-library/resources/CommonSense.plist"; sourceTree = "<group>"; };
+		3E138789174D0EC900950CA4 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Settings.plist; path = "../../../Documents/iosProjects/sense-library/resources/Settings.plist"; sourceTree = "<group>"; };
+		3E76A51C17817E6C009CCACB /* StepCounterTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCounterTabViewController.h; sourceTree = "<group>"; };
+		3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepCounterTabViewController.m; sourceTree = "<group>"; };
+		3E76A51F1781D4C4009CCACB /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
+		3E76A5201781D4C4009CCACB /* Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Factory.m; sourceTree = "<group>"; };
+		3E76A5241782D1FE009CCACB /* RegisterUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterUserView.h; sourceTree = "<group>"; };
+		3E76A5251782D1FF009CCACB /* RegisterUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterUserView.m; sourceTree = "<group>"; };
+		3E76A52A1782D9BD009CCACB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		3E76A52B1782D9BD009CCACB /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3E836DC5171D93A300D7494C /* CortexDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CortexDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E836DC9171D93A300D7494C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E836DCB171D93A300D7494C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E14CD761727DEBB0002D558 /* libCortex.a in Frameworks */,
 				3E836E05171D961500D7494C /* SystemConfiguration.framework in Frameworks */,
 				3E836E03171D960C00D7494C /* CoreTelephony.framework in Frameworks */,
 				3E836E01171D960500D7494C /* AudioToolbox.framework in Frameworks */,
@@ -114,26 +97,17 @@
 				3E836DCA171D93A300D7494C /* UIKit.framework in Frameworks */,
 				3E836DCC171D93A300D7494C /* Foundation.framework in Frameworks */,
 				3E836DCE171D93A300D7494C /* CoreGraphics.framework in Frameworks */,
+				3E0585EE1784650A00808B5D /* Cortex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E14CD521727CADD0002D558 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E14CD601727CADE0002D558 /* libCortex.a */,
-				3E14CD621727CADE0002D558 /* CortexTests.octest */,
-				3E14CD641727CADE0002D558 /* libAIM.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3E836DBA171D93A300D7494C = {
 			isa = PBXGroup;
 			children = (
-				3E14CD511727CADD0002D558 /* Cortex.xcodeproj */,
+				3E0585ED1784650A00808B5D /* Cortex.framework */,
 				3E836E04171D961500D7494C /* SystemConfiguration.framework */,
 				3E836E02171D960C00D7494C /* CoreTelephony.framework */,
 				3E836E00171D960500D7494C /* AudioToolbox.framework */,
@@ -169,6 +143,8 @@
 		3E836DCF171D93A300D7494C /* CortexDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3E76A51C17817E6C009CCACB /* StepCounterTabViewController.h */,
+				3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */,
 				3E836DD8171D93A300D7494C /* AppDelegate.h */,
 				3E836DD9171D93A300D7494C /* AppDelegate.m */,
 				3E836DDB171D93A300D7494C /* MainStoryboard.storyboard */,
@@ -183,6 +159,14 @@
 				3E836DE8171D93A300D7494C /* second.png */,
 				3E836DEA171D93A300D7494C /* second@2x.png */,
 				3E836DD0171D93A300D7494C /* Supporting Files */,
+				3E76A51F1781D4C4009CCACB /* Factory.h */,
+				3E76A5201781D4C4009CCACB /* Factory.m */,
+				3E76A5241782D1FE009CCACB /* RegisterUserView.h */,
+				3E76A5251782D1FF009CCACB /* RegisterUserView.m */,
+				3E76A52A1782D9BD009CCACB /* MainViewController.h */,
+				3E76A52B1782D9BD009CCACB /* MainViewController.m */,
+				3E0585D61783006A00808B5D /* ActivityTabViewController.h */,
+				3E0585D71783006A00808B5D /* ActivityTabViewController.m */,
 			);
 			path = CortexDemo;
 			sourceTree = "<group>";
@@ -221,7 +205,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E14CD741727DEAF0002D558 /* PBXTargetDependency */,
 			);
 			name = CortexDemo;
 			productName = CortexDemo;
@@ -247,42 +230,12 @@
 			mainGroup = 3E836DBA171D93A300D7494C;
 			productRefGroup = 3E836DC6171D93A300D7494C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3E14CD521727CADD0002D558 /* Products */;
-					ProjectRef = 3E14CD511727CADD0002D558 /* Cortex.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3E836DC4171D93A300D7494C /* CortexDemo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3E14CD601727CADE0002D558 /* libCortex.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCortex.a;
-			remoteRef = 3E14CD5F1727CADE0002D558 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E14CD621727CADE0002D558 /* CortexTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CortexTests.octest;
-			remoteRef = 3E14CD611727CADE0002D558 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E14CD641727CADE0002D558 /* libAIM.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libAIM.a;
-			remoteRef = 3E14CD631727CADE0002D558 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3E836DC3171D93A300D7494C /* Resources */ = {
@@ -312,18 +265,15 @@
 				3E836DE0171D93A300D7494C /* FallDetectionTabViewController.m in Sources */,
 				3E836DE7171D93A300D7494C /* CarryDeviceTabViewController.m in Sources */,
 				3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */,
+				3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */,
+				3E76A5211781D4C5009CCACB /* Factory.m in Sources */,
+				3E76A5261782D1FF009CCACB /* RegisterUserView.m in Sources */,
+				3E76A52C1782D9BD009CCACB /* MainViewController.m in Sources */,
+				3E0585D81783006A00808B5D /* ActivityTabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3E14CD741727DEAF0002D558 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Cortex;
-			targetProxy = 3E14CD731727DEAF0002D558 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3E836DD2171D93A300D7494C /* InfoPlist.strings */ = {
@@ -407,15 +357,13 @@
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../frameworks\"",
-					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/sensePlatform-advnmtyvdrzpdwbtyuxvwtnccews/Build/Products/Debug-iphoneos\"",
-					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../aim/ios-sdk/build\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Cortex-hgpxkldzefwlcbfbemxkebxomfyf/Build/Products/Debug-iphoneos\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CortexDemo/CortexDemo-Prefix.pch";
 				INFOPLIST_FILE = "CortexDemo/CortexDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lstdc++",
@@ -436,15 +384,13 @@
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../frameworks\"",
-					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/sensePlatform-advnmtyvdrzpdwbtyuxvwtnccews/Build/Products/Debug-iphoneos\"",
-					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../aim/ios-sdk/build\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Cortex-hgpxkldzefwlcbfbemxkebxomfyf/Build/Products/Debug-iphoneos\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CortexDemo/CortexDemo-Prefix.pch";
 				INFOPLIST_FILE = "CortexDemo/CortexDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lstdc++",
 					"-ObjC",

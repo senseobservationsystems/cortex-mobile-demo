@@ -7,8 +7,9 @@
 //
 
 #import "CarryDeviceTabViewController.h"
-#import <Cortex/Cortex/CarryDeviceModule.h>
-#import <Cortex/SensePlatform/CSSensePlatform.h>
+#import <Cortex/CarryDeviceModule.h>
+#import <Cortex/CSSensePlatform.h>
+#import "Factory.h"
 
 static const NSUInteger MAX_ENTRIES = 60;
 
@@ -37,13 +38,13 @@ static const NSUInteger MAX_ENTRIES = 60;
     
 
     //setup carry device module
-    carryDeviceModule = [[CarryDeviceModule alloc] init];
+    carryDeviceModule = [Factory sharedFactory].carryDeviceModule;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
