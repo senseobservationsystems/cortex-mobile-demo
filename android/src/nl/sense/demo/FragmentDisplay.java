@@ -2,13 +2,13 @@ package nl.sense.demo;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,8 +35,10 @@ import android.widget.TextView;
 
 public class FragmentDisplay extends Fragment 
 {
+	
+	public static final int MAX_ENTRIES = 60;
 	public static final String TITLE = "TITLE";	
-	public JSONArray output = new JSONArray();
+	public ArrayList<JSONObject> output = new ArrayList<JSONObject>(MAX_ENTRIES);
 	public View v = null;
 	private float mx, my;	
 	private FragmentActivity fa;
@@ -84,7 +86,9 @@ public class FragmentDisplay extends Fragment
 		} catch (JSONException e) {		
 			e.printStackTrace();
 		}
-		output.put(data);	
+		if (output.size() >= MAX_ENTRIES)
+			output.remove(output.size()-1);
+		output.add(data);
 		final JSONObject d = data;		
 		Handler h = new Handler(Looper.getMainLooper());
 		h.post(new Runnable() {			
@@ -172,14 +176,10 @@ public class FragmentDisplay extends Fragment
 		pagerText.setText(pager);	
 		TableLayout tl = (TableLayout)v.findViewById(R.id.tableLayoutOutput);		
 		tl.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
-		for(int i = 0; i < output.length(); i++)
+		for(int i = 0; i < output.size(); i++)
 		{
-			try {
-				JSONObject json = output.getJSONObject(i);				
-				addRow(json);
-			} catch (JSONException e) {			
-				e.printStackTrace();
-			}
+			JSONObject json = output.get(i);				
+			addRow(json);
 		}
 		return v;
 	}
@@ -230,7 +230,11 @@ public class FragmentDisplay extends Fragment
 				tl.addView(tr);
 				addRow(message);
 			}
-
+			
+			// make sure this doesn't grow too big
+			while (tl.getChildCount() + 1 > MAX_ENTRIES) {
+				tl.removeViewAt(tl.getChildCount() - 1);
+			}
 		}
 		catch(Exception e)
 		{
