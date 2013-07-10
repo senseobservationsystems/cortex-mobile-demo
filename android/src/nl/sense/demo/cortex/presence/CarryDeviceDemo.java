@@ -50,11 +50,11 @@ public class CarryDeviceDemo {
 			// To compute the noise in the signal the buffer should have enough samples
 			// when it receives samples ones every minute than a window of 1 minute does not work
 			// this should then at least be 5 minutes.
-			carryDevice.setInterval(60);
+			carryDevice.setInterval(30);
 			// Reliable output will only be given when the buffer time has been reached
 			// This time window also smoothes this signal, but when an event is found in the time window
 			// this event can take the length of the time window to get the event out
-			carryDevice.setTimeWindow(60*5);
+			carryDevice.setTimeWindow(30);
 			// this sets how much times the sensor data should be above the noise level
 			// carryDevice.setEventThreshold(0.01);
 			// Re-calibrate removes the learned lowest and highest variance values
