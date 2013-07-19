@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.dataprocessor.SitStand;
+import nl.sense_os.cortex.SitStand;
 import nl.sense_os.platform.SensePlatform;
-import nl.sense_os.service.shared.DataProcessor;
+import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class SitStandDemo {
@@ -22,13 +22,13 @@ public class SitStandDemo {
 
 	public SitStandDemo(SensePlatform sensePlatform)
 	{	
-
 		this.sensePlatform = sensePlatform;
+		SubscriptionManager sm = SubscriptionManager.getInstance();
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(SitStandDemo.TAG))
+		if(sm.isProducerRegistered(SitStandDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(SitStandDemo.TAG).get(0);			
+			getData = (GetData) sm.getSubscribedConsumers(SitStandDemo.TAG).get(0);			
 		}
 		else
 		{
@@ -37,7 +37,7 @@ public class SitStandDemo {
 			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
 			new SitStand(TAG, sensePlatform.getService().getSenseService());
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
-			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
+			sm.subscribeConsumer(TAG, getData);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class SitStandDemo {
 	 * 
 	 * @author Ted Schmidt <ted@sense-os.nl>
 	 */
-	private class GetData implements DataProcessor
+	private class GetData implements DataConsumer
 	{						
 		public FragmentDisplay fDisplay;
 

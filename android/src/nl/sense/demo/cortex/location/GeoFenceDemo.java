@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.dataprocessor.GeoFence;
+import nl.sense_os.cortex.GeoFence;
 import nl.sense_os.platform.SensePlatform;
-import nl.sense_os.service.shared.DataProcessor;
+import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class GeoFenceDemo {
@@ -25,13 +25,14 @@ public class GeoFenceDemo {
 	public GeoFenceDemo(SensePlatform sensePlatform)
 	{		
 		this.sensePlatform = sensePlatform;
+		SubscriptionManager sm = SubscriptionManager.getInstance();
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(GeoFenceDemo.TAG))
+		if(sm.isProducerRegistered(GeoFenceDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(GeoFenceDemo.TAG).get(0);
-			// Get the GeoFence DataProcessor
-			geoFence = (GeoFence) sensePlatform.getService().getSenseService().getRegisteredDataProducers(GeoFenceDemo.TAG).get(0);
+			getData = (GetData) sm.getSubscribedConsumers(GeoFenceDemo.TAG).get(0);
+			// Get the GeoFence
+			geoFence = (GeoFence) sm.getRegisteredProducers(GeoFenceDemo.TAG).get(0);
 		}
 		else
 		{
@@ -44,7 +45,7 @@ public class GeoFenceDemo {
 			// Set the circle diameter range from the goal location as fence
 			geoFence.setRange(100);
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
-			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
+			sm.subscribeConsumer(TAG, getData);
 		}
 	}
 
@@ -66,7 +67,7 @@ public class GeoFenceDemo {
 	 * 
 	 * @author Ted Schmidt <ted@sense-os.nl>
 	 */
-	private class GetData implements DataProcessor
+	private class GetData implements DataConsumer
 	{						
 		public FragmentDisplay fDisplay;
 
