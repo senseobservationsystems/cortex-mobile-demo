@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.dataprocessor.CarryDevice;
+import nl.sense_os.cortex.CarryDevice;
 import nl.sense_os.platform.SensePlatform;
-import nl.sense_os.service.shared.DataProcessor;
+import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class CarryDeviceDemo {
@@ -26,13 +26,14 @@ public class CarryDeviceDemo {
 	public CarryDeviceDemo(SensePlatform sensePlatform)
 	{			
 		this.sensePlatform = sensePlatform;
+		SubscriptionManager sm = SubscriptionManager.getInstance();
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(CarryDeviceDemo.TAG))
+		if(sm.isProducerRegistered(CarryDeviceDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(CarryDeviceDemo.TAG).get(0);
+			getData = (GetData) sm.getSubscribedConsumers(CarryDeviceDemo.TAG).get(0);
 			// Get the DataProcessor
-			carryDevice = (CarryDevice) sensePlatform.getService().getSenseService().getRegisteredDataProducers(CarryDeviceDemo.TAG).get(0);
+			carryDevice = (CarryDevice) sm.getRegisteredProducers(CarryDeviceDemo.TAG).get(0);
 		}
 		else
 		{
@@ -43,7 +44,7 @@ public class CarryDeviceDemo {
 			// This resets the learned noise values, when erroneous data with no variance is processed
 			// the lowest variance used to determine the noise is 0 which means that the smallest change will cause an event
 			//carryDevice.reCalibrate();
-			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
+			sm.subscribeConsumer(TAG, getData);
 			// This sets the interval at which to compute the output
 			// It only produces output when new data comes in and the interval time has been exceeded.
 			// Setting the interval will also reset the time window to the interval value + 10%
@@ -80,7 +81,7 @@ public class CarryDeviceDemo {
 	 * 
 	 * @author Ted Schmidt <ted@sense-os.nl>
 	 */
-	private class GetData implements DataProcessor
+	private class GetData implements DataConsumer
 	{						
 		public FragmentDisplay fDisplay;
 

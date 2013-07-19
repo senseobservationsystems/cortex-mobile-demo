@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.dataprocessor.StepCounter;
+import nl.sense_os.cortex.StepCounter;
 import nl.sense_os.platform.SensePlatform;
-import nl.sense_os.service.shared.DataProcessor;
+import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class StepCounterDemo {
@@ -22,13 +22,13 @@ public class StepCounterDemo {
 
 	public StepCounterDemo(SensePlatform sensePlatform)
 	{	
-
 		this.sensePlatform = sensePlatform;
+		SubscriptionManager sm = SubscriptionManager.getInstance();
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(StepCounterDemo.TAG))
+		if(sm.isProducerRegistered(StepCounterDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(StepCounterDemo.TAG).get(0);			
+			getData = (GetData) sm.getSubscribedConsumers(StepCounterDemo.TAG).get(0);			
 		}
 		else
 		{
@@ -37,7 +37,7 @@ public class StepCounterDemo {
 			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
 			new StepCounter(TAG, sensePlatform.getService().getSenseService());
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
-			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
+			sm.subscribeConsumer(TAG, getData);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class StepCounterDemo {
 	 * 
 	 * @author Ted Schmidt <ted@sense-os.nl>
 	 */
-	private class GetData implements DataProcessor
+	private class GetData implements DataConsumer
 	{						
 		public FragmentDisplay fDisplay;
 
