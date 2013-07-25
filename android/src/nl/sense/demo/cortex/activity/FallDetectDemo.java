@@ -3,7 +3,7 @@ package nl.sense.demo.cortex.activity;
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
-import nl.sense_os.cortex.FallDetect;
+import nl.sense_os.cortex.FallSensor;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
@@ -16,7 +16,7 @@ import nl.sense_os.service.shared.SensorDataPoint;
 public class FallDetectDemo {
 
 	/** The DataProcessor */
-	private FallDetect fallDetect;
+	private FallSensor fallDetect;
 	/** The name of the DataProcessor */
 	private static String TAG = "My Fall Detect Demo";
 	/** Connection to the SenseService **/
@@ -36,14 +36,14 @@ public class FallDetectDemo {
 			// Get the getData class which has the fragment for the display
 			getData = (GetData) sm.getSubscribedConsumers(FallDetectDemo.TAG).get(0);
 			// Get the FallDetect DataProcessor
-			fallDetect = (FallDetect) sm.getRegisteredProducers(FallDetectDemo.TAG).get(0);
+			fallDetect = (FallSensor) sm.getRegisteredProducers(FallDetectDemo.TAG).get(0);
 		}
 		else
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual FallDetect DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			fallDetect = new FallDetect(TAG, sensePlatform.getService().getSenseService());
+			fallDetect = new FallSensor(TAG, sensePlatform.getService().getSenseService());
 			// Subscribe the GetData class to get data from the FallDetect Data Processor 
 			sm.subscribeConsumer(TAG, getData);
 			// only detect fall when the phone is carried on body

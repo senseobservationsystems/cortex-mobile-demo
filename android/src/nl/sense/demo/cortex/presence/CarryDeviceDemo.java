@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.CarryDevice;
+import nl.sense_os.cortex.CarryDeviceSensor;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
@@ -12,7 +12,7 @@ import nl.sense_os.service.shared.SensorDataPoint;
 public class CarryDeviceDemo {
 
 	/** The DataProcessor */
-	private CarryDevice carryDevice;
+	private CarryDeviceSensor carryDevice;
 	/** The name of the DataProcessor */
 	public final static String TAG = "My CarryDevice Demo";
 	/** Connection to the SenseService **/
@@ -33,14 +33,14 @@ public class CarryDeviceDemo {
 			// Get the getData class which has the fragment for the display
 			getData = (GetData) sm.getSubscribedConsumers(CarryDeviceDemo.TAG).get(0);
 			// Get the DataProcessor
-			carryDevice = (CarryDevice) sm.getRegisteredProducers(CarryDeviceDemo.TAG).get(0);
+			carryDevice = (CarryDeviceSensor) sm.getRegisteredProducers(CarryDeviceDemo.TAG).get(0);
 		}
 		else
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual CarryDevice DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			carryDevice = new CarryDevice(TAG, sensePlatform.getService().getSenseService());
+			carryDevice = new CarryDeviceSensor(TAG, sensePlatform.getService().getSenseService());
 			// This resets the learned noise values, when erroneous data with no variance is processed
 			// the lowest variance used to determine the noise is 0 which means that the smallest change will cause an event
 			//carryDevice.reCalibrate();
