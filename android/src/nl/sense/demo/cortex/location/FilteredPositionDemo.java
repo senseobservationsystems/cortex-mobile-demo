@@ -3,8 +3,7 @@ package nl.sense.demo.cortex.location;
 import org.json.JSONObject;
 
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.FallDetect;
-import nl.sense_os.cortex.FilteredPosition;
+import nl.sense_os.cortex.FilteredPositionSensor;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
@@ -36,7 +35,7 @@ public class FilteredPositionDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual FilteredPostion DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			new FilteredPosition(TAG, sensePlatform.getService().getSenseService());
+			new FilteredPositionSensor(TAG, sensePlatform.getService().getSenseService());
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sm.subscribeConsumer(TAG, getData);
 		}

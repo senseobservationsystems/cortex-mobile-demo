@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.StepCounter;
+import nl.sense_os.cortex.StepCountSensor;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
@@ -35,7 +35,7 @@ public class StepCounterDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			new StepCounter(TAG, sensePlatform.getService().getSenseService());
+			new StepCountSensor(TAG, sensePlatform.getService().getSenseService());
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sm.subscribeConsumer(TAG, getData);
 		}
