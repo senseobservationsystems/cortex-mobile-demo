@@ -11,6 +11,7 @@
 		3E0585EE1784650A00808B5D /* Cortex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0585ED1784650A00808B5D /* Cortex.framework */; };
 		3E13878A174D0EC900950CA4 /* CommonSense.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138788174D0EC900950CA4 /* CommonSense.plist */; };
 		3E13878B174D0EC900950CA4 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138789174D0EC900950CA4 /* Settings.plist */; };
+		3E2FF70917A2D72100F7F00A /* TimeActiveTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */; };
 		3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */; };
 		3E76A5211781D4C5009CCACB /* Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A5201781D4C4009CCACB /* Factory.m */; };
 		3E76A5261782D1FF009CCACB /* RegisterUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A5251782D1FF009CCACB /* RegisterUserView.m */; };
@@ -44,6 +45,8 @@
 		3E0585ED1784650A00808B5D /* Cortex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cortex.framework; sourceTree = "<group>"; };
 		3E138788174D0EC900950CA4 /* CommonSense.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CommonSense.plist; path = "../../../Documents/iosProjects/sense-library/resources/CommonSense.plist"; sourceTree = "<group>"; };
 		3E138789174D0EC900950CA4 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Settings.plist; path = "../../../Documents/iosProjects/sense-library/resources/Settings.plist"; sourceTree = "<group>"; };
+		3E2FF70717A2D72100F7F00A /* TimeActiveTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeActiveTabViewController.h; sourceTree = "<group>"; };
+		3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeActiveTabViewController.m; sourceTree = "<group>"; };
 		3E76A51C17817E6C009CCACB /* StepCounterTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCounterTabViewController.h; sourceTree = "<group>"; };
 		3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepCounterTabViewController.m; sourceTree = "<group>"; };
 		3E76A51F1781D4C4009CCACB /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				3E76A52B1782D9BD009CCACB /* MainViewController.m */,
 				3E0585D61783006A00808B5D /* ActivityTabViewController.h */,
 				3E0585D71783006A00808B5D /* ActivityTabViewController.m */,
+				3E2FF70717A2D72100F7F00A /* TimeActiveTabViewController.h */,
+				3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */,
 			);
 			path = CortexDemo;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				3E76A5261782D1FF009CCACB /* RegisterUserView.m in Sources */,
 				3E76A52C1782D9BD009CCACB /* MainViewController.m in Sources */,
 				3E0585D81783006A00808B5D /* ActivityTabViewController.m in Sources */,
+				3E2FF70917A2D72100F7F00A /* TimeActiveTabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

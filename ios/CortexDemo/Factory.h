@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Cortex/FallDetectorModule.h>
 #import <Cortex/StepCounterModule.h>
+#import <Cortex/TimeActiveModule.h>
 #import <Cortex/CarryDeviceModule.h>
 #import <Cortex/ActivityModule.h>
 
@@ -18,6 +19,7 @@
 
 @property (strong, nonatomic, readonly) FallDetectorModule* fallDetectorModule;
 @property (strong, nonatomic, readonly) StepCounterModule* stepCounterModule;
+@property (strong, nonatomic, readonly) TimeActiveModule* timeActiveModule;
 @property (strong, nonatomic, readonly) CarryDeviceModule* carryDeviceModule;
 @property (strong, nonatomic, readonly) ActivityModule* activityModule;
 

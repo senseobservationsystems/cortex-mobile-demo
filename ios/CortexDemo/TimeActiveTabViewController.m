@@ -1,20 +1,20 @@
 //
-//  StepCounterTabViewController.m
+//  TimeActiveTabViewController.m
 //  CortexDemo
 //
-//  Created by Pim Nijdam on 7/1/13.
+//  Created by Pim Nijdam on 7/26/13.
 //  Copyright (c) 2013 Sense Observation Systems BV. All rights reserved.
 //
-
 #import "Factory.h"
-#import "StepCounterTabViewController.h"
+#import "TimeActiveTabViewController.h"
+#import "TimeActiveTabViewController.h"
 #import <Cortex/CSSensePlatform.h>
-#import <Cortex/StepCounterModule.h>
+#import <Cortex/TimeActiveModule.h>
 
 static const NSUInteger MAX_ENTRIES = 10;
 
-@implementation StepCounterTabViewController{
-    StepCounterModule* scm;
+@implementation TimeActiveTabViewController{
+    TimeActiveModule* tam;
     NSMutableArray* fallLog;
     
     NSDateFormatter* dateFormatter;
@@ -32,11 +32,9 @@ static const NSUInteger MAX_ENTRIES = 10;
     
     //subscribe to sensor data
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
-
-    //setup fall detector module
-    scm = [Factory sharedFactory].stepCounterModule;
-
-    self.sensitivitySlider.value = [scm getSensitivity];
+    
+    //setup module
+    tam = [Factory sharedFactory].timeActiveModule;
 }
 
 - (void)viewDidUnload
@@ -50,30 +48,26 @@ static const NSUInteger MAX_ENTRIES = 10;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction) resetStepCount: (id) sender {
-    [scm resetStepCounter];
-}
-
-- (IBAction) setSensitivity:(UISlider *)sensitivitySlider {
-    NSLog(@"Set sensitivity %f ", sensitivitySlider.value);
-    [scm setSensitivity:sensitivitySlider.value];
+- (IBAction) resetTimeActive:(id)sender {
+    [tam reset];
 }
 
 - (void) onNewData:(NSNotification*)notification {
     NSString* sensor = notification.object;
-    if ([sensor isEqualToString:@"step counter"]) {
+    if ([sensor isEqualToString:@"time active"]) {
         NSString* json = [notification.userInfo valueForKey:@"value"];
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[notification.userInfo valueForKey:@"date"] doubleValue]];
         
+        NSTimeInterval totalSeconds = [json doubleValue];
+        int hours = totalSeconds / 3600;
+        int minutes = ((int)(totalSeconds / 60)) % 60;
+        int seconds = ((int)totalSeconds) % 60;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             @autoreleasepool {
-                NSString* entry = [NSString stringWithFormat:@"%@: %@", [dateFormatter stringFromDate:date], json];
-                [fallLog insertObject:entry atIndex:0];
-                while ([fallLog count] > MAX_ENTRIES) {
-                    [fallLog removeLastObject];
-                }
+                NSString* entry = [NSString stringWithFormat:@"%@: Active for %.2i:%.2i:%.2i", [dateFormatter stringFromDate:date], hours, minutes, seconds];
                 
-                [self.logText setText:[fallLog componentsJoinedByString:@"\n"]];
+                [self.logText setText:entry];
             }
         });
     }
