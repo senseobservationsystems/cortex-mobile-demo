@@ -4,15 +4,15 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.dataprocessor.CarryDevice;
+import nl.sense_os.cortex.CarryDeviceSensor;
 import nl.sense_os.platform.SensePlatform;
-import nl.sense_os.service.shared.DataProcessor;
+import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
 
 public class CarryDeviceDemo {
 
 	/** The DataProcessor */
-	private CarryDevice carryDevice;
+	private CarryDeviceSensor carryDevice;
 	/** The name of the DataProcessor */
 	public final static String TAG = "My CarryDevice Demo";
 	/** Connection to the SenseService **/
@@ -26,24 +26,25 @@ public class CarryDeviceDemo {
 	public CarryDeviceDemo(SensePlatform sensePlatform)
 	{			
 		this.sensePlatform = sensePlatform;
+		SubscriptionManager sm = SubscriptionManager.getInstance();
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sensePlatform.getService().getSenseService().isDataProducerRegistered(CarryDeviceDemo.TAG))
+		if(sm.isProducerRegistered(CarryDeviceDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sensePlatform.getService().getSenseService().getSubscribedDataProcessors(CarryDeviceDemo.TAG).get(0);
+			getData = (GetData) sm.getSubscribedConsumers(CarryDeviceDemo.TAG).get(0);
 			// Get the DataProcessor
-			carryDevice = (CarryDevice) sensePlatform.getService().getSenseService().getRegisteredDataProducers(CarryDeviceDemo.TAG).get(0);
+			carryDevice = (CarryDeviceSensor) sm.getRegisteredProducers(CarryDeviceDemo.TAG).get(0);
 		}
 		else
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual CarryDevice DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			carryDevice = new CarryDevice(TAG, sensePlatform.getService().getSenseService());
+			carryDevice = new CarryDeviceSensor(TAG, sensePlatform.getService().getSenseService());
 			// This resets the learned noise values, when erroneous data with no variance is processed
 			// the lowest variance used to determine the noise is 0 which means that the smallest change will cause an event
 			//carryDevice.reCalibrate();
-			sensePlatform.getService().getSenseService().subscribeDataProcessor(TAG, getData);
+			sm.subscribeConsumer(TAG, getData);
 			// This sets the interval at which to compute the output
 			// It only produces output when new data comes in and the interval time has been exceeded.
 			// Setting the interval will also reset the time window to the interval value + 10%
@@ -80,7 +81,7 @@ public class CarryDeviceDemo {
 	 * 
 	 * @author Ted Schmidt <ted@sense-os.nl>
 	 */
-	private class GetData implements DataProcessor
+	private class GetData implements DataConsumer
 	{						
 		public FragmentDisplay fDisplay;
 
