@@ -302,7 +302,6 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			service.setPrefBool(Ambience.MAGNETIC_FIELD, false);
 			service.setPrefBool(Ambience.MIC, true);
 			
-
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector
 			service.setPrefBool(Motion.FALL_DETECT, true);
