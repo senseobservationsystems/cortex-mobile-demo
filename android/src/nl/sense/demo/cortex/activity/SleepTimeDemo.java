@@ -105,7 +105,7 @@ public class SleepTimeDemo {
 				{
 					// Description of the sensor
 					// This is only used to send data to CommonSense
-					final String name = "carry device";
+					final String name = "sleep_time";
 					final String displayName = TAG;
 					final String dataType = "json";
 					final String description = name;

@@ -14,7 +14,7 @@ public class CarryDeviceDemo {
 	/** The DataProcessor */
 	private CarryDeviceSensor carryDevice;
 	/** The name of the DataProcessor */
-	public final static String TAG = "carry device";
+	public final static String TAG = "My Carry Device Demo";
 	/** Connection to the SenseService **/
 	private SensePlatform sensePlatform;
 	
