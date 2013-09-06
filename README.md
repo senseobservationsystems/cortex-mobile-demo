@@ -7,7 +7,7 @@ Android and iOS demo applications of cortex. The goal is to provide useful code 
  
 The cortex demo can only be used in combination with the [sense-android-library](https://github.com/senseobservationsystems/sense-android-library) or [sense-ios-library](https://github.com/senseobservationsystems/sense-ios-library) repositories.
 It also requires additional native libraries which you need to place in the /libs folder for Android.
-Please contact steven@, pim@ or ted@ sense-os.nl to obtain the libraries.
+Please contact pim@ or ted@ sense-os.nl to obtain the libraries.
 
 An installable demo application can be found in the bin/ folder. This demo application is for testing purposes only.  
 Your data will be logged to common.sense-os.nl and can be viewed as _user_ cortex with password _demo_.
