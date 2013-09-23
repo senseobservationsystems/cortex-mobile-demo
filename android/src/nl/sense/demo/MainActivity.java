@@ -7,7 +7,9 @@ import nl.sense.demo.R;
 import nl.sense.demo.cortex.activity.FallDetectDemo;
 import nl.sense.demo.cortex.activity.PhysicalActivityDemo;
 import nl.sense.demo.cortex.activity.SitStandDemo;
+import nl.sense.demo.cortex.activity.SleepTimeDemo;
 import nl.sense.demo.cortex.activity.StepCounterDemo;
+import nl.sense.demo.cortex.activity.TimeActiveDemo;
 import nl.sense.demo.cortex.location.FilteredPositionDemo;
 import nl.sense.demo.cortex.location.GeoFenceDemo;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
@@ -109,9 +111,11 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	private FallDetectDemo fallDetectDemo = null;
 	private SitStandDemo sitStandDemo = null;
 	private StepCounterDemo stepCounter = null;	
+	private SleepTimeDemo sleepTimeDemo = null;
 	private MyPageAdapter pageAdapterActivity;
 	private MyPageAdapter pageAdapterLocation;	
 	private MyPageAdapter pageAdapterPresence;	
+	private TimeActiveDemo timeActiveDemo = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -173,13 +177,21 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		
 		if(stepCounter == null)			
 			stepCounter = new StepCounterDemo(sensePlatform);
+		
+		if(timeActiveDemo == null)			
+			timeActiveDemo = new TimeActiveDemo(sensePlatform);
+		
+		if(sleepTimeDemo == null)			
+			sleepTimeDemo = new SleepTimeDemo(sensePlatform);
 
 		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
 		fragmentsActivity.add(physicalActivityDemo.getFragment());	
 		fragmentsActivity.add(fallDetectDemo.getFragment());
 		fragmentsActivity.add(sitStandDemo.getFragment());
-		fragmentsActivity.add(stepCounter.getFragment());		
+		fragmentsActivity.add(stepCounter.getFragment());
+		fragmentsActivity.add(timeActiveDemo.getFragment());
+		fragmentsActivity.add(sleepTimeDemo.getFragment());
 		setFragmentPager(fragmentsActivity);
 		pageAdapterActivity = new MyPageAdapter(getSupportFragmentManager(), fragmentsActivity);
 		ViewPager pager =  (ViewPager)findViewById(R.id.viewpagerActivity);
@@ -288,9 +300,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			service.setPrefBool(Ambience.CAMERA_LIGHT, true);
 			service.setPrefBool(Ambience.AUDIO_SPECTRUM, false);
 			service.setPrefBool(Ambience.MAGNETIC_FIELD, false);
-			service.setPrefBool(Ambience.MIC, false);
+			service.setPrefBool(Ambience.MIC, true);
 			
-
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector
 			service.setPrefBool(Motion.FALL_DETECT, true);
@@ -327,6 +338,5 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		} catch (Exception e) {
 			Log.e(TAG, "Exception while setting up Sense library.", e);
 		}
-	}	
-
+	}
 }

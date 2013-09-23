@@ -4,39 +4,42 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import nl.sense.demo.FragmentDisplay;
-import nl.sense_os.cortex.SitStandSensor;
+import nl.sense_os.cortex.TimeActiveSensor;
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.subscription.*;
 import nl.sense_os.service.shared.SensorDataPoint;
+import nl.sense_os.service.subscription.DataConsumer;
 
-public class SitStandDemo {
+public class TimeActiveDemo {
 	
-	/** The name of the DataProcessor */
-	private static String TAG = "My Sit Stand Demo";
-	/** Connection to the SenseService **/
-	private SensePlatform sensePlatform;
+	//The name of the DataProcessor
+	private static String TAG = "My TimeActive Demo";
 
-	/** The DataProcessor which handles the data coming from the PhysicalActivity DataProcessor */
+	// The DataProcessor which handles the data coming from the PhysicalActivity DataProcessor
 	private GetData getData;
 	Thread sendData;
 
-	public SitStandDemo(SensePlatform sensePlatform)
-	{	
-		this.sensePlatform = sensePlatform;
+	public TimeActiveDemo(SensePlatform sensePlatform)
+	{
 		SubscriptionManager sm = SubscriptionManager.getInstance();
 		// Check if the DataProcessor is already registered at the Sense Service
-		if(sm.isProducerRegistered(SitStandDemo.TAG))
+		if(sm.isProducerRegistered(TimeActiveDemo.TAG))
 		{
 			// Get the getData class which has the fragment for the display
-			getData = (GetData) sm.getSubscribedConsumers(SitStandDemo.TAG).get(0);			
+			getData = (GetData) sm.getSubscribedConsumers(TimeActiveDemo.TAG).get(0);			
 		}
 		else
 		{
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
-			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			new SitStandSensor(TAG, sensePlatform.getService().getSenseService());
-			// Subscribe the GetData class to get data from the FallDetect Data Processor
+			// Create the actual TimeActive DataProcessor, which will be registered at the Sense Service with the given name (TAG)
+			TimeActiveSensor ta = new TimeActiveSensor(TAG, sensePlatform);
+			ta.setVerbose(true);
+			//reset every day at 00:00
+			//Calendar resetDate = new GregorianCalendar(2013, 1, 1, 0, 0, 0);
+			//ta.setPeriodicReset(resetDate, TimeActiveSensor.PERIOD_MINUTE);
+			//ta.clearPeriodicReset();
+			// Subscribe the GetData class to get data from the TimeActiveDemo Data Processor
 			sm.subscribeConsumer(TAG, getData);
 		}
 	}
@@ -78,32 +81,12 @@ public class SitStandDemo {
 				if(dataPoint.sensorName == TAG)
 				{
 					// Description of the sensor
-					// This is only used to send data to CommonSense
-					final String name = "sit_stand";
-					final String displayName = TAG;
-					final String dataType = "string";
-					final String description = name;
 					JSONObject json = dataPoint.getJSONValue();				
-
 					// the value to be sent as string
 					final String value = json.getString("value");
 					
 					// Add data to the fragment display
 					fDisplay.addText(value);
-					final long timestamp = dataPoint.timeStamp;
-
-					// Only try to send data when the service is bound
-					if(sensePlatform.getService().isBinderAlive())
-					{
-						try {
-							sendData =  new Thread() { public void run() {
-								sensePlatform.addDataPoint(name, displayName, description, dataType, value, timestamp); 
-							}};
-							sendData.start();
-						} catch (Exception e) {
-							Log.e(TAG, "Failed to add data point!", e);
-						}
-					}
 				}
 			}catch(Exception e)
 			{
