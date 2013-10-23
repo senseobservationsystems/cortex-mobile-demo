@@ -40,7 +40,7 @@ public class CarryDeviceDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual CarryDevice DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			carryDevice = new CarryDeviceSensor(TAG, sensePlatform.getService().getSenseService());
+			carryDevice = new CarryDeviceSensor(TAG, sensePlatform);
 			// This resets the learned noise values, when erroneous data with no variance is processed
 			// the lowest variance used to determine the noise is 0 which means that the smallest change will cause an event
 			//carryDevice.reCalibrate();
