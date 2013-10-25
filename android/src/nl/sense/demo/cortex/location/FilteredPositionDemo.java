@@ -35,7 +35,7 @@ public class FilteredPositionDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual FilteredPostion DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			new FilteredPositionSensor(TAG, sensePlatform.getService().getSenseService());
+			new FilteredPositionSensor(TAG, sensePlatform);
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sm.subscribeConsumer(TAG, getData);
 		}

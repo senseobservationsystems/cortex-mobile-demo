@@ -36,7 +36,7 @@ public class PhysicalActivityDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			new PhysicalActivitySensor(TAG, sensePlatform.getService().getSenseService());
+			new PhysicalActivitySensor(TAG, sensePlatform);
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sm.subscribeConsumer(TAG, getData);
 		}
