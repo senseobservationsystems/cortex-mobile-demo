@@ -39,7 +39,7 @@ public class GeoFenceDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual GeoFence DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			geoFence = new GeoFenceSensor(TAG, sensePlatform.getService().getSenseService());
+			geoFence = new GeoFenceSensor(TAG, sensePlatform);
 			// Set the goal location to create a fence around
 			geoFence.setGoalLocation(53.20987,6.54536);
 			// Set the circle diameter range from the goal location as fence
