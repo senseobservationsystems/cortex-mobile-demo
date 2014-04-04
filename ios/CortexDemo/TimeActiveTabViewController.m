@@ -11,7 +11,7 @@
 #import <Cortex/CSSensePlatform.h>
 #import <Cortex/TimeActiveModule.h>
 
-static const NSUInteger MAX_ENTRIES = 10;
+//static const NSUInteger MAX_ENTRIES = 10;
 
 @implementation TimeActiveTabViewController{
     TimeActiveModule* tam;

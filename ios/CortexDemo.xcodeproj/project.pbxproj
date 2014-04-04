@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3E0585D81783006A00808B5D /* ActivityTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0585D71783006A00808B5D /* ActivityTabViewController.m */; };
-		3E0585EE1784650A00808B5D /* Cortex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0585ED1784650A00808B5D /* Cortex.framework */; };
 		3E13878A174D0EC900950CA4 /* CommonSense.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138788174D0EC900950CA4 /* CommonSense.plist */; };
 		3E13878B174D0EC900950CA4 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E138789174D0EC900950CA4 /* Settings.plist */; };
+		3E2B2ACA18EEDDC30048B5DC /* Cortex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2B2AC918EEDDC30048B5DC /* Cortex.framework */; };
 		3E2FF70917A2D72100F7F00A /* TimeActiveTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */; };
 		3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */; };
 		3E76A5211781D4C5009CCACB /* Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A5201781D4C4009CCACB /* Factory.m */; };
@@ -42,9 +42,9 @@
 /* Begin PBXFileReference section */
 		3E0585D61783006A00808B5D /* ActivityTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTabViewController.h; sourceTree = "<group>"; };
 		3E0585D71783006A00808B5D /* ActivityTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTabViewController.m; sourceTree = "<group>"; };
-		3E0585ED1784650A00808B5D /* Cortex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cortex.framework; sourceTree = "<group>"; };
 		3E138788174D0EC900950CA4 /* CommonSense.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CommonSense.plist; path = "../../../Documents/iosProjects/sense-library/resources/CommonSense.plist"; sourceTree = "<group>"; };
 		3E138789174D0EC900950CA4 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Settings.plist; path = "../../../Documents/iosProjects/sense-library/resources/Settings.plist"; sourceTree = "<group>"; };
+		3E2B2AC918EEDDC30048B5DC /* Cortex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cortex.framework; path = libs/Cortex.framework; sourceTree = "<group>"; };
 		3E2FF70717A2D72100F7F00A /* TimeActiveTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeActiveTabViewController.h; sourceTree = "<group>"; };
 		3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeActiveTabViewController.m; sourceTree = "<group>"; };
 		3E76A51C17817E6C009CCACB /* StepCounterTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCounterTabViewController.h; sourceTree = "<group>"; };
@@ -94,13 +94,13 @@
 				3E836E03171D960C00D7494C /* CoreTelephony.framework in Frameworks */,
 				3E836E01171D960500D7494C /* AudioToolbox.framework in Frameworks */,
 				3E836DFF171D95FF00D7494C /* AVFoundation.framework in Frameworks */,
+				3E2B2ACA18EEDDC30048B5DC /* Cortex.framework in Frameworks */,
 				3E836DFD171D95F900D7494C /* CoreAudio.framework in Frameworks */,
 				3E836DFB171D95F100D7494C /* CoreMotion.framework in Frameworks */,
 				3E836DF9171D95E800D7494C /* CoreLocation.framework in Frameworks */,
 				3E836DCA171D93A300D7494C /* UIKit.framework in Frameworks */,
 				3E836DCC171D93A300D7494C /* Foundation.framework in Frameworks */,
 				3E836DCE171D93A300D7494C /* CoreGraphics.framework in Frameworks */,
-				3E0585EE1784650A00808B5D /* Cortex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +110,7 @@
 		3E836DBA171D93A300D7494C = {
 			isa = PBXGroup;
 			children = (
-				3E0585ED1784650A00808B5D /* Cortex.framework */,
+				3E2B2AC918EEDDC30048B5DC /* Cortex.framework */,
 				3E836E04171D961500D7494C /* SystemConfiguration.framework */,
 				3E836E02171D960C00D7494C /* CoreTelephony.framework */,
 				3E836E00171D960500D7494C /* AudioToolbox.framework */,
@@ -359,17 +359,19 @@
 		3E836DEF171D93A300D7494C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../aim/ios-sdk/build\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)/libs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CortexDemo/CortexDemo-Prefix.pch";
 				INFOPLIST_FILE = "CortexDemo/CortexDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lstdc++",
@@ -386,17 +388,19 @@
 		3E836DF0171D93A300D7494C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../aim/ios-sdk/build\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)/libs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CortexDemo/CortexDemo-Prefix.pch";
 				INFOPLIST_FILE = "CortexDemo/CortexDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-lstdc++",
 					"-ObjC",
