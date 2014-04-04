@@ -54,7 +54,7 @@ static const NSUInteger MAX_ENTRIES = 60;
 
 - (void) onNewData:(NSNotification*)notification {
     NSString* sensor = notification.object;
-    if ([sensor isEqualToString:@"CarryDevice"]) {
+    if ([sensor isEqualToString:[carryDeviceModule name]]) {
         id json = [notification.userInfo valueForKey:@"value"];
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[notification.userInfo valueForKey:@"date"] doubleValue]];
 
