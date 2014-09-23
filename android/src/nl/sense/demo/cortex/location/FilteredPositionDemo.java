@@ -84,7 +84,7 @@ public class FilteredPositionDemo {
 					final String dataType = "json";
 					final String description = name;					
 					JSONObject json = dataPoint.getJSONValue();				
-					Log.e(TAG,json.getJSONObject("value").toString());
+					
 					// the value to be sent, in json format
 					final String value = json.getJSONObject("value").toString();
 					

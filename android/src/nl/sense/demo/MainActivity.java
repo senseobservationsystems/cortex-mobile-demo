@@ -282,7 +282,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			SenseServiceStub service = sensePlatform.getService();
 
 			// log in (you only need to do this once, Sense will remember the login)
-			sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
+		//	sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
 
 			// turn on specific sensors			
@@ -304,12 +304,12 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector
-			service.setPrefBool(Motion.FALL_DETECT, true);
-			service.setPrefBool(Motion.BURSTMODE, true);
+			service.setPrefBool(Motion.FALL_DETECT, false);
+			service.setPrefBool(Motion.BURSTMODE, false);
 			service.setPrefBool(Motion.ACCELEROMETER, true);
-			service.setPrefBool(Motion.GYROSCOPE, true);
+			service.setPrefBool(Motion.GYROSCOPE, false);
 			service.setPrefBool(Motion.ORIENTATION, false);
-			service.setPrefBool(Motion.LINEAR_ACCELERATION, true);
+			service.setPrefBool(Motion.LINEAR_ACCELERATION, false);
 
 			// set how often to sample
 			// 1 := rarely (~every 15 min)
@@ -323,7 +323,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// 0 := normal (buffer 5 min)
 			// -1 := often (buffer 1 min)
 			// -2 := real time (every new data point is uploaded immediately)
-			service.setPrefString(SensePrefs.Main.SYNC_RATE, "1");
+			//service.setPrefString(SensePrefs.Main.SYNC_RATE, "1");
+			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, false);
 
 			service.toggleMain(true);
 			// carry device

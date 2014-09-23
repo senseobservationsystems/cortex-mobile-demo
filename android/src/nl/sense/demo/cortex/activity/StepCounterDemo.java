@@ -37,7 +37,7 @@ public class StepCounterDemo {
 			// Create the actual PhysicalActivity DataProcessor, which will be registered at the Sense Service with the given name (TAG)
 			new StepCountSensor(TAG, sensePlatform);
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
-			sm.subscribeConsumer(TAG, getData);
+			sm.subscribeConsumer(TAG, getData);			
 		}
 	}
 

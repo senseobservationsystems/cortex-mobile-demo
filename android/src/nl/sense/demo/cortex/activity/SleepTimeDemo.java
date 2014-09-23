@@ -55,15 +55,17 @@ public class SleepTimeDemo {
 			// To compute the noise in the signal the buffer should have enough samples
 			// when it receives samples ones every minute than a window of 1 minute does not work
 			// this should then at least be 5 minutes.
-			sleepTime.setInterval(30);
+			sleepTime.setInterval(20);
 			// Reliable output will only be given when the buffer time has been reached
 			// This time window also smoothes this signal, but when an event is found in the time window
 			// this event can take the length of the time window to get the event out
-			sleepTime.setTimeWindow(30);
+			sleepTime.setTimeWindow(60*60);
+			sleepTime.setComputeNightlySleep(false);
 			// this sets how much times the sensor data should be above the noise level
 			// carryDevice.setEventThreshold(0.01);
 			// Re-calibrate removes the learned lowest and highest variance values
 			// carryDevice.reCalibrate();
+			sleepTime.setSaveToSensor(false);
 		}
 	}
 
@@ -109,8 +111,9 @@ public class SleepTimeDemo {
 					final String displayName = TAG;
 					final String dataType = "json";
 					final String description = name;
-					JSONObject json = dataPoint.getJSONValue();				
-
+					JSONObject json = dataPoint.getJSONValue();	
+					Log.d(TAG, "date"+json.getInt("date"));
+					Log.d(TAG, json.toString());
 					// the value to be sent, in json format
 					final String value = json.getJSONObject("value").toString();
 					

@@ -33,8 +33,7 @@ public class TimeActiveDemo {
 			// Create new GetData DataProcessor which is used to display the data on a fragment, and send it to CommonSense
 			getData = new GetData(FragmentDisplay.newInstance(TAG));
 			// Create the actual TimeActive DataProcessor, which will be registered at the Sense Service with the given name (TAG)
-			TimeActiveSensor ta = new TimeActiveSensor(TAG, sensePlatform);
-			ta.setVerbose(true);
+			new TimeActiveSensor(TAG, sensePlatform);
 			//reset every day at 00:00
 			//Calendar resetDate = new GregorianCalendar(2013, 1, 1, 0, 0, 0);
 			//ta.setPeriodicReset(resetDate, TimeActiveSensor.PERIOD_MINUTE);
