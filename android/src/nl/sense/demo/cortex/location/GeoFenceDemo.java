@@ -43,7 +43,7 @@ public class GeoFenceDemo {
 			// Set the goal location to create a fence around
 			geoFence.setGoalLocation(53.20987,6.54536);
 			// Set the circle diameter range from the goal location as fence
-			geoFence.setRange(100);
+			geoFence.setRange(100);			
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sm.subscribeConsumer(TAG, getData);
 		}

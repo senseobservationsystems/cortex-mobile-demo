@@ -35,7 +35,7 @@ import android.widget.TextView;
 
 public class FragmentDisplay extends Fragment 
 {
-	
+	private final static String TAG = "FragmentDisplay";
 	public static final int MAX_ENTRIES = 60;
 	public static final String TITLE = "TITLE";	
 	public ArrayList<JSONObject> output = new ArrayList<JSONObject>(MAX_ENTRIES);
@@ -46,7 +46,7 @@ public class FragmentDisplay extends Fragment
 	
 	private ScrollView vScroll;
 	private HorizontalScrollView hScroll;
-
+	
 	public static final FragmentDisplay newInstance(String message)
 	{
 		FragmentDisplay f = new FragmentDisplay();
@@ -68,6 +68,8 @@ public class FragmentDisplay extends Fragment
 	 */
 	public void addText(final String message)
 	{		
+		try
+		{
 		JSONObject data = null;
 		try {
 			data = new JSONObject(message);
@@ -99,6 +101,11 @@ public class FragmentDisplay extends Fragment
 				addRow(d);
 			}
 		});
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			Log.e(TAG, "Exception in FragmentDisplay.addText: "+message);
+		}
 	}
 
 	/**
@@ -218,7 +225,11 @@ public class FragmentDisplay extends Fragment
 					continue;
 				TextView tv1 = new TextView(fa);
 				if(message.optJSONObject(key) != null)
-					addRow(message.optJSONObject(key));
+				{
+					JSONObject newMessage = message.optJSONObject(key);
+					newMessage.put("time",message.getString("time"));					 
+					addRow(newMessage);					
+				}
 				else 
 					createView(tr, tv1,createHeader?key:message.getString(key));
 			}	
@@ -238,6 +249,7 @@ public class FragmentDisplay extends Fragment
 		}
 		catch(Exception e)
 		{
+			Log.e(TAG, "Exception in FragmentDisplay.addText: "+message);
 			e.printStackTrace();
 		}
 	}

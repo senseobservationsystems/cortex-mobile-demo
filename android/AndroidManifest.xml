@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nl.sense.demo"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1.1-rc1" >
 
     <!-- REQUEST GENERAL PERMISSIONS FOR MAIN APP FUNCTIONALITY -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -99,62 +99,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <!-- ACTIVITY THAT POPS UP WHEN AN NFC TAG WAS SCANNED -->
-        <!-- CAN BE REMOVED IF NOT USED -->
-        <activity
-            android:name="nl.sense_os.service.deviceprox.NfcScan"
-            android:configChanges="orientation"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc" />
-        </activity>
-
+      
         <!-- MAIN SERVICE THAT MANAGES SENSING -->
         <service
             android:name="nl.sense_os.service.SenseService"
             android:exported="false" >
             <intent-filter>
-
                 <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
                 <action android:name="nl.sense_os.demo.cortex.SENSE_SERVICE" />
             </intent-filter>
         </service>
-        <!-- SERVICE TO BUFFER AND SEND DATA TO COMMONSENSE -->
-        <service
-            android:name="nl.sense_os.service.MsgHandler"
-            android:exported="false" >
-            <intent-filter>
-
-                <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
-                <action android:name="nl.sense_os.demo.cortex.NEW_DATA" />
-                <action android:name="nl.sense_os.demo.cortex.SEND_DATA" />
-            </intent-filter>
-        </service>
-        <!-- SERVICE THAT CHECKS SENSOR REGISTRATION WITH COMMONSENSE -->
-        <service android:name="nl.sense_os.service.commonsense.DefaultSensorRegistrationService" />
-        <!-- SERVICE THAT HANDLES GCM MESSAGES FROM COMMONSENSE -->
-        <!-- CAN BE REMOVED IF NOT USED -->
-        <service android:name="nl.sense_os.service.push.GCMReceiver" />
-        <!-- SERVICE THAT UPDATES THE SENSOR CONFIGURATION WHEN REQUIREMENTS CHANGE -->
-        <!-- CAN BE REMOVED IF NOT USED -->
-        <service android:name="nl.sense_os.service.configuration.ConfigurationService" />
-        <!-- DUMMY SERVICE TO HANDLE CHANGES IN THE SENSE STATE (DOES NOTHING BY DEFAULT) -->
-        <!-- REPLACE THIS SERVICE IF YOU WANT TO IMPLEMENT YOUR OWN APP WIDGET -->
-        <service
-            android:name="nl.sense_os.service.appwidget.DummyAppWidgetService"
-            android:exported="false" >
-            <intent-filter>
-                <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
-                <action android:name="nl.sense_os.demo.cortex.UPDATE_APP_WIDGET" />
-            </intent-filter>
-        </service>
-
         <!-- BROADCAST RECEIVER THAT WAKES UP THE APP AGAIN WHEN THE PHONE REBOOTS -->
         <receiver
             android:name="nl.sense_os.service.BootRx"
@@ -175,46 +129,6 @@
                 <action android:name="nl.sense_os.demo.cortex.CHECK_ALIVE" />
             </intent-filter>
         </receiver>
-        <!-- BROADCAST RECEIVER FOR CHANGES IN THE NETWORK STATE -->
-        <receiver
-            android:name="nl.sense_os.service.NetworkMonitor"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-        <!-- BROADCAST RECEIVER FOR GCM MESSAGES -->
-        <!-- CAN BE REMOVED IF NOT USED -->
-        <receiver
-            android:name="nl.sense_os.service.push.GCMBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
-                <category android:name="nl.sense_os.demo.cortex" />
-            </intent-filter>
-        </receiver>
-         <receiver android:name="nl.sense_os.service.scheduler.ExecutionAlarmReceiver"/>
-        <!-- BROADCAST RECEIVER FOR PUSHED REQUIREMENT CHANGES -->
-        <!-- CAN BE REMOVED IF NOT USED -->
-        <receiver
-            android:name="nl.sense_os.service.configuration.RequirementReceiver"
-            android:exported="false" >
-            <intent-filter>
-
-                <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
-                <action android:name="nl.sense_os.demo.cortex.NEW_REQUIREMENTS" />
-            </intent-filter>
-        </receiver>
-
-        <!-- CONTENT PROVIDER THAT GIVES OTHER APPS ACCESS TO THE SENSOR DATA -->
-        <!-- MAKE SURE YOU USE A UNIQUE AUTHORITY FOR YOUR OWN APP (SEE res/strings.xml) -->
-        <!-- CAN BE REMOVED IF NOT USED -->
-        <provider
-            android:name="nl.sense_os.service.provider.SensorDataProvider"
-            android:authorities="nl.sense_os.demo.cortex.LocalStorage"
-            android:exported="true" />
     </application>
 
 </manifest>
