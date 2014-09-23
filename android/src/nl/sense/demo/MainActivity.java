@@ -305,11 +305,11 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector
 			service.setPrefBool(Motion.FALL_DETECT, false);
-			service.setPrefBool(Motion.BURSTMODE, false);
+			service.setPrefBool(Motion.BURSTMODE, true);
 			service.setPrefBool(Motion.ACCELEROMETER, true);
-			service.setPrefBool(Motion.GYROSCOPE, false);
-			service.setPrefBool(Motion.ORIENTATION, false);
-			service.setPrefBool(Motion.LINEAR_ACCELERATION, false);
+			service.setPrefBool(Motion.GYROSCOPE, true);
+			service.setPrefBool(Motion.ORIENTATION, true);
+			service.setPrefBool(Motion.LINEAR_ACCELERATION, true);
 
 			// set how often to sample
 			// 1 := rarely (~every 15 min)
