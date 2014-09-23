@@ -55,7 +55,7 @@ public class CarryDeviceDemo {
 			// Reliable output will only be given when the buffer time has been reached
 			// This time window also smoothes this signal, but when an event is found in the time window
 			// this event can take the length of the time window to get the event out
-			carryDevice.setTimeWindow(30);
+			carryDevice.setTimeWindow(60);
 			// this sets how much times the sensor data should be above the noise level
 			// carryDevice.setEventThreshold(0.01);
 			// Re-calibrate removes the learned lowest and highest variance values

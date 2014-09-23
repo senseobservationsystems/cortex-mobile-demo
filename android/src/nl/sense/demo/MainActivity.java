@@ -13,6 +13,7 @@ import nl.sense.demo.cortex.activity.TimeActiveDemo;
 import nl.sense.demo.cortex.location.FilteredPositionDemo;
 import nl.sense.demo.cortex.location.GeoFenceDemo;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
+import nl.sense.demo.cortex.presence.TimeCarriedDemo;
 
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.ISenseServiceCallback;
@@ -116,6 +117,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	private MyPageAdapter pageAdapterLocation;	
 	private MyPageAdapter pageAdapterPresence;	
 	private TimeActiveDemo timeActiveDemo = null;
+	private TimeCarriedDemo timeCarriedDemo = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -183,6 +186,9 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		
 		if(sleepTimeDemo == null)			
 			sleepTimeDemo = new SleepTimeDemo(sensePlatform);
+		
+		if(timeCarriedDemo == null)         
+		    timeCarriedDemo = new TimeCarriedDemo(sensePlatform);
 
 		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
@@ -209,6 +215,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		// Add the presence Fragments to the right pager
 		List<Fragment> fragmentsPresence = new ArrayList<Fragment>();
 		fragmentsPresence.add(carryDeviceDemo.getFragment());
+		fragmentsPresence.add(timeCarriedDemo.getFragment());
 		setFragmentPager(fragmentsPresence);
 		pageAdapterPresence = new MyPageAdapter(getSupportFragmentManager(), fragmentsPresence);
 		pager =  (ViewPager)findViewById(R.id.ViewPagerPresence);
