@@ -12,21 +12,18 @@ import nl.sense.demo.cortex.activity.StepCounterDemo;
 import nl.sense.demo.cortex.activity.TimeActiveDemo;
 import nl.sense.demo.cortex.location.FilteredPositionDemo;
 import nl.sense.demo.cortex.location.GeoFenceDemo;
+import nl.sense.demo.cortex.location.TimeTraveledDemo;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
-
 import nl.sense_os.platform.SensePlatform;
 import nl.sense_os.service.ISenseServiceCallback;
 import nl.sense_os.service.SenseServiceStub;
 import nl.sense_os.service.commonsense.SenseApi;
 import nl.sense_os.service.constants.SensePrefs;
 import nl.sense_os.service.constants.SenseStatusCodes;
-
 import nl.sense_os.service.constants.SensePrefs.Main.Ambience;
 import nl.sense_os.service.constants.SensePrefs.Main.Location;
 import nl.sense_os.service.constants.SensePrefs.Main.Motion;
-
 import nl.sense_os.service.constants.SensePrefs.Main.PhoneState;
-
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -116,6 +113,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	private MyPageAdapter pageAdapterLocation;	
 	private MyPageAdapter pageAdapterPresence;	
 	private TimeActiveDemo timeActiveDemo = null;
+	private TimeTraveledDemo timeTraveledDemo = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -183,6 +181,9 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		
 		if(sleepTimeDemo == null)			
 			sleepTimeDemo = new SleepTimeDemo(sensePlatform);
+		
+		if(timeTraveledDemo == null)			
+			timeTraveledDemo = new TimeTraveledDemo(sensePlatform);
 
 		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
@@ -201,6 +202,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		List<Fragment> fragmentsLocation = new ArrayList<Fragment>();		
 		fragmentsLocation.add(filteredPositionDemo.getFragment());
 		fragmentsLocation.add(geoFenceDemo.getFragment());	
+		fragmentsLocation.add(timeTraveledDemo.getFragment());
 		setFragmentPager(fragmentsLocation);		
 		pageAdapterLocation = new MyPageAdapter(getSupportFragmentManager(), fragmentsLocation);
 		pager =  (ViewPager)findViewById(R.id.ViewPagerLocation);
