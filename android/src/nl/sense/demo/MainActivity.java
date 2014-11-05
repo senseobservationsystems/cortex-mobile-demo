@@ -12,6 +12,7 @@ import nl.sense.demo.cortex.activity.StepCounterDemo;
 import nl.sense.demo.cortex.activity.TimeActiveDemo;
 import nl.sense.demo.cortex.location.FilteredPositionDemo;
 import nl.sense.demo.cortex.location.GeoFenceDemo;
+import nl.sense.demo.cortex.location.LocationTraceDemo;
 import nl.sense.demo.cortex.location.TimeTraveledDemo;
 import nl.sense.demo.cortex.presence.CarryDeviceDemo;
 import nl.sense_os.platform.SensePlatform;
@@ -114,6 +115,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 	private MyPageAdapter pageAdapterPresence;	
 	private TimeActiveDemo timeActiveDemo = null;
 	private TimeTraveledDemo timeTraveledDemo = null;
+	private LocationTraceDemo locationTraceDemo = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -158,7 +160,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		if(filteredPositionDemo == null)			
 			filteredPositionDemo = new FilteredPositionDemo(sensePlatform);		
 
-		if(geoFenceDemo == null)			
+	/*	if(geoFenceDemo == null)			
 			geoFenceDemo = new GeoFenceDemo(sensePlatform); 
 
 		if(physicalActivityDemo == null)	
@@ -181,18 +183,22 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		
 		if(sleepTimeDemo == null)			
 			sleepTimeDemo = new SleepTimeDemo(sensePlatform);
+			*/
 		
 		if(timeTraveledDemo == null)			
 			timeTraveledDemo = new TimeTraveledDemo(sensePlatform);
+		
+		if(locationTraceDemo == null)			
+			locationTraceDemo = new LocationTraceDemo(sensePlatform);
 
 		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
-		fragmentsActivity.add(physicalActivityDemo.getFragment());	
+		/*fragmentsActivity.add(physicalActivityDemo.getFragment());	
 		fragmentsActivity.add(fallDetectDemo.getFragment());
 		fragmentsActivity.add(sitStandDemo.getFragment());
 		fragmentsActivity.add(stepCounter.getFragment());
 		fragmentsActivity.add(timeActiveDemo.getFragment());
-		fragmentsActivity.add(sleepTimeDemo.getFragment());
+		fragmentsActivity.add(sleepTimeDemo.getFragment());*/
 		setFragmentPager(fragmentsActivity);
 		pageAdapterActivity = new MyPageAdapter(getSupportFragmentManager(), fragmentsActivity);
 		ViewPager pager =  (ViewPager)findViewById(R.id.viewpagerActivity);
@@ -201,7 +207,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		// Add the location Fragments to the right pager
 		List<Fragment> fragmentsLocation = new ArrayList<Fragment>();		
 		fragmentsLocation.add(filteredPositionDemo.getFragment());
-		fragmentsLocation.add(geoFenceDemo.getFragment());	
+		fragmentsLocation.add(locationTraceDemo.getFragment());
+		//fragmentsLocation.add(geoFenceDemo.getFragment());	
 		fragmentsLocation.add(timeTraveledDemo.getFragment());
 		setFragmentPager(fragmentsLocation);		
 		pageAdapterLocation = new MyPageAdapter(getSupportFragmentManager(), fragmentsLocation);
@@ -210,7 +217,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 		// Add the presence Fragments to the right pager
 		List<Fragment> fragmentsPresence = new ArrayList<Fragment>();
-		fragmentsPresence.add(carryDeviceDemo.getFragment());
+		//fragmentsPresence.add(carryDeviceDemo.getFragment());
 		setFragmentPager(fragmentsPresence);
 		pageAdapterPresence = new MyPageAdapter(getSupportFragmentManager(), fragmentsPresence);
 		pager =  (ViewPager)findViewById(R.id.ViewPagerPresence);
@@ -231,9 +238,9 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		TabSpec spec3=tabHost.newTabSpec("Presence");
 		spec3.setContent(R.id.tabPresence);
 		spec3.setIndicator("Presence");
-		tabHost.addTab(spec1);
+		//tabHost.addTab(spec1);
 		tabHost.addTab(spec2);
-		tabHost.addTab(spec3);
+		//tabHost.addTab(spec3);
 
 		try {
 			// Check the status of the service
@@ -284,7 +291,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			SenseServiceStub service = sensePlatform.getService();
 
 			// log in (you only need to do this once, Sense will remember the login)
-		//	sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
+			//sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
 
 			// turn on specific sensors			
@@ -325,8 +332,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// 0 := normal (buffer 5 min)
 			// -1 := often (buffer 1 min)
 			// -2 := real time (every new data point is uploaded immediately)
-			//service.setPrefString(SensePrefs.Main.SYNC_RATE, "1");
-			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, false);
+			service.setPrefString(SensePrefs.Main.SYNC_RATE, "-2");
+			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, true);
 
 			service.toggleMain(true);
 			// carry device
