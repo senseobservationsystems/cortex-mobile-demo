@@ -92,7 +92,7 @@ public class LocationTraceDemo {
 				if(dataPoint.sensorName == TAG)
 				{
 					
-					Log.e(TAG, "New Location");
+					Log.e(TAG, "New LocationTrace");
 					
 					// Description of the sensor
 					// This is only used to send data to CommonSense
@@ -130,7 +130,7 @@ public class LocationTraceDemo {
 					
 					JSONObject json = dataPoint.getJSONValue();				
 
-					System.out.println(json.getString("value"));
+					//System.out.println(json.getString("value").toString());
 					
 				}
 			}catch(Exception e)

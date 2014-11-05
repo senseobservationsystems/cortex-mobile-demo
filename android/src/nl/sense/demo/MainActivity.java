@@ -292,6 +292,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 			// log in (you only need to do this once, Sense will remember the login)
 			//sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
+			//sensePlatform.login("mike@sense-os.nl", SenseApi.hashPassword("mike@sense"), callback);
+
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
 
 			// turn on specific sensors			
@@ -301,31 +303,31 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			service.setPrefBool(Location.AUTO_GPS, true);
 
 			// settings for the carry device demo
-			service.setPrefBool(PhoneState.CALL_STATE, true);
-			service.setPrefBool(PhoneState.PROXIMITY, true);
-			service.setPrefBool(PhoneState.SCREEN_ACTIVITY, true);
-			service.setPrefBool(PhoneState.BATTERY, true);
-			service.setPrefBool(Ambience.LIGHT, true);
-			service.setPrefBool(Ambience.CAMERA_LIGHT, true);
+			service.setPrefBool(PhoneState.CALL_STATE, false);
+			service.setPrefBool(PhoneState.PROXIMITY, false);
+			service.setPrefBool(PhoneState.SCREEN_ACTIVITY, false);
+			service.setPrefBool(PhoneState.BATTERY, false);
+			service.setPrefBool(Ambience.LIGHT, false);
+			service.setPrefBool(Ambience.CAMERA_LIGHT, false);
 			service.setPrefBool(Ambience.AUDIO_SPECTRUM, false);
 			service.setPrefBool(Ambience.MAGNETIC_FIELD, false);
-			service.setPrefBool(Ambience.MIC, true);
+			service.setPrefBool(Ambience.MIC, false);
 			
 			// settings for physical activity demo and fall detect 
 			// TODO: create separate preference for the new fall detector
 			service.setPrefBool(Motion.FALL_DETECT, false);
-			service.setPrefBool(Motion.BURSTMODE, true);
-			service.setPrefBool(Motion.ACCELEROMETER, true);
-			service.setPrefBool(Motion.GYROSCOPE, true);
-			service.setPrefBool(Motion.ORIENTATION, true);
-			service.setPrefBool(Motion.LINEAR_ACCELERATION, true);
+			service.setPrefBool(Motion.BURSTMODE, false);
+			service.setPrefBool(Motion.ACCELEROMETER, false);
+			service.setPrefBool(Motion.GYROSCOPE, false);
+			service.setPrefBool(Motion.ORIENTATION, false);
+			service.setPrefBool(Motion.LINEAR_ACCELERATION, false);
 
 			// set how often to sample
 			// 1 := rarely (~every 15 min)
 			// 0 := normal`  (~every 5 min)
 			// -1 := often (~every 10 sec)
 			// -2 := real time (this setting affects power consumption considerably!)
-			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "-1");
+			service.setPrefString(SensePrefs.Main.SAMPLE_RATE, "0");
 
 			// set how often to upload
 			// 1 := eco mode (buffer data for 30 minutes before bulk uploading)
@@ -333,7 +335,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// -1 := often (buffer 1 min)
 			// -2 := real time (every new data point is uploaded immediately)
 			service.setPrefString(SensePrefs.Main.SYNC_RATE, "-2");
-			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, true);
+			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, false);
 
 			service.toggleMain(true);
 			// carry device
