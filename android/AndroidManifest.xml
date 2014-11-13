@@ -71,7 +71,7 @@
     <!-- WE SUPPORT ANDROID 2.1 (ECLAIR) AND UP -->
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"

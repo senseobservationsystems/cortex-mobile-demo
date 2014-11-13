@@ -107,6 +107,8 @@ public class LocationTraceDemo {
 					final String value = json.getJSONObject("value").getString("event");
 					
 					//System.out.println(json.getJSONObject("value").getString("event"));
+					Log.e(TAG, json.getJSONObject("value").getString("event"));
+
 					
 					// Add data to the fragment display
 					fDisplay.addText(value);

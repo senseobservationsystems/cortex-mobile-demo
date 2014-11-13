@@ -122,6 +122,8 @@ public class TimeTraveledDemo {
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
 					
+					System.out.println("Timestamp!!! "+timestamp);
+					
 					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{

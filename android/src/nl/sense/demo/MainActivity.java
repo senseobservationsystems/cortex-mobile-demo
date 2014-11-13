@@ -188,8 +188,8 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		if(timeTraveledDemo == null)			
 			timeTraveledDemo = new TimeTraveledDemo(sensePlatform);
 		
-		if(locationTraceDemo == null)			
-			locationTraceDemo = new LocationTraceDemo(sensePlatform);
+		/*if(locationTraceDemo == null)			
+			locationTraceDemo = new LocationTraceDemo(sensePlatform);*/
 
 		// Add the activity Fragments to the right pager	
 		List<Fragment> fragmentsActivity = new ArrayList<Fragment>();		
@@ -207,7 +207,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 		// Add the location Fragments to the right pager
 		List<Fragment> fragmentsLocation = new ArrayList<Fragment>();		
 		fragmentsLocation.add(filteredPositionDemo.getFragment());
-		fragmentsLocation.add(locationTraceDemo.getFragment());
+		//fragmentsLocation.add(locationTraceDemo.getFragment());
 		//fragmentsLocation.add(geoFenceDemo.getFragment());	
 		fragmentsLocation.add(timeTraveledDemo.getFragment());
 		setFragmentPager(fragmentsLocation);		
@@ -292,7 +292,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 			// log in (you only need to do this once, Sense will remember the login)
 			//sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
-			//sensePlatform.login("mike@sense-os.nl", SenseApi.hashPassword("mike@sense"), callback);
+			sensePlatform.login("mike@sense-os.nl", SenseApi.hashPassword("mike@sense"), callback);
 
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
 
@@ -335,7 +335,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 			// -1 := often (buffer 1 min)
 			// -2 := real time (every new data point is uploaded immediately)
 			service.setPrefString(SensePrefs.Main.SYNC_RATE, "-2");
-			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, false);
+			service.setPrefBool(SensePrefs.Main.Advanced.USE_COMMONSENSE, true);
 
 			service.toggleMain(true);
 			// carry device
