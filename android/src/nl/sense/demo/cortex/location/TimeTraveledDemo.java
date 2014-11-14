@@ -85,7 +85,7 @@ public class TimeTraveledDemo {
 			try
 			{					
 
-				Log.e(TAG, "New timetraveled");
+				//Log.e(TAG, "New timetraveled");
 
 				
 				if(dataPoint.sensorName == TAG)
@@ -121,9 +121,7 @@ public class TimeTraveledDemo {
 					// Add data to the fragment display
 					fDisplay.addText(value);
 					final long timestamp = dataPoint.timeStamp;
-					
-					System.out.println("Timestamp!!! "+timestamp);
-					
+										
 					// Only try to send data when the service is bound
 					if(sensePlatform.getService().isBinderAlive())
 					{

@@ -47,9 +47,7 @@ public class LocationTraceDemo {
 			locationTrace =	new LocationTraceSensor(TAG, sensePlatform);
 			// Subscribe the GetData class to get data from the FallDetect Data Processor
 			sm.subscribeConsumer(TAG, getData);
-			
-			
-			sm.subscribeConsumer(Sensors.getSENSOR_POSITION(),getData);
+
 
 		}
 	}
@@ -126,14 +124,6 @@ public class LocationTraceDemo {
 							Log.e(TAG, "Failed to add data point!", e);
 						}
 					}
-				}
-				else if(dataPoint.sensorName.equals(Sensors.getSENSOR_POSITION())){
-					
-					
-					JSONObject json = dataPoint.getJSONValue();				
-
-					//System.out.println(json.getString("value").toString());
-					
 				}
 			}catch(Exception e)
 			{

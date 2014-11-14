@@ -109,6 +109,39 @@
                 <action android:name="nl.sense_os.demo.cortex.SENSE_SERVICE" />
             </intent-filter>
         </service>
+        <!-- SERVICE TO BUFFER AND SEND DATA TO COMMONSENSE -->
+        <service
+            android:name="nl.sense_os.service.MsgHandler"
+            android:exported="false" >
+            <intent-filter>
+
+                <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
+                <action android:name="nl.sense_os.demo.cortex.NEW_DATA" />
+                <action android:name="nl.sense_os.demo.cortex.SEND_DATA" />
+            </intent-filter>
+        </service>
+        
+        <!-- SERVICE THAT CHECKS SENSOR REGISTRATION WITH COMMONSENSE -->
+        <service android:name="nl.sense_os.service.commonsense.DefaultSensorRegistrationService" />
+        <!-- SERVICE THAT HANDLES GCM MESSAGES FROM COMMONSENSE -->
+        <!-- CAN BE REMOVED IF NOT USED -->
+        <service android:name="nl.sense_os.service.push.GCMReceiver" />
+        <!-- SERVICE THAT UPDATES THE SENSOR CONFIGURATION WHEN REQUIREMENTS CHANGE -->
+        <!-- CAN BE REMOVED IF NOT USED -->
+        <service android:name="nl.sense_os.service.configuration.ConfigurationService" />
+        <!-- DUMMY SERVICE TO HANDLE CHANGES IN THE SENSE STATE (DOES NOTHING BY DEFAULT) -->
+        <!-- REPLACE THIS SERVICE IF YOU WANT TO IMPLEMENT YOUR OWN APP WIDGET -->
+        <service
+            android:name="nl.sense_os.service.appwidget.DummyAppWidgetService"
+            android:exported="false" >
+            <intent-filter>
+
+                <!-- MAKE SURE YOU USE UNIQUE ACTIONS FOR YOUR OWN APP (SEE res/strings.xml) -->
+                <action android:name="nl.sense_os.demo.cortex.UPDATE_APP_WIDGET" />
+            </intent-filter>
+        </service>
+        
+        
         <!-- BROADCAST RECEIVER THAT WAKES UP THE APP AGAIN WHEN THE PHONE REBOOTS -->
         <receiver
             android:name="nl.sense_os.service.BootRx"

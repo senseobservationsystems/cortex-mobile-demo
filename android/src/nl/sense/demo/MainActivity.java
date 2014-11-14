@@ -292,6 +292,7 @@ public class MainActivity extends FragmentActivity implements ServiceConnection 
 
 			// log in (you only need to do this once, Sense will remember the login)
 			//sensePlatform.login("cortex", SenseApi.hashPassword("demo"), callback);
+			sensePlatform.getService().setPrefBool(SensePrefs.Main.Advanced.DEV_MODE, true);			
 			sensePlatform.login("mike@sense-os.nl", SenseApi.hashPassword("mike@sense"), callback);
 
 			// this is an asynchronous call, we get a call to the callback object when the login is complete
