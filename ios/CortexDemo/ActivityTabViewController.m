@@ -7,7 +7,7 @@
 //
 
 #import "ActivityTabViewController.h"
-#import "Factory.h"
+#import <Cortex/Cortex.h>
 #import <Cortex/ActivityModule.h>
 #import <Cortex/CSSensePlatform.h>
 #import <Cortex/CSSettings.h>
@@ -35,7 +35,7 @@ static const size_t MAX_ENTRIES = 60;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
     
     //setup fall detector module
-    pam = [Factory sharedFactory].activityModule;
+    pam = [Cortex sharedCortex].activityModule;
 }
 
 - (void)viewDidUnload

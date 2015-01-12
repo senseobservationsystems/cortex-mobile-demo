@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Sense Observation Systems BV. All rights reserved.
 //
 
-#import "Factory.h"
+#import <Cortex/Cortex.h>
 #import "StepCounterTabViewController.h"
 #import <Cortex/CSSensePlatform.h>
 #import <Cortex/StepCounterModule.h>
@@ -34,7 +34,7 @@ static const NSUInteger MAX_ENTRIES = 10;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
 
     //setup fall detector module
-    scm = [Factory sharedFactory].stepCounterModule;
+    scm = [Cortex sharedCortex].stepCounterModule;
 
     self.sensitivitySlider.value = [scm getSensitivity];
 }

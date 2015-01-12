@@ -5,13 +5,11 @@
 //  Created by Pim Nijdam on 7/26/13.
 //  Copyright (c) 2013 Sense Observation Systems BV. All rights reserved.
 //
-#import "Factory.h"
+#import <Cortex/Cortex.h>
 #import "TimeActiveTabViewController.h"
 #import "TimeActiveTabViewController.h"
 #import <Cortex/CSSensePlatform.h>
 #import <Cortex/TimeActiveModule.h>
-
-//static const NSUInteger MAX_ENTRIES = 10;
 
 @implementation TimeActiveTabViewController{
     TimeActiveModule* tam;
@@ -34,7 +32,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
     
     //setup module
-    tam = [Factory sharedFactory].timeActiveModule;
+    tam = [Cortex sharedCortex].timeActiveModule;
 }
 
 - (void)viewDidUnload

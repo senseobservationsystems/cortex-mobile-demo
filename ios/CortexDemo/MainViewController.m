@@ -40,7 +40,7 @@
     loginAlert = [[UIAlertView alloc] initWithTitle:@"Login" message:@"Username and password?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Login",nil];
     loginAlert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     
-     failedToLoginAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Couldn't login" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    failedToLoginAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Couldn't login" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     
     NSString* username = [[CSSettings sharedSettings] getSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingUsername];
     NSLog(@"Username %@", username);
@@ -63,13 +63,12 @@
     [activityIndicator startAnimating];
     
     BOOL succes = NO;
-    if (user != nil || password != nil) {
+    if (user != nil && password != nil) {
         succes = [CSSensePlatform loginWithUser:user andPassword:password];
     }
     [activityIndicator stopAnimating];
     [activityIndicator removeFromSuperview];
-    
-    
+
     //Alert on failure
     if (!succes) {
         [failedToLoginAlert show];
@@ -77,7 +76,6 @@
         //save settings
         [[CSSettings sharedSettings] setLogin:user withPassword:password];
     }
-    
 }
 
 
@@ -85,7 +83,6 @@
     if (alertView == loginAlert) {
         switch (buttonIndex) {
             case 0:
-                [notLoggedInAlert show];
                 break;
             case 1: {
                 NSString* username = [alertView textFieldAtIndex:0].text;

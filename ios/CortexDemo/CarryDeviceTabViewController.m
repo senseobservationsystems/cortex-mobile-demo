@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Sense Observation Systems BV. All rights reserved.
 //
 
+
+#import <Cortex/Cortex.h>
 #import "CarryDeviceTabViewController.h"
 #import <Cortex/CarryDeviceModule.h>
 #import <Cortex/CSSensePlatform.h>
-#import "Factory.h"
 
 static const NSUInteger MAX_ENTRIES = 60;
 
@@ -38,7 +39,7 @@ static const NSUInteger MAX_ENTRIES = 60;
     
 
     //setup carry device module
-    carryDeviceModule = [Factory sharedFactory].carryDeviceModule;
+    carryDeviceModule = [Cortex sharedCortex].carryDeviceModule;
 }
 
 - (void)viewDidUnload
