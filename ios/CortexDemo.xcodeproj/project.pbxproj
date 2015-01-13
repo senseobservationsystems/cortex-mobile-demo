@@ -12,7 +12,6 @@
 		3E199B0A184CD18600375ACA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E199B09184CD18600375ACA /* libz.dylib */; };
 		3E199B0C184CD19B00375ACA /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E199B0B184CD19B00375ACA /* CoreBluetooth.framework */; };
 		3E199B7D18563EC000375ACA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E199B7C18563EBE00375ACA /* SettingsViewController.m */; };
-		3E199BA81859C59800375ACA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E199BA71859C59800375ACA /* Default-568h@2x.png */; };
 		3E2FF70917A2D72100F7F00A /* TimeActiveTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */; };
 		3E743E231977D260009F571B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E743E221977D260009F571B /* libsqlite3.dylib */; };
 		3E743E321977D7AC009F571B /* libCortex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E743E2D1977D77F009F571B /* libCortex.a */; };
@@ -41,6 +40,9 @@
 		3E836E05171D961500D7494C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E836E04171D961500D7494C /* SystemConfiguration.framework */; };
 		3E8E23C0198FB26D00BC58A8 /* CoachesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E23BF198FB26D00BC58A8 /* CoachesViewController.m */; };
 		3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EACDDB517325C1700975C8D /* DebugTabViewController.m */; };
+		A93131FA1A6446D400088ABD /* PersistencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93131F91A6446D400088ABD /* PersistencyViewController.m */; };
+		A93131FF1A64580F00088ABD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A93131FE1A64580C00088ABD /* Default-568h@2x.png */; };
+		A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +84,6 @@
 		3E199B0B184CD19B00375ACA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		3E199B7B18563EBE00375ACA /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		3E199B7C18563EBE00375ACA /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		3E199BA71859C59800375ACA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3E2FF70717A2D72100F7F00A /* TimeActiveTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeActiveTabViewController.h; sourceTree = "<group>"; };
 		3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeActiveTabViewController.m; sourceTree = "<group>"; };
 		3E743E221977D260009F571B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -123,6 +124,11 @@
 		3E8E23BF198FB26D00BC58A8 /* CoachesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoachesViewController.m; sourceTree = "<group>"; };
 		3EACDDB417325C1700975C8D /* DebugTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTabViewController.h; sourceTree = "<group>"; };
 		3EACDDB517325C1700975C8D /* DebugTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugTabViewController.m; sourceTree = "<group>"; };
+		A93131F81A6446D400088ABD /* PersistencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistencyViewController.h; sourceTree = "<group>"; };
+		A93131F91A6446D400088ABD /* PersistencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistencyViewController.m; sourceTree = "<group>"; };
+		A93131FE1A64580C00088ABD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "CortexDemo/Default-568h@2x.png"; sourceTree = "<group>"; };
+		A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoudnessViewController.h; sourceTree = "<group>"; };
+		A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudnessViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				3E743E241977D77F009F571B /* Cortex.xcodeproj */,
-				3E199BA71859C59800375ACA /* Default-568h@2x.png */,
+				A93131FE1A64580C00088ABD /* Default-568h@2x.png */,
 				3E836E04171D961500D7494C /* SystemConfiguration.framework */,
 				3E836E02171D960C00D7494C /* CoreTelephony.framework */,
 				3E836E00171D960500D7494C /* AudioToolbox.framework */,
@@ -234,6 +240,10 @@
 				3E836DD8171D93A300D7494C /* AppDelegate.h */,
 				3E836DD9171D93A300D7494C /* AppDelegate.m */,
 				3E836DDB171D93A300D7494C /* MainStoryboard.storyboard */,
+				A93131F81A6446D400088ABD /* PersistencyViewController.h */,
+				A93131F91A6446D400088ABD /* PersistencyViewController.m */,
+				A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */,
+				A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */,
 				3E836DE1171D93A300D7494C /* first.png */,
 				3E836DE3171D93A300D7494C /* first@2x.png */,
 				3EACDDB417325C1700975C8D /* DebugTabViewController.h */,
@@ -355,9 +365,9 @@
 			files = (
 				3E836DD4171D93A300D7494C /* InfoPlist.strings in Resources */,
 				3E836DDD171D93A300D7494C /* MainStoryboard.storyboard in Resources */,
-				3E199BA81859C59800375ACA /* Default-568h@2x.png in Resources */,
 				3E836DE2171D93A300D7494C /* first.png in Resources */,
 				3E836DE4171D93A300D7494C /* first@2x.png in Resources */,
+				A93131FF1A64580F00088ABD /* Default-568h@2x.png in Resources */,
 				3E836DE9171D93A300D7494C /* second.png in Resources */,
 				3E836DEB171D93A300D7494C /* second@2x.png in Resources */,
 			);
@@ -370,7 +380,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93131FA1A6446D400088ABD /* PersistencyViewController.m in Sources */,
 				3E836DD6171D93A300D7494C /* main.m in Sources */,
+				A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */,
 				3E836DDA171D93A300D7494C /* AppDelegate.m in Sources */,
 				3E836DE0171D93A300D7494C /* FallDetectionTabViewController.m in Sources */,
 				3E836DE7171D93A300D7494C /* CarryDeviceTabViewController.m in Sources */,

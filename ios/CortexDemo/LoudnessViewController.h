@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LoudnessViewController : UIViewController
+@property (nonatomic, retain) IBOutlet UITextView* logText;
+- (IBAction) fastForward: (id) sender;
 
 @end

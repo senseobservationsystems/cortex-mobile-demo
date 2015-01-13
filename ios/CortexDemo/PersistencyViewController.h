@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PersistencyViewController : UIViewController
+@property (nonatomic, retain) IBOutlet UITextView* logText;
+- (IBAction) testDatabaseFillUp: (id) sender;
 
 @end

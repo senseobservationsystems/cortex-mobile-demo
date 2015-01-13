@@ -7,6 +7,10 @@
 //
 
 #import "LoudnessViewController.h"
+#import "Cortex/Cortex.h"
+#import "Cortex/CSSensePlatform.h"
+#import "AppDelegate.h"
+#include <stdlib.h>
 
 @interface LoudnessViewController ()
 
@@ -17,11 +21,107 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+       
+    //subscribe to sensor data
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
+    
+    //fastforward
+    [self fastforward];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) fastForward:(id)sender {
+    [self fastforward];
+}
+
+- (void) fastforward {
+    [self simulateNoiseDataOf:100];
+}
+
+//Add some noise data to fast forward
+- (void) simulateNoiseDataOf: (int)numberOfPoints {
+
+    for(int i = 0; i < numberOfPoints; i++) {
+        
+        int value = arc4random_uniform(74);
+        
+        [CSSensePlatform addDataPointForSensor:kCSSENSOR_NOISE displayName:@"Noise" description:@"Dummy noise data" deviceType:@"dummy" deviceUUID:@"dummy" dataType:@"string" stringValue:[NSString stringWithFormat:@"%d",value] timestamp:[NSDate date]];
+    }
+}
+
+- (void) onNewData: (NSNotification*)notification {
+    NSString* sensor = notification.object;
+        
+    NSString* loudnessModuleName = [Cortex sharedCortex].loudnessModule.name;
+    
+    if ([sensor isEqualToString:loudnessModuleName] || [sensor isEqualToString:kCSSENSOR_NOISE]) {
+    
+        NSDate* startDate = [[NSDate date] dateByAddingTimeInterval: -60*60*24]; // 24 hours ago
+        
+        //((AppDelegate*)[UIApplication sharedApplication]).loadingDate;
+        NSArray* noiseData = [CSSensePlatform getLocalDataForSensor:kCSSENSOR_NOISE from:startDate to:[NSDate date]];
+        NSArray* loudnessData = [CSSensePlatform getLocalDataForSensor:loudnessModuleName from:startDate to:[NSDate date]];
+        
+        //NSTimeInterval timeSinceLoading = [[NSDate date] timeIntervalSinceDate: startDate];
+        
+        //calculate min, max, and average of noise data
+        
+        NSNumber *noiseMin, *noiseMax, *noiseAvg, *loudnessAvg, *nNoise, *nLoudness;
+        
+        if (noiseData) {
+            NSLog(@"Noisedata found.. %d rows", noiseData.count);
+            noiseMin = [self minOfSensorDataArray:noiseData];
+            noiseMax = [self maxOfSensorDataArray:noiseData];
+            noiseAvg = [NSNumber numberWithFloat:[self avgOfSensorDataArray:noiseData]];
+            nNoise = [NSNumber numberWithInt:noiseData.count];
+        } else {
+            NSLog(@"No noise data found ...");
+            noiseMin = [NSNumber numberWithDouble: 0.0];
+            noiseMax = [NSNumber numberWithDouble: 0.0];
+            noiseAvg = [NSNumber numberWithDouble: 0.0];
+            nNoise = [NSNumber numberWithInt:0];
+        }
+        
+        
+        if (loudnessData) {
+            loudnessAvg = [NSNumber numberWithFloat:[self avgOfSensorDataArray:loudnessData]];
+            nLoudness = [NSNumber numberWithInt:loudnessData.count];
+        } else {
+            loudnessAvg = [NSNumber numberWithDouble: 0.0];
+            nLoudness = [NSNumber numberWithInt:0];
+        }
+        
+        //create string and set the new text
+        NSString* newText = [NSString stringWithFormat:@"DATA FROM LAST 24h \n NOISE -- min: %f - max %f - avg %f (n: %d) \n LOUDNESS avg %f (n: %d)",
+                             [noiseMin floatValue], [noiseMax floatValue], [noiseAvg floatValue], [nNoise intValue], [loudnessAvg floatValue], [nLoudness intValue]];
+        
+        [self.logText setText:newText];
+        
+        
+        
+  /* MEUK VAN PIM MSS NOG WEL EENS HANDIG OFZO */
+//        NSString* json = [notification.userInfo valueForKey:@"value"];
+//        NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[notification.userInfo valueForKey:@"date"] doubleValue]];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            @autoreleasepool {
+//                NSString* entry = [NSString stringWithFormat:@"%@:%@", [dateFormatter stringFromDate:date], json];
+//                [fallLog insertObject:entry atIndex:0];
+//                while ([fallLog count] > MAX_ENTRIES) {
+//                    [fallLog removeLastObject];
+//                }
+//                [self.logText setText:[fallLog componentsJoinedByString:@"\n"]];
+//            }
+//        });
+        
+        
+        
+    }
 }
 
 /*
@@ -33,5 +133,52 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark Helper functions for calculating min, max, and avg
+
+
+//note that we assume the right format here, no need for fancy processing, this is just a test application
+- (NSNumber*) minOfSensorDataArray: (NSArray*) input {
+    
+    NSNumber *result = [[NSNumber alloc] init];
+    NSNumber* value = [[NSNumber alloc] init];
+    
+    for(NSDictionary* dict in input) {
+        
+        value = [[dict valueForKey:@"value"] valueForKey:@"value"];
+        
+        if (! result) {result = value;}
+        if (value.doubleValue < result.doubleValue) { result = value; }
+    }
+    
+    return result;
+}
+
+- (NSNumber*) maxOfSensorDataArray: (NSArray*) input {
+    
+    NSNumber *result = [[NSNumber alloc] init];
+    NSNumber* value = [[NSNumber alloc] init];
+    
+    for(NSDictionary* dict in input) {
+        
+        value = [[dict valueForKey:@"value"] valueForKey:@"value"];
+        
+        if (! result) {result = value;}
+        else if (value.doubleValue > result.doubleValue) { result = value; }
+    }
+    
+    return result;
+}
+
+- (float) avgOfSensorDataArray: (NSArray*) input {
+    
+    float sum = 0.0;
+    
+    for(NSDictionary* dict in input) {
+        sum += [(NSNumber *)[[dict valueForKey:@"value"] valueForKey:@"value"] floatValue];
+    }
+    
+    return sum / input.count;
+}
 
 @end
