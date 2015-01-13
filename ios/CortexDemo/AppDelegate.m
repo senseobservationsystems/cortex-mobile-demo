@@ -51,7 +51,7 @@
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_SCREEN_STATE},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_ACCELERATION_BURST, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@30},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_ACCELEROMETER_BURST, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@30},
-                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_NOISE, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@5},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_NOISE, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@10},
                                     //location sensor is needed so that we keep running in the background
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_LOCATION, kCSREQUIREMENT_FIELD_SAMPLE_ACCURACY:@10000}];
     [[CSSensorRequirements sharedRequirements] setRequirements:commonRequirements byConsumer:consumerName];

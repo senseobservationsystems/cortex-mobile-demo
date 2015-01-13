@@ -100,25 +100,12 @@
         NSString* newText = [NSString stringWithFormat:@"DATA FROM LAST 24h \n NOISE -- min: %f - max %f - avg %f (n: %d) \n LOUDNESS avg %f (n: %d)",
                              [noiseMin floatValue], [noiseMax floatValue], [noiseAvg floatValue], [nNoise intValue], [loudnessAvg floatValue], [nLoudness intValue]];
         
-        [self.logText setText:newText];
         
-        
-        
-  /* MEUK VAN PIM MSS NOG WEL EENS HANDIG OFZO */
-//        NSString* json = [notification.userInfo valueForKey:@"value"];
-//        NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[notification.userInfo valueForKey:@"date"] doubleValue]];
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            @autoreleasepool {
-//                NSString* entry = [NSString stringWithFormat:@"%@:%@", [dateFormatter stringFromDate:date], json];
-//                [fallLog insertObject:entry atIndex:0];
-//                while ([fallLog count] > MAX_ENTRIES) {
-//                    [fallLog removeLastObject];
-//                }
-//                [self.logText setText:[fallLog componentsJoinedByString:@"\n"]];
-//            }
-//        });
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            @autoreleasepool {
+                [self.logText setText:newText];
+            }
+        });
         
         
     }
