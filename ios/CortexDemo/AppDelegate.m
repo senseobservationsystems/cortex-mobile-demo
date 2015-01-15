@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import <Cortex/Cortex.h>
-#import <Cortex/CSSensePlatform.h>
-#import <Cortex/CSSettings.h>
+#import <SensePlatform/CSSensePlatform.h>
+#import <SensePlatform/CSSettings.h>
 #import <Cortex/CoachingEngine/CSCoachingEngine.h>
 
 @implementation AppDelegate
@@ -61,11 +61,15 @@
     
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingDontUploadBursts value:kCSSettingYES];
     
+    //pause location updates for 2 minutes between every location update
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeLocation setting:kCSLocationSettingCortexAutoPausing value:kCSSettingYES];
+
     //enable the background restart hack
-    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingBackgroundRestarthack        value:kCSSettingYES];
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingBackgroundRestarthack value:kCSSettingYES];
     
     //Don't record audio when the screen is on. This avoids users being annoyed by an iOS red bar
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeAmbience setting:kCSAmbienceSettingSampleOnlyWhenScreenLocked value:kCSSettingNO];
+    
     return YES;
 }
 

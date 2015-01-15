@@ -7,8 +7,7 @@
 //
 #import <Cortex/Cortex.h>
 #import "TimeActiveTabViewController.h"
-#import "TimeActiveTabViewController.h"
-#import <Cortex/CSSensePlatform.h>
+#import <SensePlatform/CSSensePlatform.h>
 #import <Cortex/TimeActiveModule.h>
 
 @implementation TimeActiveTabViewController{
