@@ -21,8 +21,10 @@
     //initialize cortex
     [Cortex sharedCortex];
 
+    self->_loadingDate = [NSDate date];
+    
     //initialize coaching engine.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCoachMessage:) name:kCORTEX_COACHING_ENGINE_NEW_MESSAGE_NOTIFICATION object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCoachMessage:) name:kCORTEX_COACHING_ENGINE_NEW_MESSAGE_NOTIFICATION object:nil];
     //[[CSCoachingEngine sharedCoachingEngine] initializeWithAppKey:appKey ];
     //set into simulation mode
     //[CSSensorRequirements sharedRequirements].isEnabled = NO;
@@ -41,6 +43,7 @@
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.activityModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.stepCounterModule.name},
+                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.loudnessModule.name},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.locationTraceModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_BATTERY},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_CALL},
@@ -48,7 +51,7 @@
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_SCREEN_STATE},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_ACCELERATION_BURST, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@30},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_ACCELEROMETER_BURST, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@30},
-                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_NOISE, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@5},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_NOISE, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@10},
                                     //location sensor is needed so that we keep running in the background
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_LOCATION, kCSREQUIREMENT_FIELD_SAMPLE_ACCURACY:@10000}];
     [[CSSensorRequirements sharedRequirements] setRequirements:commonRequirements byConsumer:consumerName];
@@ -62,7 +65,7 @@
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingBackgroundRestarthack        value:kCSSettingYES];
     
     //Don't record audio when the screen is on. This avoids users being annoyed by an iOS red bar
-    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeAmbience setting:kCSAmbienceSettingSampleOnlyWhenScreenLocked value:kCSSettingYES];
+    [[CSSettings sharedSettings] setSettingType:kCSSettingTypeAmbience setting:kCSAmbienceSettingSampleOnlyWhenScreenLocked value:kCSSettingNO];
     return YES;
 }
 
