@@ -42,6 +42,7 @@
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sitStandModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.activityModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeModule.name},
+                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeEstimateModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.stepCounterModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.loudnessModule.name},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.locationTraceModule.name},

@@ -26,7 +26,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
     
     //fastforward
-    [self fastforward];
+    //[self fastforward];
     
 }
 

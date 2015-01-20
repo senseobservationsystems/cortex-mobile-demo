@@ -42,6 +42,7 @@
 		3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EACDDB517325C1700975C8D /* DebugTabViewController.m */; };
 		A93131FA1A6446D400088ABD /* PersistencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93131F91A6446D400088ABD /* PersistencyViewController.m */; };
 		A93131FF1A64580F00088ABD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A93131FE1A64580C00088ABD /* Default-568h@2x.png */; };
+		A93309611A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */; };
 		A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,8 @@
 		A93131F81A6446D400088ABD /* PersistencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistencyViewController.h; sourceTree = "<group>"; };
 		A93131F91A6446D400088ABD /* PersistencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistencyViewController.m; sourceTree = "<group>"; };
 		A93131FE1A64580C00088ABD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "CortexDemo/Default-568h@2x.png"; sourceTree = "<group>"; };
+		A933095F1A6D13D300CCBAE2 /* SleepTimeEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTimeEstimateViewController.h; sourceTree = "<group>"; };
+		A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTimeEstimateViewController.m; sourceTree = "<group>"; };
 		A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoudnessViewController.h; sourceTree = "<group>"; };
 		A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudnessViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +243,8 @@
 				3E836DD8171D93A300D7494C /* AppDelegate.h */,
 				3E836DD9171D93A300D7494C /* AppDelegate.m */,
 				3E836DDB171D93A300D7494C /* MainStoryboard.storyboard */,
+				A933095F1A6D13D300CCBAE2 /* SleepTimeEstimateViewController.h */,
+				A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */,
 				A93131F81A6446D400088ABD /* PersistencyViewController.h */,
 				A93131F91A6446D400088ABD /* PersistencyViewController.m */,
 				A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */,
@@ -385,6 +390,7 @@
 				A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */,
 				3E836DDA171D93A300D7494C /* AppDelegate.m in Sources */,
 				3E836DE0171D93A300D7494C /* FallDetectionTabViewController.m in Sources */,
+				A93309611A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m in Sources */,
 				3E836DE7171D93A300D7494C /* CarryDeviceTabViewController.m in Sources */,
 				3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */,
 				3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */,
