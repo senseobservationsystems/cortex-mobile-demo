@@ -8,7 +8,7 @@
 
 #import <Cortex/Cortex.h>
 #import "StepCounterTabViewController.h"
-#import <Cortex/CSSensePlatform.h>
+#import <SensePlatform/CSSensePlatform.h>
 #import <Cortex/StepCounterModule.h>
 
 static const NSUInteger MAX_ENTRIES = 10;

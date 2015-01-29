@@ -10,7 +10,7 @@
 #import <Cortex/Cortex.h>
 #import "CarryDeviceTabViewController.h"
 #import <Cortex/CarryDeviceModule.h>
-#import <Cortex/CSSensePlatform.h>
+#import <SensePlatform/CSSensePlatform.h>
 
 static const NSUInteger MAX_ENTRIES = 60;
 

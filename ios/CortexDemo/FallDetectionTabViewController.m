@@ -7,7 +7,7 @@
 //
 
 #import "FallDetectionTabViewController.h"
-#import <Cortex/CSSensePlatform.h>
+#import <SensePlatform/CSSensePlatform.h>
 #import <Cortex/FallDetectorModule.h>
 
 

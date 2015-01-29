@@ -9,7 +9,7 @@
 #import "RegisterUserView.h"
 
 #import "RegisterUserView.h"
-#import <Cortex/CSSensePlatform.h>
+#import <SensePlatform/CSSensePlatform.h>
 
 @interface RegisterUserView ()
 

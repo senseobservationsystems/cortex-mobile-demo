@@ -8,7 +8,7 @@
 
 #import "CoachesViewController.h"
 #import <Cortex/CoachingEngine/CSCoachingEngine.h>
-#import <Cortex/CSSensePlatform.h>
+#import <SensePlatform/CSSensePlatform.h>
 #import <Cortex/Cortex.h>
 
 @implementation CoachesViewController

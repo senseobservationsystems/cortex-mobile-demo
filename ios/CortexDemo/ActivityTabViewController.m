@@ -9,8 +9,8 @@
 #import "ActivityTabViewController.h"
 #import <Cortex/Cortex.h>
 #import <Cortex/ActivityModule.h>
-#import <Cortex/CSSensePlatform.h>
-#import <Cortex/CSSettings.h>
+#import <SensePlatform/CSSensePlatform.h>
+#import <SensePlatform/CSSettings.h>
 
 static const size_t MAX_ENTRIES = 60;
 

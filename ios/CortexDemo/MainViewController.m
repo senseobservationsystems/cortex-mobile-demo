@@ -8,8 +8,8 @@
 
 #import "MainViewController.h"
 #import "RegisterUserView.h"
-#import <Cortex/CSSensePlatform.h>
-#import <Cortex/CSSettings.h>
+#import <SensePlatform/CSSensePlatform.h>
+#import <SensePlatform/CSSettings.h>
 
 @interface MainViewController ()
 

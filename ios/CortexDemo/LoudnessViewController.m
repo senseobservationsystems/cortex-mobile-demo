@@ -8,7 +8,7 @@
 
 #import "LoudnessViewController.h"
 #import "Cortex/Cortex.h"
-#import "Cortex/CSSensePlatform.h"
+#import "SensePlatform/CSSensePlatform.h"
 #import "AppDelegate.h"
 #include <stdlib.h>
 
@@ -26,7 +26,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewData:) name:kCSNewSensorDataNotification object:nil];
     
     //fastforward
-    [self fastforward];
+    //[self fastforward];
     
 }
 

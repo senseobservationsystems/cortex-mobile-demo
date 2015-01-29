@@ -8,7 +8,7 @@
 
 #import "PersistencyViewController.h"
 #import "Cortex/Cortex.h"
-#import "Cortex/CSSensePlatform.h"
+#import "SensePlatform/CSSensePlatform.h"
 
 @interface PersistencyViewController ()
 

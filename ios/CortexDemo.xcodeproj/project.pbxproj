@@ -42,6 +42,7 @@
 		3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EACDDB517325C1700975C8D /* DebugTabViewController.m */; };
 		A93131FA1A6446D400088ABD /* PersistencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93131F91A6446D400088ABD /* PersistencyViewController.m */; };
 		A93131FF1A64580F00088ABD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A93131FE1A64580C00088ABD /* Default-568h@2x.png */; };
+		A93309611A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */; };
 		A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,8 @@
 		A93131F81A6446D400088ABD /* PersistencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistencyViewController.h; sourceTree = "<group>"; };
 		A93131F91A6446D400088ABD /* PersistencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistencyViewController.m; sourceTree = "<group>"; };
 		A93131FE1A64580C00088ABD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "CortexDemo/Default-568h@2x.png"; sourceTree = "<group>"; };
+		A933095F1A6D13D300CCBAE2 /* SleepTimeEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTimeEstimateViewController.h; sourceTree = "<group>"; };
+		A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTimeEstimateViewController.m; sourceTree = "<group>"; };
 		A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoudnessViewController.h; sourceTree = "<group>"; };
 		A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudnessViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +243,8 @@
 				3E836DD8171D93A300D7494C /* AppDelegate.h */,
 				3E836DD9171D93A300D7494C /* AppDelegate.m */,
 				3E836DDB171D93A300D7494C /* MainStoryboard.storyboard */,
+				A933095F1A6D13D300CCBAE2 /* SleepTimeEstimateViewController.h */,
+				A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */,
 				A93131F81A6446D400088ABD /* PersistencyViewController.h */,
 				A93131F91A6446D400088ABD /* PersistencyViewController.m */,
 				A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */,
@@ -308,7 +313,7 @@
 		3E836DBC171D93A300D7494C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Sense Observation Systems BV";
 			};
 			buildConfigurationList = 3E836DBF171D93A300D7494C /* Build configuration list for PBXProject "CortexDemo" */;
@@ -385,6 +390,7 @@
 				A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */,
 				3E836DDA171D93A300D7494C /* AppDelegate.m in Sources */,
 				3E836DE0171D93A300D7494C /* FallDetectionTabViewController.m in Sources */,
+				A93309611A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m in Sources */,
 				3E836DE7171D93A300D7494C /* CarryDeviceTabViewController.m in Sources */,
 				3EACDDB617325C1700975C8D /* DebugTabViewController.m in Sources */,
 				3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */,
@@ -431,15 +437,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -449,10 +458,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -461,19 +474,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
