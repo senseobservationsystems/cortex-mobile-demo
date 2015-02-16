@@ -44,6 +44,7 @@
 		A93131FF1A64580F00088ABD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A93131FE1A64580C00088ABD /* Default-568h@2x.png */; };
 		A93309611A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */; };
 		A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */; };
+		CB4CF1C41A7FA75D002EF9B0 /* DataCoverageTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4CF1C31A7FA75D002EF9B0 /* DataCoverageTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,8 @@
 		A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTimeEstimateViewController.m; sourceTree = "<group>"; };
 		A9A769E91A641B2800EB53F5 /* LoudnessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoudnessViewController.h; sourceTree = "<group>"; };
 		A9A769EA1A641B2800EB53F5 /* LoudnessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudnessViewController.m; sourceTree = "<group>"; };
+		CB4CF1C21A7FA75D002EF9B0 /* DataCoverageTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCoverageTestViewController.h; sourceTree = "<group>"; };
+		CB4CF1C31A7FA75D002EF9B0 /* DataCoverageTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCoverageTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +246,8 @@
 				3E836DD8171D93A300D7494C /* AppDelegate.h */,
 				3E836DD9171D93A300D7494C /* AppDelegate.m */,
 				3E836DDB171D93A300D7494C /* MainStoryboard.storyboard */,
+				CB4CF1C21A7FA75D002EF9B0 /* DataCoverageTestViewController.h */,
+				CB4CF1C31A7FA75D002EF9B0 /* DataCoverageTestViewController.m */,
 				A933095F1A6D13D300CCBAE2 /* SleepTimeEstimateViewController.h */,
 				A93309601A6D13D300CCBAE2 /* SleepTimeEstimateViewController.m */,
 				A93131F81A6446D400088ABD /* PersistencyViewController.h */,
@@ -315,6 +320,11 @@
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Sense Observation Systems BV";
+				TargetAttributes = {
+					3E836DC4171D93A300D7494C = {
+						DevelopmentTeam = MT2K5TW3U7;
+					};
+				};
 			};
 			buildConfigurationList = 3E836DBF171D93A300D7494C /* Build configuration list for PBXProject "CortexDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -385,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB4CF1C41A7FA75D002EF9B0 /* DataCoverageTestViewController.m in Sources */,
 				A93131FA1A6446D400088ABD /* PersistencyViewController.m in Sources */,
 				3E836DD6171D93A300D7494C /* main.m in Sources */,
 				A9A769EB1A641B2800EB53F5 /* LoudnessViewController.m in Sources */,
@@ -504,6 +515,8 @@
 		3E836DEF171D93A300D7494C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -527,6 +540,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debug;
@@ -537,6 +551,8 @@
 		3E836DF0171D93A300D7494C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -560,6 +576,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debug;
