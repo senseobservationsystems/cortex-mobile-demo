@@ -64,7 +64,7 @@ float timeInterval;
     
     endDate = [NSDate date];
     startDate = [[NSDate date] dateByAddingTimeInterval:-timeInterval];
-    nrLastPoints = 999;
+    nrLastPoints = 1000;
     
     
     // selecet required sensors
@@ -89,32 +89,31 @@ float timeInterval;
     
     NSArray *noiseLocalData = [CSSensePlatform getLocalDataForSensor:nameNoiseSensor from: startDate to: endDate];
     
+    //[NSDate dateWithTimeIntervalSince1970:myEpochTimeStamp];
     
-    NSDictionary *lastRemotePoint = [noiseData lastObject];
-    NSDate *lastRemoteDate = [lastRemotePoint valueForKey:@"timestamp"];
+    NSDictionary *lastLocalPoint = [noiseLocalData lastObject];
+    //NSDictionary *lastRemotePointDate = [lastRemotePoint valueForKey:@"value"];//objectAtIndex:1
+    NSDate *lastLocalDate = [lastLocalPoint valueForKey:@"timestamp"];
+
     
-    NSDictionary *firstRemotePoint = [noiseData objectAtIndex:0];
-    NSDate *firstRemoteDate = [firstRemotePoint valueForKey:@"timestamp"];
     
-    NSTimeInterval  timeFirstToLastRemotepoint = [lastRemoteDate timeIntervalSinceDate:firstRemoteDate];
+    NSDictionary *firstLocalPoint = [noiseLocalData objectAtIndex:0];
+    //NSDictionary *firstRemotePointDate = [firstRemotePoint valueForKey:@"value"];
+    NSDate *firstLocalDate = [firstLocalPoint valueForKey:@"timestamp"];
     
-    double totalNoMinutesRemote = timeFirstToLastRemotepoint/60.0;
     
-    NSTimeInterval totalTimeLocal = [endDate timeIntervalSinceDate:startDate];
+    //NSTimeInterval totalTime = [endDate timeIntervalSinceDate:startDate];
+    NSTimeInterval totalTimeLocal = [lastLocalDate timeIntervalSinceDate:firstLocalDate];
     
+    //double totalNoMinutes = totalTime/60.0;
     double totalNoMinutesLocal = totalTimeLocal/60.0;
     
     
-    NSLog(@"First Point Date : %@",  firstRemoteDate);
-    NSLog(@"Last Point Date : %@",  lastRemoteDate);
-  
+    NSLog(@"First Local Point Time : %@",  firstLocalDate);
+    NSLog(@"Last Local Point Time : %@",  lastLocalDate);
+    NSLog(@"Local Points Time Interval : %f", totalNoMinutesLocal);
     
-    /*Last Point Date : {
-        timestamp = "2015-02-06 17:13:40 +0000";
-        value =     {
-            date = "1423242820.316";
-            value = "34.7";
-        };*/
+
     
     
     double accLocalPerMinute = accelerometerLocalData.count/totalNoMinutesLocal;
@@ -136,7 +135,7 @@ float timeInterval;
     NSLog(@"Noise Remote Points per min : %f", noisePerMinute);
     
     
-    NSString *startDateString = [NSDateFormatter localizedStringFromDate:startDate
+    NSString *startDateString = [NSDateFormatter localizedStringFromDate:firstLocalDate
                                                           dateStyle:NSDateFormatterShortStyle
                                                           timeStyle:NSDateFormatterShortStyle];
     
@@ -158,23 +157,22 @@ float timeInterval;
     
     [self updateSummaryText: [NSString stringWithFormat:@"Start Date    : %@\n", startDateString]];
     [self updateSummaryText: [NSString stringWithFormat:@"End Date      : %@\n", endDateString]];
-   // [self updateSummaryText: [NSString stringWithFormat:@"Time Interval Local  : %@\n", [self timeFormatted:totalTimeLocal]]];
-    //[self updateSummaryText: [NSString stringWithFormat:@"Time Interval Remote : %@\n", [self timeFormatted:timeFirstToLastRemotepoint]]];
+
     
     [self updateSummaryText: [NSString stringWithFormat:@"Accelerometer Data Stat : \n"]];
     [self updateSummaryText: [NSString stringWithFormat:@" o Number of Local Points       = %0.d\n", (int) accelerometerLocalData.count]];
     [self updateSummaryText: [NSString stringWithFormat:@" o Number of Remote Points      = %0.d\n", (int) accelerometerData.count]];
-    [self updateSummaryText: [NSString stringWithFormat:@" o Max. Number of Local Points  = %0.f\n", (int) timeInterval/60.0]];
+    [self updateSummaryText: [NSString stringWithFormat:@" o Expected Number of Points    = %0d\n", (int) totalNoMinutesLocal]];
     
     [self updateSummaryText: [NSString stringWithFormat:@"Noise Data Stat : \n"]];
     [self updateSummaryText: [NSString stringWithFormat:@" o Number of Local Points       = %0.d\n", (int) noiseLocalData.count]];
     [self updateSummaryText: [NSString stringWithFormat:@" o Number of Remote Points      = %0.d\n", (int) noiseData.count]];
-    [self updateSummaryText: [NSString stringWithFormat:@" o Max. Number of Local Points  = %0.f\n", (int) timeInterval/60.0]];
+    [self updateSummaryText: [NSString stringWithFormat:@" o Expected Number of Points    = %0d\n", (int) totalNoMinutesLocal]];
     
     [self updateSummaryText: [NSString stringWithFormat:@"Location Data Stat : \n"]];
     [self updateSummaryText: [NSString stringWithFormat:@" o Number of Local Points      = %0.d\n", (int) locationLocalData.count]];
     [self updateSummaryText: [NSString stringWithFormat:@" o Number of Remote Points     = %0.d\n", (int) locationData.count]];
-    [self updateSummaryText: [NSString stringWithFormat:@" o Max. Number of Local Points = %0.f\n", (int) timeInterval/120.0]];
+    [self updateSummaryText: [NSString stringWithFormat:@" o Expected Number of Points   = %0.f\n", (int) totalNoMinutesLocal/3.0]];
     
 
     
