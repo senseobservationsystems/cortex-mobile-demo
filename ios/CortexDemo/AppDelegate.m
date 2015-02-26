@@ -62,7 +62,7 @@
     
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeGeneral setting:kCSGeneralSettingDontUploadBursts value:kCSSettingYES];
     
-    //pause location updates for 2 minutes between every location update
+    //pause location updates for 2/3 minutes between every location update
     [[CSSettings sharedSettings] setSettingType:kCSSettingTypeLocation setting:kCSLocationSettingCortexAutoPausing value:kCSSettingYES];
 
     //enable the background restart hack
