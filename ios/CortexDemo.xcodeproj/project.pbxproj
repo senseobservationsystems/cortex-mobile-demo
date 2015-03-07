@@ -47,6 +47,30 @@
 		CB4CF1C41A7FA75D002EF9B0 /* DataCoverageTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4CF1C31A7FA75D002EF9B0 /* DataCoverageTestViewController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0EE164391AABC0BD00EF30F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E4F260317030AA30045588C;
+			remoteInfo = Cortex;
+		};
+		0EE1643B1AABC0BD00EF30F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E4F26A71703279F0045588C;
+			remoteInfo = AIM;
+		};
+		0EE1643D1AABC0BD00EF30F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E743E4819795A96009F571B;
+			remoteInfo = "CoachingEngine tests";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0EE1641D1AABB9CF00EF30F4 /* libCortex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCortex.a; path = "../../../../Library/Developer/Xcode/DerivedData/CortexDemo-dzumslldemwjjyghynycqgzhcjav/Build/Products/Debug-iphoneos/libCortex.a"; sourceTree = "<group>"; };
 		3E0585D61783006A00808B5D /* ActivityTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTabViewController.h; sourceTree = "<group>"; };
@@ -59,7 +83,7 @@
 		3E2FF70717A2D72100F7F00A /* TimeActiveTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeActiveTabViewController.h; sourceTree = "<group>"; };
 		3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeActiveTabViewController.m; sourceTree = "<group>"; };
 		3E743E221977D260009F571B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		3E743E241977D77F009F571B /* aim-ios-sdk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "aim-ios-sdk"; path = "libs/aim-ios-sdk"; sourceTree = "<group>"; };
+		3E743E241977D77F009F571B /* Cortex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cortex.xcodeproj; path = "libs/aim-ios-sdk/Cortex.xcodeproj"; sourceTree = "<group>"; };
 		3E76A51C17817E6C009CCACB /* StepCounterTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCounterTabViewController.h; sourceTree = "<group>"; };
 		3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepCounterTabViewController.m; sourceTree = "<group>"; };
 		3E76A5241782D1FE009CCACB /* RegisterUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterUserView.h; sourceTree = "<group>"; };
@@ -133,6 +157,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EE164331AABC0BD00EF30F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0EE1643A1AABC0BD00EF30F4 /* libCortex.a */,
+				0EE1643C1AABC0BD00EF30F4 /* libAIM.a */,
+				0EE1643E1AABC0BD00EF30F4 /* CoachingEngine tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3E199B67184CE0B500375ACA /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,7 +194,7 @@
 		3E836DBA171D93A300D7494C = {
 			isa = PBXGroup;
 			children = (
-				3E743E241977D77F009F571B /* aim-ios-sdk */,
+				3E743E241977D77F009F571B /* Cortex.xcodeproj */,
 				A93131FE1A64580C00088ABD /* Default-568h@2x.png */,
 				3E836E04171D961500D7494C /* SystemConfiguration.framework */,
 				3E836E02171D960C00D7494C /* CoreTelephony.framework */,
@@ -296,12 +330,42 @@
 			mainGroup = 3E836DBA171D93A300D7494C;
 			productRefGroup = 3E836DC6171D93A300D7494C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0EE164331AABC0BD00EF30F4 /* Products */;
+					ProjectRef = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3E836DC4171D93A300D7494C /* CortexDemo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0EE1643A1AABC0BD00EF30F4 /* libCortex.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCortex.a;
+			remoteRef = 0EE164391AABC0BD00EF30F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0EE1643C1AABC0BD00EF30F4 /* libAIM.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAIM.a;
+			remoteRef = 0EE1643B1AABC0BD00EF30F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0EE1643E1AABC0BD00EF30F4 /* CoachingEngine tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CoachingEngine tests.xctest";
+			remoteRef = 0EE1643D1AABC0BD00EF30F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3E836DC3171D93A300D7494C /* Resources */ = {
