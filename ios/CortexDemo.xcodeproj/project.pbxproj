@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EE1641E1AABB9CF00EF30F4 /* libCortex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE1641D1AABB9CF00EF30F4 /* libCortex.a */; };
 		3E0585D81783006A00808B5D /* ActivityTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0585D71783006A00808B5D /* ActivityTabViewController.m */; };
 		3E199B08184CD17F00375ACA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E199B07184CD17F00375ACA /* Security.framework */; };
 		3E199B0A184CD18600375ACA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E199B09184CD18600375ACA /* libz.dylib */; };
@@ -14,7 +15,6 @@
 		3E199B7D18563EC000375ACA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E199B7C18563EBE00375ACA /* SettingsViewController.m */; };
 		3E2FF70917A2D72100F7F00A /* TimeActiveTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */; };
 		3E743E231977D260009F571B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E743E221977D260009F571B /* libsqlite3.dylib */; };
-		3E743E321977D7AC009F571B /* libCortex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E743E2D1977D77F009F571B /* libCortex.a */; };
 		3E76A51E17817E6C009CCACB /* StepCounterTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */; };
 		3E76A5261782D1FF009CCACB /* RegisterUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A5251782D1FF009CCACB /* RegisterUserView.m */; };
 		3E76A52C1782D9BD009CCACB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E76A52B1782D9BD009CCACB /* MainViewController.m */; };
@@ -47,38 +47,8 @@
 		CB4CF1C41A7FA75D002EF9B0 /* DataCoverageTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4CF1C31A7FA75D002EF9B0 /* DataCoverageTestViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3E743E2C1977D77F009F571B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E4F260317030AA30045588C;
-			remoteInfo = Cortex;
-		};
-		3E743E301977D77F009F571B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E4F26A71703279F0045588C;
-			remoteInfo = AIM;
-		};
-		3E743E331977D7BF009F571B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E4F260217030AA30045588C;
-			remoteInfo = Cortex;
-		};
-		3E9BE4E5197FFE760082038E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E743E4819795A96009F571B;
-			remoteInfo = "Test ExerciseCoach";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		0EE1641D1AABB9CF00EF30F4 /* libCortex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCortex.a; path = "../../../../Library/Developer/Xcode/DerivedData/CortexDemo-dzumslldemwjjyghynycqgzhcjav/Build/Products/Debug-iphoneos/libCortex.a"; sourceTree = "<group>"; };
 		3E0585D61783006A00808B5D /* ActivityTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTabViewController.h; sourceTree = "<group>"; };
 		3E0585D71783006A00808B5D /* ActivityTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTabViewController.m; sourceTree = "<group>"; };
 		3E199B07184CD17F00375ACA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -89,7 +59,7 @@
 		3E2FF70717A2D72100F7F00A /* TimeActiveTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeActiveTabViewController.h; sourceTree = "<group>"; };
 		3E2FF70817A2D72100F7F00A /* TimeActiveTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeActiveTabViewController.m; sourceTree = "<group>"; };
 		3E743E221977D260009F571B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		3E743E241977D77F009F571B /* Cortex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cortex.xcodeproj; path = "../../aim/ios-sdk/Cortex.xcodeproj"; sourceTree = "<group>"; };
+		3E743E241977D77F009F571B /* aim-ios-sdk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "aim-ios-sdk"; path = "libs/aim-ios-sdk"; sourceTree = "<group>"; };
 		3E76A51C17817E6C009CCACB /* StepCounterTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCounterTabViewController.h; sourceTree = "<group>"; };
 		3E76A51D17817E6C009CCACB /* StepCounterTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepCounterTabViewController.m; sourceTree = "<group>"; };
 		3E76A5241782D1FE009CCACB /* RegisterUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterUserView.h; sourceTree = "<group>"; };
@@ -142,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E743E321977D7AC009F571B /* libCortex.a in Frameworks */,
+				0EE1641E1AABB9CF00EF30F4 /* libCortex.a in Frameworks */,
 				3E743E231977D260009F571B /* libsqlite3.dylib in Frameworks */,
 				3E199B0C184CD19B00375ACA /* CoreBluetooth.framework in Frameworks */,
 				3E199B0A184CD18600375ACA /* libz.dylib in Frameworks */,
@@ -187,20 +157,10 @@
 			name = Activity;
 			sourceTree = "<group>";
 		};
-		3E743E251977D77F009F571B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E743E2D1977D77F009F571B /* libCortex.a */,
-				3E743E311977D77F009F571B /* libAIM.a */,
-				3E9BE4E6197FFE760082038E /* CoachingEngine tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3E836DBA171D93A300D7494C = {
 			isa = PBXGroup;
 			children = (
-				3E743E241977D77F009F571B /* Cortex.xcodeproj */,
+				3E743E241977D77F009F571B /* aim-ios-sdk */,
 				A93131FE1A64580C00088ABD /* Default-568h@2x.png */,
 				3E836E04171D961500D7494C /* SystemConfiguration.framework */,
 				3E836E02171D960C00D7494C /* CoreTelephony.framework */,
@@ -227,6 +187,7 @@
 		3E836DC8171D93A300D7494C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0EE1641D1AABB9CF00EF30F4 /* libCortex.a */,
 				3E743E221977D260009F571B /* libsqlite3.dylib */,
 				3E199B0B184CD19B00375ACA /* CoreBluetooth.framework */,
 				3E199B09184CD18600375ACA /* libz.dylib */,
@@ -305,7 +266,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E743E341977D7BF009F571B /* PBXTargetDependency */,
 			);
 			name = CortexDemo;
 			productName = CortexDemo;
@@ -336,42 +296,12 @@
 			mainGroup = 3E836DBA171D93A300D7494C;
 			productRefGroup = 3E836DC6171D93A300D7494C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3E743E251977D77F009F571B /* Products */;
-					ProjectRef = 3E743E241977D77F009F571B /* Cortex.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3E836DC4171D93A300D7494C /* CortexDemo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3E743E2D1977D77F009F571B /* libCortex.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCortex.a;
-			remoteRef = 3E743E2C1977D77F009F571B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E743E311977D77F009F571B /* libAIM.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libAIM.a;
-			remoteRef = 3E743E301977D77F009F571B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E9BE4E6197FFE760082038E /* CoachingEngine tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CoachingEngine tests.xctest";
-			remoteRef = 3E9BE4E5197FFE760082038E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3E836DC3171D93A300D7494C /* Resources */ = {
@@ -415,14 +345,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3E743E341977D7BF009F571B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Cortex;
-			targetProxy = 3E743E331977D7BF009F571B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3E836DD2171D93A300D7494C /* InfoPlist.strings */ = {
@@ -532,6 +454,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/CortexDemo-dzumslldemwjjyghynycqgzhcjav/Build/Products/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -568,6 +491,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Lib",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/CortexDemo-dzumslldemwjjyghynycqgzhcjav/Build/Products/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (

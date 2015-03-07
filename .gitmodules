@@ -1,0 +1,3 @@
+[submodule "ios/libs/aim-ios-sdk"]
+	path = ios/libs/aim-ios-sdk
+	url = git@github.com:senseobservationsystems/aim-ios-sdk.git

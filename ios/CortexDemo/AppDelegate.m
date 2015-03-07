@@ -37,24 +37,27 @@
     //set the requirements, i.e. all sensors that the demo uses
     Cortex* cortex = [Cortex sharedCortex];
     NSString* consumerName = @"com.sense.cortexdemo";
-    NSArray* commonRequirements = @[@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.timeActiveModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.carryDeviceModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sitStandModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.activityModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeEstimateModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.stepCounterModule.name},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.loudnessModule.name},
+    NSArray* commonRequirements = @[
+                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.timeActiveModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.carryDeviceModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sitStandModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.activityModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.sleepTimeEstimateModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.stepCounterModule.name},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.loudnessModule.name},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:cortex.locationTraceModule.name},
                                     @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_BATTERY},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_CALL},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_CONNECTION_TYPE},
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_SCREEN_STATE},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_CALL},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_CONNECTION_TYPE},
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_SCREEN_STATE},
+                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_STEP_COUNTER},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_ACCELERATION_BURST, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@30},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_ACCELEROMETER_BURST, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@30},
                                     //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_NOISE, kCSREQUIREMENT_FIELD_SAMPLE_INTERVAL:@10},
                                     //location sensor is needed so that we keep running in the background
-                                    @{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_LOCATION, kCSREQUIREMENT_FIELD_SAMPLE_ACCURACY:@10000}];
+                                    //@{kCSREQUIREMENT_FIELD_SENSOR_NAME:kCSSENSOR_LOCATION, kCSREQUIREMENT_FIELD_SAMPLE_ACCURACY:@10000}
+                                    ];
     [[CSSensorRequirements sharedRequirements] setRequirements:commonRequirements byConsumer:consumerName];
     
     //enable uploading to common sense
